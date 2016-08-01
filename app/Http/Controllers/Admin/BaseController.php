@@ -3,8 +3,9 @@
 use App\Http\Controllers\Controller;
 
 class BaseController extends Controller {
-
-	public function __construct()
+	
+	const PAGE_NUM = 10;
+	public function  __construct()
 	{
 		$this->middleware('auth.admin');
 	}

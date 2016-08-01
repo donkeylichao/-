@@ -115,10 +115,10 @@
 				<!-- #section:basics/navbar.user_menu -->
 				<li class="light-blue">
 					<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-						<img class="nav-user-photo" src="../assets/avatars/user.jpg" alt="Jason's Photo" />
+						<img class="nav-user-photo" src="{{ Auth::user()->headimg ? Auth::user()->headimg : '/assets/avatars/user.jpg'}}"/>
 						<span class="user-info">
 							<small>Welcome,</small>
-							Jason
+							{{ Auth::user()->name }}
 						</span>
 
 						<i class="ace-icon fa fa-caret-down"></i>
@@ -142,7 +142,7 @@
 						<li class="divider"></li>
 
 						<li>
-							<a href="#">
+							<a href="{{ url('donkey/admin/auth/logout')}}">
 								<i class="ace-icon fa fa-power-off"></i>
 								退出
 							</a>

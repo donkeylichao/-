@@ -3,6 +3,8 @@
 use App\Http\Requests;
 use App\Http\Controllers\Admin\BaseController;
 use Illuminate\Http\Request;
+use Auth;
+use Redirect;
 
 class AdminController extends BaseController {
 
@@ -13,7 +15,11 @@ class AdminController extends BaseController {
 	 */
 	public function index()
 	{
-		return view('admin.index');
+		if(Auth::check()){
+			return view('admin.index');
+		} else {
+			return Redirect::to('donkey/admin/auth/login');
+		}
 	}
 
 	/**

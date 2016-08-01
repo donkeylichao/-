@@ -32,12 +32,19 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);	
 
-
+	
+Route::group(['prefix'=>'donkey/admin/auth' , 'namespace'=>'Admin\Auth'] , function(){
+	Route::get('login' , 'AuthController@getLogin');
+	
+	Route::post('login', 'AuthController@postLogin');
+	
+	Route::get('logout' , 'AuthController@getLogout');
+});
 /****************************************************************
 admin 后台的所有路由
 *****************************************************************/
 Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'AppAdmin'], function(){
-	
+		
 	//网站统计
 	Route::get('/' , ['as'=>'admin.home' , 'uses'=>'AdminController@index']);
 	

@@ -1,25 +1,22 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Requests;
-use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 
-class UserController extends  BaseController{
-
+class AuthController extends Controller {
+	
+	use AuthenticatesAndRegistersUsers;
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index()
-	{	
-		$compact = [];
-		$users = User::all();
-		$compact[] = 'users';
+	{
 		
-		return view('admin.user.index')->with(compact($compact));
 	}
 
 	/**

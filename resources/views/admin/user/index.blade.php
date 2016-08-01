@@ -63,7 +63,56 @@
 		
 		<!-- /section:basics/content.breadcrumbs -->
 		<div class="page-content">
-		<p>这是user别表</p>
+			<div class="row">
+				<div class="col-xs-12">
+					<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
+						<thead>
+							<tr>
+								<th class="center">序号</th>
+								<th class="center">用户名</th>
+								<th class="center">邮箱</th>
+								<th class="center">手机</th>
+								<th class="center">最后登陆</th>
+								<th class="center">上次登陆ip</th>
+								<th class="center">真实姓名</th>
+								<th class="center">操作</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<?php $num = 1 ?> 
+							@foreach($users as $item)
+							<tr>
+								<td>{{ $num++ }}</td>
+								<td>{{ $item->name or ''}}</td>
+								<td>{{ $item->email or ''}}</td>
+								<td>{{ $item->phone or ''}}</td>
+								<td>{{ $item->last_login_time ? date('Y-m-d H:i:s',$item->last_login_time) : ''}}</td>
+								<td>{{ $item->last_login_ip or ''}}</td>
+								<th>{{ $item->real_name or ''}}</th>			
+								<td>
+									<div class="btn-group">
+										<a class="btn btn-xs btn-success" href="#">
+											<i class="ace-icon fa fa-plus bigger-120"></i>
+										</a>
+
+										<a class="btn btn-xs btn-info" href="#">
+											<i class="ace-icon fa fa-pencil bigger-120"></i>
+										</a>
+
+										<a class="btn btn-xs btn-danger" href="#">
+											<i class="ace-icon fa fa-trash-o bigger-120"></i>
+										</a>
+
+									</div>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div><!-- /.span -->
+			</div><!-- /.row -->
+
 		
 		@include('admin.master.common_footer')
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
