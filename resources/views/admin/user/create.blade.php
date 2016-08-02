@@ -37,32 +37,103 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin') }}">后台</a>
+					<a href="{{ url('donkey/admin/user') }}">用户管理</a>
 				</li>
-				<li class="active">网站统计</li>	
+				<li class="active">添加用户</li>	
 			</ul><!-- /.breadcrumb -->
-
-			<!-- #section:basics/content.searchbox -->
-			<!--<div class="nav-search" id="nav-search">
-				<form class="form-search">
-					<span class="input-icon">
-						<input type="text" placeholder="search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-						<i class="ace-icon fa fa-search nav-search-icon"></i>
-					</span>
-					
-					
-					<button type="button" class="btn btn-primary btn-xs">
-						搜索 
-					</button>
-				</form>
-			</div>-->
-			<!-- /.nav-search -->
-			<!-- /section:basics/content.searchbox -->
 		
 		</div>
 		
 		<!-- /section:basics/content.breadcrumbs -->
 		<div class="page-content">
+			<form method="post" action="{{ url('donkey/admin/user/store')}}">
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">用户名：</label>
+					<div class="col-sm-11">
+						<input type='text' name='username' class="col-xs-10 col-sm-4"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle"></span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">邮箱：</label>
+					<div class="col-sm-11">
+						<input type="text" name="email"  class="col-xs-10 col-sm-4"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">密码：</label>
+					<div class="col-sm-11">
+						<input type='password' name="password" class="col-xs-10 col-sm-4"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>	
+				</div>	
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" >确认密码：</label>
+					<div class="col-sm-11">	
+						<input type='password' name="repassword" class="col-xs-10 col-sm-4"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>	
+				</div>	
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">手机号：</label>
+					<div class="col-sm-11">	
+						<input type="text" name="phone" class="col-xs-10 col-sm-4"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle"></span>
+						</span>
+					</div>	
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">真实姓名：</label>
+					<div class="col-sm-11">
+						<input type='text' name="real_name" class="col-xs-10 col-sm-4" />
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle"></span>
+						</span>
+					</div>	
+				</div>	
+			
+				<div height="10px">&nbsp;</div>
+				
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-info" type="button">
+						<i class="ace-icon fa fa-check bigger-110"></i>
+						Submit
+					</button>
+
+					&nbsp; &nbsp; &nbsp;
+					<button class="btn" type="reset">
+						<i class="ace-icon fa fa-undo bigger-110"></i>
+						Reset
+					</button>
+				</div>
+			</form>
+		
 			
 			@include('admin.master.common_footer')
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">

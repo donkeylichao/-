@@ -88,7 +88,7 @@ trait AuthenticatesAndRegistersUsers {
 			$user->last_login_time = time();
 			$user->save();
 			//return redirect()->intended($this->redirectPath());
-			return Redirect::to('donkey/admin');
+			return Redirect::to('donkey/admin/home');
 		}
 
 		return Redirect::to('donkey/admin/auth/login')

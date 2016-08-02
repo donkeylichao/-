@@ -46,42 +46,69 @@ admin 后台的所有路由
 Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'AppAdmin'], function(){
 		
 	//网站统计
-	Route::get('/' , ['as'=>'admin.home' , 'uses'=>'AdminController@index']);
+	Route::group(['prefix'=>'home'] , function(){
+		Route::get('/' , ['as'=>'admin.home' , 'uses'=>'AdminController@index']);
+	});
 	
 	//用户管理
-	Route::get('user' , ['as'=>'admin.user' , 'uses'=>'UserController@index']);
+	Route::group(['prefix'=>'user'] , function(){
+		Route::get('/', ['as'=>'admin.user' , 'uses'=>'UserController@index']);
+		Route::get('create', ['as'=>'admin.user.create' , 'uses'=>'UserController@create']);
+	});
 	
 	//权限管理
-	Route::get('permission' , ['as'=>'admin.auth' , 'uses'=>'PermissionController@index']);
+	Route::group(['prefix'=>'permission'] , function(){
+		Route::get('/' , ['as'=>'admin.auth' , 'uses'=>'PermissionController@index']);
+	});
 	
-	Route::get('role' ,['as'=>'admin.role' , 'uses'=>'RoleController@index']);	
+	Route::group(['prefix'=>'role'] , function(){
+		Route::get('/' , ['as'=>'admin.role' , 'uses'=>'RoleController@index']);
+	});	
 	
 	//分类管理(日记分类)
-	Route::get('category' , ['as'=>'admin.category' , 'uses'=>'CategoryController@index']);
+	Route::group(['prefix'=>'category'] , function(){
+		Route::get('/' , ['as'=>'admin.category' , 'uses'=>'CategoryController@index']);
+	});
 	
 	//房源管理
-	Route::get('room', ['as'=>'admin.room' , 'uses'=>'RoomController@index']);
+	Route::group(['prefix'=>'room'] , function(){
+		Route::get('/' , ['as'=>'admin.room' , 'uses'=>'RoomController@index']);
+	});
 	
 	//视屏管理
-	Route::get('video' , ['as'=>'admin.video' , 'uses'=>'VideoController@index']);
+	Route::group(['prefix'=>'video'] , function(){
+		Route::get('/' , ['as'=>'admin.video' , 'uses'=>'VideoController@index']);
+	});
 	
 	//音频管理
-	Route::get('music' , ['as'=>'admin.music' , 'uses'=>'MusicController@index']);
+	Route::group(['prefix'=>'music'] , function(){
+		Route::get('/' , ['as'=>'admin.music' , 'uses'=>'NusicController@index']);
+	});
 	
 	//图片管理
-	Route::get('photo' , ['as'=>'admin.photo' , 'uses'=>'PhotoController@index']);
+	Route::group(['prefix'=>'photo'] , function(){
+		Route::get('/' , ['as'=>'admin.photo' , 'uses'=>'PhotoController@index']);
+	});
 	
 	//日记管理
-	Route::get('post' , ['as'=>'admin.post' , 'uses'=>'PostController@index']);
+	Route::group(['prefix'=>'post'] , function(){
+		Route::get('/' , ['as'=>'admin.post' , 'uses'=>'PostController@index']);
+	});
 	
 	//评论管理
-	Route::get('comment' , ['as'=>'admin.comment' , 'uses'=>'CommentController@index']);
+	Route::group(['prefix'=>'comment'] , function(){
+		Route::get('/' , ['as'=>'admin.comment' , 'uses'=>'CommentController@index']);
+	});
 	
 	//消息管理
-	Route::get('notification' , ['as'=>'admin.notification' , 'uses'=>'NotifycationController@index']);
+	Route::group(['prefix'=>'notification'] , function(){
+		Route:;get('/' , ['as'=>'admin.notification' , 'uses'=>'NotifycationController@index']);
+	});
 	
 	//个人中心
-	Route::get('personal' , ['as'=>'admin.personal' , 'uses'=>'PersonalController@index']);
+	Route::group(['prefix'=>'personal'] , function(){
+		Route::get('/' , ['as'=>'admin.personal' , 'uses'=>'PersonalController@index']);
+	});
 });
 
 

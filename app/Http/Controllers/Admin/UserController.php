@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\BaseController;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Input;
 class UserController extends  BaseController{
 
 	/**
@@ -15,8 +15,13 @@ class UserController extends  BaseController{
 	 */
 	public function index()
 	{	
+		if(Input::get('username')) {
+			$username = rtrim(Input::get('username'));
+			$users = User::where('name','like',"%$username%")->paginate(2);
+		}else{
+			$users = User::paginate(2);
+		}
 		$compact = [];
-		$users = User::all();
 		$compact[] = 'users';
 		
 		return view('admin.user.index')->with(compact($compact));
@@ -29,7 +34,7 @@ class UserController extends  BaseController{
 	 */
 	public function create()
 	{
-		//
+		return view('admin.user.create');
 	}
 
 	/**

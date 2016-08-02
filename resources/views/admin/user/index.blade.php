@@ -29,6 +29,7 @@
 	</div>
 	<div class="main-content">
 		<!-- #section:basics/content.breadcrumbs -->
+		
 		<div class="breadcrumbs" id="breadcrumbs">
 			<script type="text/javascript">
 				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
@@ -37,21 +38,21 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/user') }}">后台</a>
+					<a href="{{ url('donkey/admin/user') }}">用户管理</a>
 				</li>
-				<li class="active">用户管理</li>	
+				<li class="active">用户列表</li>	
 			</ul><!-- /.breadcrumb -->
 
 			<!-- #section:basics/content.searchbox -->
 			<div class="nav-search" id="nav-search">
-				<form class="form-search">
+				<form class="form-search" method="get" action="{{ url('donkey/admin/user')}}">
 					<span class="input-icon">
-						<input type="text" placeholder="search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+						<input type="text" placeholder="输入用户名" class="nav-search-input" id="nav-search-input" name="username" />
 						<i class="ace-icon fa fa-search nav-search-icon"></i>
 					</span>
 					
 					
-					<button type="button" class="btn btn-primary btn-xs">
+					<button type="submit" class="btn btn-primary btn-xs">
 						搜索 
 					</button>
 				</form>
@@ -61,57 +62,59 @@
 		
 		</div>
 		
+		
+		
+		
 		<!-- /section:basics/content.breadcrumbs -->
 		<div class="page-content">
-			<div class="row">
-				<div class="col-xs-12">
-					<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
-						<thead>
-							<tr>
-								<th class="center">序号</th>
-								<th class="center">用户名</th>
-								<th class="center">邮箱</th>
-								<th class="center">手机</th>
-								<th class="center">最后登陆</th>
-								<th class="center">上次登陆ip</th>
-								<th class="center">真实姓名</th>
-								<th class="center">操作</th>
-							</tr>
-						</thead>
+	
+			<div>
+				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/user/create') }}" style="float:right; margin-bottom:5px;" >
+					<i class="ace-icon fa fa-plus bigger-120"></i>添加用户
+				</a>
+				<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
+					<thead>
+						<tr>
+							<th class="center">序号</th>
+							<th class="center">用户名</th>
+							<th class="center">邮箱</th>
+							<th class="center">手机</th>
+							<th class="center">最后登陆</th>
+							<th class="center">上次登陆ip</th>
+							<th class="center">真实姓名</th>
+							<th class="center">操作</th>
+						</tr>
+					</thead>
 
-						<tbody>
-							<?php $num = 1 ?> 
-							@foreach($users as $item)
-							<tr>
-								<td>{{ $num++ }}</td>
-								<td>{{ $item->name or ''}}</td>
-								<td>{{ $item->email or ''}}</td>
-								<td>{{ $item->phone or ''}}</td>
-								<td>{{ $item->last_login_time ? date('Y-m-d H:i:s',$item->last_login_time) : ''}}</td>
-								<td>{{ $item->last_login_ip or ''}}</td>
-								<th>{{ $item->real_name or ''}}</th>			
-								<td>
-									<div class="btn-group">
-										<a class="btn btn-xs btn-success" href="#">
-											<i class="ace-icon fa fa-plus bigger-120"></i>
-										</a>
+					<tbody>
+						<?php $num = 1 ?> 
+						@foreach($users as $item)
+						<tr>
+							<td>{{ $num++ }}</td>
+							<td>{{ $item->name or ''}}</td>
+							<td>{{ $item->email or ''}}</td>
+							<td>{{ $item->phone or ''}}</td>
+							<td>{{ $item->last_login_time ? date('Y-m-d H:i:s',$item->last_login_time) : ''}}</td>
+							<td>{{ $item->last_login_ip or ''}}</td>
+							<th>{{ $item->real_name or ''}}</th>			
+							<td>
+								<div class="btn-group">
+								
+									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/user/edit') .'/'. $item->id }}">
+										<i class="ace-icon fa fa-pencil bigger-120"></i>
+									</a>
 
-										<a class="btn btn-xs btn-info" href="#">
-											<i class="ace-icon fa fa-pencil bigger-120"></i>
-										</a>
+									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/user/destroy') .'/'. $item->id}}">
+										<i class="ace-icon fa fa-trash-o bigger-120"></i>
+									</a>
 
-										<a class="btn btn-xs btn-danger" href="#">
-											<i class="ace-icon fa fa-trash-o bigger-120"></i>
-										</a>
-
-									</div>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div><!-- /.span -->
-			</div><!-- /.row -->
+								</div>
+							</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
 
 		
 		@include('admin.master.common_footer')
