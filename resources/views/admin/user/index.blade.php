@@ -63,11 +63,11 @@
 		</div>
 		
 		
-		
-		
 		<!-- /section:basics/content.breadcrumbs -->
 		<div class="page-content">
-	
+			
+			@include('admin.master.notify')
+			
 			<div>
 				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/user/create') }}" style="float:right; margin-bottom:5px;" >
 					<i class="ace-icon fa fa-plus bigger-120"></i>添加用户

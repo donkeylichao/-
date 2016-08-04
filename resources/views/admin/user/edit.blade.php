@@ -39,7 +39,7 @@
 					<i class="ace-icon fa fa-home home-icon"></i>
 					<a href="{{ url('donkey/admin/user') }}">用户管理</a>
 				</li>
-				<li class="active">添加用户</li>	
+				<li class="active">编辑用户</li>	
 			</ul><!-- /.breadcrumb -->
 		
 		</div>
@@ -50,27 +50,28 @@
 			@include('admin.master.notify')
 			{{-- dump(Session::all())--}}
 			{{-- dump($errors->first())--}}
-			<form method="post" action="{{ url('donkey/admin/user/store')}}">
+			<form method="post" action="{{ url('donkey/admin/user/update')}}">
 				
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">用户名：</label>
 					<div class="col-sm-11">
-						<input type='text' name='username' class="col-xs-10 col-sm-4" value="{{ old('username') }}"/>
+						<input type='text' name='username' class="col-xs-10 col-sm-4" value="{{ $user->name }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填*</span>
+							<span class="middle" style="color:red"></span>
 						</span>
 					</div>
 				</div>
 				
 				<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+				<input type="hidden" name="id" value="{{ $user->id }}" />
 				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">邮箱：</label>
 					<div class="col-sm-11">
-						<input type="text" name="email"  class="col-xs-10 col-sm-4" value="{{ old('email') }}"/>
+						<input type="text" disabled name="email"  class="col-xs-10 col-sm-4" value="{{ $user->email }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填*</span>
+							<span class="middle" style="color:red"></span>
 						</span>
 					</div>
 				</div>
@@ -80,9 +81,9 @@
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">密码：</label>
 					<div class="col-sm-11">
-						<input type='password' name="password" class="col-xs-10 col-sm-4" value="{{ old('password') }}"/>
+						<input type='password' name="password" class="col-xs-10 col-sm-4" value=""/>
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填*</span>
+							<span class="middle" style="color:red"></span>
 						</span>
 					</div>	
 				</div>	
@@ -104,7 +105,7 @@
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">手机号：</label>
 					<div class="col-sm-11">	
-						<input type="text" name="phone" class="col-xs-10 col-sm-4" value="{{ old('phone') }}"/>
+						<input type="text" name="phone" class="col-xs-10 col-sm-4" value="{{ old('phone') ? old('phone') : $user->phone }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle"></span>
 						</span>
@@ -116,7 +117,7 @@
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">真实姓名：</label>
 					<div class="col-sm-11">
-						<input type='text' name="real_name" class="col-xs-10 col-sm-4" value="{{ old('real_name') }}"/>
+						<input type='text' name="real_name" class="col-xs-10 col-sm-4" value="{{ old('real_name') ? old('real_name') : $user->real_name  }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle"></span>
 						</span>

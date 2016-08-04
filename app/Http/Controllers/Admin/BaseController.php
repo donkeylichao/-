@@ -40,4 +40,32 @@ class BaseController extends Controller {
 		$note->user_id = $pid;
 		$note->save();
 	 }
+	 
+	 /**
+	  * 记录用户操作信息
+	  *	@resource 操作的内容id,如果是删除内容，传删除内容的名称
+	  *	@handle 操作类型，有效类型为create,update,delete
+	  *	视频:create，update为id,delete为名称
+	  *	音频：create,update为id,delete为名称
+	  *	相册：create,update为id,delete为相册名称，对相册图片的添加和删除都属于更新相册。
+	  *	
+	  */
+	public function record($handle,$resource)
+	{
+		$user_id = Auth::user()->id;
+		$notify = new Notification;
+		$notify->user_id = $user_id;
+		
+		switch($handle) {
+			case create:
+				$notify->body = '添加了';
+				$notify->from_id = $resource;
+			case update:
+				$notify->body = "更新了";
+				$notify->from_id = $resource;
+			case delete:
+				$notify->body = "删除了" . $resource;
+		}
+		$notify->save();
+	}
 }

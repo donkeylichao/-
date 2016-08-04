@@ -54,6 +54,9 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	Route::group(['prefix'=>'user'] , function(){
 		Route::get('/', ['as'=>'admin.user' , 'uses'=>'UserController@index']);
 		Route::get('create', ['as'=>'admin.user.create' , 'uses'=>'UserController@create']);
+		Route::post('store', ['as'=>'admin.user.add' , 'uses'=>'UserController@store']);
+		Route::get('edit/{userId}', ['as'=>'admin.user.edit' , 'uses'=>'UserController@edit']);
+		Route::post('update', ['as'=>'admin.user.update', 'uses'=>'UserController@update']);
 	});
 	
 	//权限管理
