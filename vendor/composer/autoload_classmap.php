@@ -7,12 +7,15 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddTimeToUsersTable' => $baseDir . '/database/migrations/2016_08_01_093503_add_time_to_users_table.php',
+    'AddTypeToPermissionsTable' => $baseDir . '/database/migrations/2016_08_05_070954_add_type_to_permissions_table.php',
+    'CreateAlbumsTable' => $baseDir . '/database/migrations/2016_08_05_021010_create_albums_table.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2016_07_28_030154_create_categories_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2016_07_28_043630_create_comments_table.php',
     'CreateHPhotosTable' => $baseDir . '/database/migrations/2016_07_27_101514_create_h_photos_table.php',
     'CreateHousesTable' => $baseDir . '/database/migrations/2016_07_27_094510_create_houses_table.php',
     'CreateNotificationsTable' => $baseDir . '/database/migrations/2016_07_29_031518_create_notifications_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreatePostsTable' => $baseDir . '/database/migrations/2016_08_05_020951_create_posts_table.php',
     'CreateResourcesTable' => $baseDir . '/database/migrations/2016_07_28_042234_create_resources_table.php',
     'CreateScansTable' => $baseDir . '/database/migrations/2016_07_28_044430_create_scans_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',

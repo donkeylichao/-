@@ -50,7 +50,7 @@
 			@include('admin.master.notify')
 			{{-- dump(Session::all())--}}
 			{{-- dump($errors->first())--}}
-			<form method="post" action="{{ url('donkey/admin/user/update')}}">
+			<form method="post" action="{{ url('donkey/admin/manager/update')}}">
 				
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">用户名：</label>

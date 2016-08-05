@@ -38,14 +38,14 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/user') }}">用户管理</a>
+					<a href="{{ url('donkey/admin/manager') }}">管理员管理</a>
 				</li>
-				<li class="active">用户列表</li>	
+				<li class="active">管理员列表</li>	
 			</ul><!-- /.breadcrumb -->
 
 			<!-- #section:basics/content.searchbox -->
 			<div class="nav-search" id="nav-search">
-				<form class="form-search" method="get" action="{{ url('donkey/admin/user')}}">
+				<form class="form-search" method="get" action="{{ url('donkey/admin/manager')}}">
 					<span class="input-icon">
 						<input type="text" placeholder="输入用户名" class="nav-search-input" id="nav-search-input" name="username" />
 						<i class="ace-icon fa fa-search nav-search-icon"></i>
@@ -69,16 +69,20 @@
 			@include('admin.master.notify')
 			
 			<div>
-				<!--<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/user/create') }}" style="float:right; margin-bottom:5px;" >
+				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/manager/create') }}" style="float:right; margin-bottom:5px;" >
 					<i class="ace-icon fa fa-plus bigger-120"></i>添加管理员
-				</a>-->
+				</a>
 				<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
 					<thead>
 						<tr>
 							<th class="center">序号</th>
 							<th class="center">用户名</th>
+							<th class="center">邮箱</th>
+							<th class="center">手机</th>
 							<th class="center">最后登陆</th>
 							<th class="center">上次登陆ip</th>
+							<th class="center">真实姓名</th>
+							<th class="center">权限角色</th>
 							<th class="center">操作</th>
 						</tr>
 					</thead>
@@ -89,16 +93,23 @@
 						<tr>
 							<td>{{ $num++ }}</td>
 							<td>{{ $item->name or ''}}</td>
+							<td>{{ $item->email or ''}}</td>
+							<td>{{ $item->phone or ''}}</td>
 							<td>{{ $item->last_login_time ? date('Y-m-d H:i:s',$item->last_login_time) : ''}}</td>
 							<td>{{ $item->last_login_ip or ''}}</td>
+							<td>{{ $item->real_name or ''}}</td>	
+							<td>@foreach($item->roles as $role)
+									{{ $role->name.' ' }}
+								@endforeach
+							</td>
 							<td>
 								<div class="btn-group">
 								
-									<!--<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/user/edit') .'/'. $item->id }}">
+									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/manager/edit') .'/'. $item->id }}">
 										<i class="ace-icon fa fa-pencil bigger-120"></i>
-									</a>-->
+									</a>
 
-									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/user/destroy') .'/'. $item->id}}">
+									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/manager/destroy') .'/'. $item->id}}">
 										<i class="ace-icon fa fa-trash-o bigger-120"></i>
 									</a>
 

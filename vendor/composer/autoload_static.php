@@ -232,12 +232,15 @@ class ComposerStaticInit4af5906c8c76c72449dfada4a32efc0a
 
     public static $classMap = array (
         'AddTimeToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_01_093503_add_time_to_users_table.php',
+        'AddTypeToPermissionsTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_05_070954_add_type_to_permissions_table.php',
+        'CreateAlbumsTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_05_021010_create_albums_table.php',
         'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_28_030154_create_categories_table.php',
         'CreateCommentsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_28_043630_create_comments_table.php',
         'CreateHPhotosTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_101514_create_h_photos_table.php',
         'CreateHousesTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_094510_create_houses_table.php',
         'CreateNotificationsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_29_031518_create_notifications_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreatePostsTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_05_020951_create_posts_table.php',
         'CreateResourcesTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_28_042234_create_resources_table.php',
         'CreateScansTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_28_044430_create_scans_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',

@@ -53,7 +53,7 @@ class AuthAdmin {
 					]
 				);
 			}else {
-				return view('app.admin.errors.401',compact('previousUrl'));
+				return view('errors.401',compact('previousUrl'));
 			}
 		}
 		return $next($request);

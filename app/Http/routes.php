@@ -47,21 +47,47 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		
 	//网站统计
 	Route::group(['prefix'=>'home'] , function(){
+		//网站首页
 		Route::get('/' , ['as'=>'admin.home' , 'uses'=>'AdminController@index']);
+	});
+	
+	//管理员管理
+	Route::group(['prefix'=>'manager'] , function(){
+		//管理员列表页
+		Route::get('/', ['as'=>'admin.manager' , 'uses'=>'ManagerController@index']);
+		//管理员添加页
+		Route::get('create', ['as'=>'admin.manager.create' , 'uses'=>'ManagerController@create']);
+		//新建管理员保存
+		Route::post('store', 'ManagerController@store');
+		//编辑管理员
+		Route::get('edit/{userId}', ['as'=>'admin.manager.edit' , 'uses'=>'ManagerController@edit']);
+		//保存编辑
+		Route::post('update','ManagerController@update');
+		//删除管理员
+		Route::get('destroy/{id}' , ['as'=>'admin.manager.delete', 'uses'=>'ManagerController@destroy']);
 	});
 	
 	//用户管理
 	Route::group(['prefix'=>'user'] , function(){
-		Route::get('/', ['as'=>'admin.user' , 'uses'=>'UserController@index']);
-		Route::get('create', ['as'=>'admin.user.create' , 'uses'=>'UserController@create']);
-		Route::post('store', ['as'=>'admin.user.add' , 'uses'=>'UserController@store']);
-		Route::get('edit/{userId}', ['as'=>'admin.user.edit' , 'uses'=>'UserController@edit']);
-		Route::post('update', ['as'=>'admin.user.update', 'uses'=>'UserController@update']);
+		//用户列表
+		Route::get('/' , ['as'=>'admin.user' , 'uses'=>'UserController@index']);
+		//删除用户
+		Route::get('destroy/{id}' , ['as'=>'admin.user.delete' , 'uses'=>'UserController@destroy']);
 	});
-	
 	//权限管理
 	Route::group(['prefix'=>'permission'] , function(){
+		//权限列表
 		Route::get('/' , ['as'=>'admin.auth' , 'uses'=>'PermissionController@index']);
+		//添加权限
+		Route::get('create' , ['as'=>'admin.auth.create' , 'uses'=>'PermissionController@create']);
+		//保存权限
+		Route::post('store' , 'PermissionController@store');
+		//编辑权限
+		Route::get('edit/{id}' , ['as'=>'admin.auth.edit' , 'uses'=>'PermissionController@edit']);
+		//保存编辑
+		Route::post('update' , 'PermissionController@update');
+		//删除权限
+		Route::get('destroy/{id}' , ['as'=>'admin.auth.delete' , 'uses'=>'PermissionController@destroy']);
 	});
 	
 	Route::group(['prefix'=>'role'] , function(){

@@ -38,14 +38,14 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/user') }}">用户管理</a>
+					<a href="{{ url('donkey/admin/permission') }}">权限管理</a>
 				</li>
-				<li class="active">用户列表</li>	
+				<li class="active">权限列表</li>	
 			</ul><!-- /.breadcrumb -->
 
 			<!-- #section:basics/content.searchbox -->
 			<div class="nav-search" id="nav-search">
-				<form class="form-search" method="get" action="{{ url('donkey/admin/user')}}">
+				<!--<form class="form-search" method="get" action="{{ url('donkey/admin/permission')}}">
 					<span class="input-icon">
 						<input type="text" placeholder="输入用户名" class="nav-search-input" id="nav-search-input" name="username" />
 						<i class="ace-icon fa fa-search nav-search-icon"></i>
@@ -55,7 +55,7 @@
 					<button type="submit" class="btn btn-primary btn-xs">
 						搜索 
 					</button>
-				</form>
+				</form>-->
 			</div>
 			<!-- /.nav-search -->
 			<!-- /section:basics/content.searchbox -->
@@ -69,36 +69,36 @@
 			@include('admin.master.notify')
 			
 			<div>
-				<!--<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/user/create') }}" style="float:right; margin-bottom:5px;" >
-					<i class="ace-icon fa fa-plus bigger-120"></i>添加管理员
-				</a>-->
+				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/permission/create') }}" style="float:right; margin-bottom:5px;" >
+					<i class="ace-icon fa fa-plus bigger-120"></i>添加权限
+				</a>
 				<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
 					<thead>
 						<tr>
 							<th class="center">序号</th>
-							<th class="center">用户名</th>
-							<th class="center">最后登陆</th>
-							<th class="center">上次登陆ip</th>
+							<th class="center">权限名称</th>
+							<th class="center">显示名称</th>
+							<th class="center">说明</th>
 							<th class="center">操作</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<?php $num = 1 ?> 
-						@foreach($users as $item)
+						@foreach($permissions as $item)
 						<tr>
 							<td>{{ $num++ }}</td>
 							<td>{{ $item->name or ''}}</td>
-							<td>{{ $item->last_login_time ? date('Y-m-d H:i:s',$item->last_login_time) : ''}}</td>
-							<td>{{ $item->last_login_ip or ''}}</td>
+							<td>{{ $item->display_name or ''}}</td>
+							<td>{{ $item->description or ''}}</td>
 							<td>
 								<div class="btn-group">
 								
-									<!--<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/user/edit') .'/'. $item->id }}">
+									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/permission/edit') .'/'. $item->id }}">
 										<i class="ace-icon fa fa-pencil bigger-120"></i>
-									</a>-->
+									</a>
 
-									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/user/destroy') .'/'. $item->id}}">
+									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/permission/destroy') .'/'. $item->id}}">
 										<i class="ace-icon fa fa-trash-o bigger-120"></i>
 									</a>
 
@@ -109,8 +109,8 @@
 					</tbody>
 				</table>
 			</div>
-			
-			{!! $users->appends(['username'=>$username])->render() !!}
+		
+			{!! $permissions->render() !!}
 			
 			@include('admin.master.common_footer')
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">

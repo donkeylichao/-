@@ -29,7 +29,6 @@
 	</div>
 	<div class="main-content">
 		<!-- #section:basics/content.breadcrumbs -->
-		
 		<div class="breadcrumbs" id="breadcrumbs">
 			<script type="text/javascript">
 				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
@@ -38,79 +37,95 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/user') }}">用户管理</a>
+					<a href="{{ url('donkey/admin/user') }}">权限管理</a>
 				</li>
-				<li class="active">用户列表</li>	
+				<li class="active">编辑权限</li>	
 			</ul><!-- /.breadcrumb -->
-
-			<!-- #section:basics/content.searchbox -->
-			<div class="nav-search" id="nav-search">
-				<form class="form-search" method="get" action="{{ url('donkey/admin/user')}}">
-					<span class="input-icon">
-						<input type="text" placeholder="输入用户名" class="nav-search-input" id="nav-search-input" name="username" />
-						<i class="ace-icon fa fa-search nav-search-icon"></i>
-					</span>
-					
-					
-					<button type="submit" class="btn btn-primary btn-xs">
-						搜索 
-					</button>
-				</form>
-			</div>
-			<!-- /.nav-search -->
-			<!-- /section:basics/content.searchbox -->
 		
 		</div>
-		
 		
 		<!-- /section:basics/content.breadcrumbs -->
 		<div class="page-content">
 			
 			@include('admin.master.notify')
+			{{-- dump(Session::all())--}}
+			{{-- dump($errors->first())--}}
+			<form method="post" action="{{ url('donkey/admin/permission/update')}}">
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">权限名称：</label>
+					<div class="col-sm-11">
+						<input type='text' name='name' class="col-xs-10 col-sm-4" value="{{ $permission['name'] }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,不能重复*</span>
+						</span>
+					</div>
+				</div>
+				
+				<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+				<input type="hidden" name="id" value="{{ $permission['id'] }}" />
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">显示名称：</label>
+					<div class="col-sm-11">
+						<input type="text" name="display_name"  class="col-xs-10 col-sm-4" value="{{ $permission['display_name'] }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red"></span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">说明：</label>
+					<div class="col-sm-11">
+						<input type='text' name="description" class="col-xs-10 col-sm-4" value="{{ $permission['description']}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>	
+				</div>	
+				
+				<!--<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" >确认密码：</label>
+					<div class="col-sm-11">	
+						<input type='password' name="repassword" class="col-xs-10 col-sm-4"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>	
+				</div>	-->
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">权限类型：</label>
+					<div class="col-sm-11">
+						<select name="type" class="col-xs-10 col-sm-4">
+							@foreach(Config::get('common.permission_types') as $k=>$v)
+								<option value="{{ $k }}" @if($k == $permission['type']) selected @endif>{{$v}}</option>
+							@endforeach
+						</select>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle"></span>
+						</span>
+					</div>	
+				</div>	
 			
-			<div>
-				<!--<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/user/create') }}" style="float:right; margin-bottom:5px;" >
-					<i class="ace-icon fa fa-plus bigger-120"></i>添加管理员
-				</a>-->
-				<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
-					<thead>
-						<tr>
-							<th class="center">序号</th>
-							<th class="center">用户名</th>
-							<th class="center">最后登陆</th>
-							<th class="center">上次登陆ip</th>
-							<th class="center">操作</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<?php $num = 1 ?> 
-						@foreach($users as $item)
-						<tr>
-							<td>{{ $num++ }}</td>
-							<td>{{ $item->name or ''}}</td>
-							<td>{{ $item->last_login_time ? date('Y-m-d H:i:s',$item->last_login_time) : ''}}</td>
-							<td>{{ $item->last_login_ip or ''}}</td>
-							<td>
-								<div class="btn-group">
-								
-									<!--<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/user/edit') .'/'. $item->id }}">
-										<i class="ace-icon fa fa-pencil bigger-120"></i>
-									</a>-->
-
-									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/user/destroy') .'/'. $item->id}}">
-										<i class="ace-icon fa fa-trash-o bigger-120"></i>
-									</a>
-
-								</div>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
-			
-			{!! $users->appends(['username'=>$username])->render() !!}
+				<div height="10px">&nbsp;</div>
+				
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-info" type="submit">
+						<i class="ace-icon fa fa-check bigger-110"></i>
+						提交修改
+					</button>
+				</div>
+			</form>
+		
 			
 			@include('admin.master.common_footer')
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
@@ -118,7 +133,9 @@
 			</a>
 		</div><!-- /.main-container -->
 		
-	
+		<script>
+			
+		</script>
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
