@@ -106,7 +106,11 @@
 							<td>{{ $item->area or ''}}</td>
 							<td>{{ $item->type or ''}}</td>
 							<td>{{ $item->price or ''}}</td>
+<<<<<<< HEAD
 							<td>{{ $item->recommend ? '已推荐' : ''}}</td>
+=======
+							<td>@if($item->recommend) '已推荐' @endif</td>
+>>>>>>> 895c277ce572acda785720c01e113c805ae9a681
 							<td>
 								<div class="btn-group">
 									
