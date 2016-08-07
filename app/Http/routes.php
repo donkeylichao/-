@@ -91,7 +91,22 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	});
 	
 	Route::group(['prefix'=>'role'] , function(){
-		Route::get('/' , ['as'=>'admin.role' , 'uses'=>'RoleController@index']);
+        //权限角色列表页
+        Route::get('/' , ['as'=>'admin.role' , 'uses'=>'RoleController@index']);
+        //添加权限角色
+        Route::get('create' , ['as'=>'admin.role.create' , 'uses'=>'RoleController@create']);
+        //保存权限角色
+        Route::post('store' , 'RoleController@store');
+        //修改权限角色
+        Route::get('edit/{id}' , ['as'=>'admin.role.edit' , 'uses'=>'RoleController@edit']);
+        //保存修改
+        Route::post('update', 'RoleController@update');
+        //删除权限角色
+        Route::get('destroy/{id}' , ['as'=>'admin.role.destroy' , 'uses'=>'RoleController@destroy']);
+        //编辑角色拥有的权限
+        Route::get('show/{id}' , ['as'=>'admin.role.show' , 'uses'=>'RoleController@show']);
+        //保存编辑
+        Route::post('store_role' , 'RoleController@store_role');
 	});	
 	
 	//分类管理(日记分类)

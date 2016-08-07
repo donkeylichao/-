@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
+use App\Models\Permission;
+use App\Models\Role;
 use App\Http\Controllers\Admin\BaseController;
-
 use Illuminate\Http\Request;
+use Validator;
 
 class RoleController extends BaseController {
 
@@ -14,7 +16,11 @@ class RoleController extends BaseController {
 	 */
 	public function index()
 	{
-		//
+        $compact = [];
+        $roles = Role::paginate(10);
+        $compact[] = 'roles';
+
+        return view('admin.role.index')->with(compact($compact));
 	}
 
 	/**
@@ -24,7 +30,7 @@ class RoleController extends BaseController {
 	 */
 	public function create()
 	{
-		//
+		return view('admin.role.create');
 	}
 
 	/**
@@ -32,9 +38,22 @@ class RoleController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$this->validate($request ,['name'=>'required|unique:roles' , 'description'=>'required'],
+            ['name.required'=>'角色名称必须!','name.unique'=>'用户名称已存在!','description.required'=>'说明不能为空!']
+        );
+
+        $role = New Role;
+        $role->name = rtrim($request->input('name'));
+        $role->display_name = rtrim($request->input('display_name'));
+        $role->description = $request->input('description');
+
+        if(!$role->save()) {
+            return back()->withInput()->with('notify_error' , '添加失败!');
+        }
+        return redirect('donkey/admin/role')->with('notify_success' , '添加成功!');
+
 	}
 
 	/**
@@ -45,8 +64,43 @@ class RoleController extends BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        $compact = [];
+
+        $permissions = Permission::all();
+        $role = Role::find($id);
+        $role_perms = Role::find($id)->perms()->get();
+        //dump($role_perms);
+        $role_per = [];
+
+        foreach($role_perms as $k=>$v) {
+            $role_per[] = $v->id;
+        }
+
+        $compact[] = 'permissions';
+        $compact[] = 'role';
+        $compact[] = 'role_per';
+        //dump($role_per);
+
+        return view('admin.role.role_per')->with(compact($compact));
 	}
+
+
+    /**
+     * Store the role's edit.
+     *
+     *
+     */
+    public function store_role(Request $request)
+    {
+        $role = Role::find($request->id);
+        //dump($request->all());
+        $result = $role->perms()->sync($request->permission);
+        if(!$result) {
+            return back()->withInput()->with('notify_error' , '修改失败!');
+        }
+        return redirect('donkey/admin/role')->with('notify_success' , '修改成功!');
+    }
+
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -56,7 +110,8 @@ class RoleController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+        $role = Role::find($id);
+		return view('admin.role.edit')->with('role',$role);
 	}
 
 	/**
@@ -65,9 +120,25 @@ class RoleController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request)
 	{
-		//
+        $validate = Validator::make($request->all(),['name'=>'required' , 'description'=>'required'],
+            ['name.required'=>'角色名称不能为空!','description.required'=>'角色描述不能为空!']
+        );
+        if($validate->fails()) {
+            return back()->withInput()->withErrors($validate);
+        }
+
+        $role = Role::find($request->id);
+        $role->name = rtrim($request->input('name'));
+        $role->display_name = rtrim($request->input('display_name'));
+        $role->description = $request->input('description');
+
+        if(!$role->save()) {
+            return back()->withInput()->with('notify_error' , '修改失败!');
+            }
+
+        return redirect('donkey/admin/role')->with('notify_success' , '修改成功!');
 	}
 
 	/**
@@ -78,7 +149,10 @@ class RoleController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		if(!Role::destroy($id)) {
+            return back()->with('notify_error' , '删除失败!');
+        }
+        return back()->with('notify_success' , '删除成功!');
 	}
 
 }
