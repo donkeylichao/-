@@ -106,7 +106,7 @@
 							<td>{{ $item->area or ''}}</td>
 							<td>{{ $item->type or ''}}</td>
 							<td>{{ $item->price or ''}}</td>
-							<td>{{ $item->recommend == null ? '' : '已推荐'}}</td>
+							<td>@if($item->recommend) '已推荐' @endif</td>
 							<td>
 								<div class="btn-group">
 									
