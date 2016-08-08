@@ -126,6 +126,22 @@
 			
 				<div height="10px">&nbsp;</div>
 				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">角色：</label>
+					<div class="col-sm-11">
+						@foreach($roles as $item)
+						<input type='checkbox' name="roles[]" value="{{ $item->id }}"/>
+						
+						<span class="">
+							<span class="middle"> {{ $item->display_name }} </span>
+						</span>
+						&nbsp;&nbsp;
+						@endforeach
+					</div>	
+				</div>	
+				
+				<div height="10px">&nbsp;</div>
+				
 				<div class="col-md-offset-1 col-md-9">
 					<button class="btn btn-info" type="submit">
 						<i class="ace-icon fa fa-check bigger-110"></i>

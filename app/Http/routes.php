@@ -110,13 +110,26 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	});	
 	
 	//分类管理(日记分类)
-	Route::group(['prefix'=>'category'] , function(){
+	/*Route::group(['prefix'=>'category'] , function(){
 		Route::get('/' , ['as'=>'admin.category' , 'uses'=>'CategoryController@index']);
-	});
+	});*/
 	
 	//房源管理
 	Route::group(['prefix'=>'room'] , function(){
-		Route::get('/' , ['as'=>'admin.room' , 'uses'=>'RoomController@index']);
+		//房源列表
+		Route::get('index/{type?}' , ['as'=>'admin.room' , 'uses'=>'RoomController@index']);
+		//添加房源
+		Route::get('create' , ['uses'=>'RoomController@create' , 'as'=>'admin.room.create']);
+		//保存添加
+		Route::post('store' , ['uses'=>'RoomController@store' , 'as'=>'admin.room.store']);
+		//修改房源信息
+		Route::get('edit/{id}' , ['uses'=>'RoomController@edit' , 'as'=>'admin.room.edit']);
+		//保存修改
+		Route::post('update' , ['uses'=>'RoomController@update' , 'as'=>'admin.room.update']);
+		//删除房源信息
+		Route::get('destroy/{id}' , ['uses'=>'RoomController@destroy' , 'as'=>'admin.room.destroy']);
+		//推荐
+		Route::get('recommend/{id}' , ['uses'=>'RoomController@recommend' , 'as'=>'admin.room.recommend']);
 	});
 	
 	//视屏管理

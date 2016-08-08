@@ -29,7 +29,6 @@
 	</div>
 	<div class="main-content">
 		<!-- #section:basics/content.breadcrumbs -->
-		
 		<div class="breadcrumbs" id="breadcrumbs">
 			<script type="text/javascript">
 				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
@@ -38,83 +37,181 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/role') }}">角色管理</a>
+					<a href="{{ url('donkey/admin/room/index/1') }}">房源管理</a>
 				</li>
-				<li class="active">角色列表</li>
+				<li class="active">添加房源</li>
 			</ul><!-- /.breadcrumb -->
-
-			<!-- #section:basics/content.searchbox -->
-			<div class="nav-search" id="nav-search">
-				<!--<form class="form-search" method="get" action="{{-- url('donkey/admin/role')--}}">
-					<span class="input-icon">
-						<input type="text" placeholder="输入用户名" class="nav-search-input" id="nav-search-input" name="username" />
-						<i class="ace-icon fa fa-search nav-search-icon"></i>
-					</span>
-					
-					
-					<button type="submit" class="btn btn-primary btn-xs">
-						搜索 
-					</button>
-				</form>-->
-			</div>
-			<!-- /.nav-search -->
-			<!-- /section:basics/content.searchbox -->
 		
 		</div>
-		
 		
 		<!-- /section:basics/content.breadcrumbs -->
 		<div class="page-content">
 			
 			@include('admin.master.notify')
+			{{-- dump(Session::all())--}}
+			{{-- dump($errors->first())--}}
 			
-			<div>
-				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/role/create') }}" style="float:right; margin-bottom:5px;" >
-					<i class="ace-icon fa fa-plus bigger-120"></i>添加权限
-				</a>
-				<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
-					<thead>
-						<tr>
-							<th class="center">序号</th>
-							<th class="center">角色名称</th>
-							<th class="center">显示名称</th>
-							<th class="center">说明</th>
-							<th class="center">操作</th>
-						</tr>
-					</thead>
+			<form method="post" action="{{ url('donkey/admin/room/store')}}">
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">类型：</label>
+					<div class="col-sm-11">
+						<select name="h_type" id="house_type" class="col-xs-10 col-sm-4">
+							@foreach(Config::get('common.house_types') as $k=>$v)
+							<option value="{{ $k }}" @if(old('h_type') == $k) selected @endif>{{$v}}</option>
+							@endforeach
+						</select>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle"></span>
+						</span>
+					</div>	
+				</div>	
+				<script>
+					//
+					$(function(){
+						$('#house_type').change(function(){
+							//alert('asdf');
+							var num = $(this).val();
+							//alert(num);
+							if(num == 1){ 
+								$('.play').css('display','none');
+							}else if(num == 2) {
+								$('.play').css('display','block');
+							}
+						});
+					});
+				</script>
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group play" style="display:none;">
+					<label class="col-sm-1 control-label no-padding-right">买卖单价：</label>
+					<div class="col-sm-11">
+						<input type='text' name='univalence' class="col-xs-10 col-sm-4" value="{{ old('univalence') }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,例如:"12000"*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px" class='play' style="display:none;">&nbsp;</div>
+				
+				<div class="form-group play" style="display:none;">
+					<label class="col-sm-1 control-label no-padding-right">税率：</label>
+					<div class="col-sm-11">
+						<input type='text' name='tax_rate' class="col-xs-10 col-sm-4" value="{{ old('tax_rate') }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*选填,例如:6%,填写格式为0.06*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px" class='play' style="display:none;">&nbsp;</div>
+				
+				<div class="form-group play" style="display:none">
+					<label class="col-sm-1 control-label no-padding-right">税费：</label>
+					<div class="col-sm-11">
+						<input type='text' name='taxes' class="col-xs-10 col-sm-4" value="{{ old('taxes') }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,例如:"20000"*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px" class='play' style="display:none;">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">小区名称：</label>
+					<div class="col-sm-11">
+						<input type='text' name='name' class="col-xs-10 col-sm-4" value="{{ old('name') }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>
+				</div>
 
-					<tbody>
-						<?php $num = 1 ?> 
-						@foreach($roles as $item)
-						<tr>
-							<td>{{ $num++ }}</td>
-							<td>{{ $item->name or ''}}</td>
-							<td>{{ $item->display_name or ''}}</td>
-							<td>{{ $item->description or ''}}</td>
-							<td>
-								<div class="btn-group">
-
-                                    <a class="btn btn-xs btn-default" href="{{ url('donkey/admin/role/show') .'/'. $item->id }}" title="编辑权限">
-                                        <i class="ace-icon fa fa-wrench bigger-120"></i>
-                                    </a>
-
-									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/role/edit') .'/'. $item->id }}" title="编辑角色">
-										<i class="ace-icon fa fa-pencil bigger-120"></i>
-									</a>
-
-									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/role/destroy') .'/'. $item->id}}" title="删除">
-										<i class="ace-icon fa fa-trash-o bigger-120"></i>
-									</a>
-
-								</div>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
+				<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">小区位置：</label>
+					<div class="col-sm-11">
+						<input type="text" name="position"  class="col-xs-10 col-sm-4" value="{{ old('position') }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,例如 "北京市 朝阳区 XX大街"*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">房子名称：</label>
+					<div class="col-sm-11">
+						<input type="text" name="room_name"  class="col-xs-10 col-sm-4" value="{{ old('room_name') }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,例如 "38楼3单元205"*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">户型：</label>
+					<div class="col-sm-11">
+						<input type="text" name="type"  class="col-xs-10 col-sm-4" value="{{ old('type') }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,例如 "三室两厅"*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">面积：</label>
+					<div class="col-sm-11">
+						<input type='text' name="area" class="col-xs-10 col-sm-4" value="{{ old('area') }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>	
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">价格：</label>
+					<div class="col-sm-11">
+						<input type='text' name="price" class="col-xs-10 col-sm-4" value="{{ old('price') }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>	
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">备注：</label>
+					<div class="col-sm-11">
+						<input type='text' name="introduction" class="col-xs-10 col-sm-4" value="{{ old('introduction') }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>	
+				</div>
+			
+				<div height="10px">&nbsp;</div>
+				
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-info" type="submit">
+						<i class="ace-icon fa fa-check bigger-110"></i>
+						提交保存
+					</button>
+				</div>
+			</form>
 		
-			{!! $roles->render() !!}
 			
 			@include('admin.master.common_footer')
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
@@ -122,7 +219,9 @@
 			</a>
 		</div><!-- /.main-container -->
 		
-	
+		<script>
+			$('')
+		</script>
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->

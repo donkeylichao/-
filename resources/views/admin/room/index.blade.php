@@ -38,19 +38,18 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/role') }}">角色管理</a>
+					<a href="{{ url('donkey/admin/room/index/1') }}">房源管理</a>
 				</li>
-				<li class="active">角色列表</li>
+				<li class="active">房源列表</li>
 			</ul><!-- /.breadcrumb -->
 
 			<!-- #section:basics/content.searchbox -->
 			<div class="nav-search" id="nav-search">
-				<!--<form class="form-search" method="get" action="{{-- url('donkey/admin/role')--}}">
+				<form class="form-search" method="get" action="{{-- url('donkey/admin/room/index')--}}">
 					<span class="input-icon">
-						<input type="text" placeholder="输入用户名" class="nav-search-input" id="nav-search-input" name="username" />
+						<input type="text" placeholder="输入小区名称搜索" class="nav-search-input" id="nav-search-input" name="name" />
 						<i class="ace-icon fa fa-search nav-search-icon"></i>
 					</span>
-					
 					
 					<button type="submit" class="btn btn-primary btn-xs">
 						搜索 
@@ -62,47 +61,72 @@
 		
 		</div>
 		
-		
+		<?php 
+			$uri = $_SERVER['REQUEST_URI'];
+			$pos = strpos($uri , '?');
+			if($pos) {
+				$uri = strstr($uri,'?',true);
+			}
+		?>
 		<!-- /section:basics/content.breadcrumbs -->
 		<div class="page-content">
 			
 			@include('admin.master.notify')
 			
 			<div>
-				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/role/create') }}" style="float:right; margin-bottom:5px;" >
-					<i class="ace-icon fa fa-plus bigger-120"></i>添加权限
+				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/room/create') }}" style="float:right; margin-bottom:5px;" >
+					<i class="ace-icon fa fa-plus bigger-120"></i>添加房源
 				</a>
-				<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
+				
+				<ul class="nav nav-pills">
+					@foreach(Config::get('common.house_types') as $key=>$value)
+						<li role="presentation" @if(strpos($uri,(string)$key)) class="active" @endif ><a href="{{ url('donkey/admin/room/index').'/'.$key}}">{{ $value }}</a></li>
+					@endforeach
+							<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
 					<thead>
 						<tr>
 							<th class="center">序号</th>
-							<th class="center">角色名称</th>
-							<th class="center">显示名称</th>
-							<th class="center">说明</th>
+							<th class="center">小区名称</th>
+							<th class="center">小区位置</th>
+							<th class="center">房子面积</th>
+							<th class="center">户型</th>
+							<th class="center">价格</th>
+							<th class="center">是否推荐</th>
 							<th class="center">操作</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<?php $num = 1 ?> 
-						@foreach($roles as $item)
+						@foreach($rooms as $item)
 						<tr>
 							<td>{{ $num++ }}</td>
 							<td>{{ $item->name or ''}}</td>
-							<td>{{ $item->display_name or ''}}</td>
-							<td>{{ $item->description or ''}}</td>
+							<td>{{ $item->position or ''}}</td>
+							<td>{{ $item->area or ''}}</td>
+							<td>{{ $item->type or ''}}</td>
+							<td>{{ $item->price or ''}}</td>
+							<td>{{ $item->recommend == null ? '' : '已推荐'}}</td>
 							<td>
 								<div class="btn-group">
-
-                                    <a class="btn btn-xs btn-default" href="{{ url('donkey/admin/role/show') .'/'. $item->id }}" title="编辑权限">
-                                        <i class="ace-icon fa fa-wrench bigger-120"></i>
+									
+									<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/room/recommend') .'/'. $item->id }}" title="推荐">
+                                        <i class="ace-icon fa fa-tag bigger-120"></i>
+                                    </a>
+									
+									<!--<a class="btn btn-xs btn-primary" href="{{ url('donkey/admin/room/upload') .'/'. $item->id }}" title="上传图片">
+                                        <i class="ace-icon fa fa-upload bigger-120"></i>
+                                    </a>-->
+									
+                                    <a class="btn btn-xs btn-warning" href="{{ url('donkey/admin/room/show') .'/'. $item->id }}" title="查看">
+                                        <i class="ace-icon fa fa-eye bigger-120"></i>
                                     </a>
 
-									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/role/edit') .'/'. $item->id }}" title="编辑角色">
+									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/room/edit') .'/'. $item->id }}" title="编辑">
 										<i class="ace-icon fa fa-pencil bigger-120"></i>
 									</a>
 
-									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/role/destroy') .'/'. $item->id}}" title="删除">
+									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/room/destroy') .'/'. $item->id}}" title="删除">
 										<i class="ace-icon fa fa-trash-o bigger-120"></i>
 									</a>
 
@@ -112,9 +136,10 @@
 						@endforeach
 					</tbody>
 				</table>
+				{!! $rooms->appends(['name'=>$name])->render() !!}
+				</ul>
+				
 			</div>
-		
-			{!! $roles->render() !!}
 			
 			@include('admin.master.common_footer')
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">

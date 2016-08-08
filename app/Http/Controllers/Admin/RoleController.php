@@ -94,6 +94,7 @@ class RoleController extends BaseController {
     {
         $role = Role::find($request->id);
         //dump($request->all());
+		//同步关系表
         $result = $role->perms()->sync($request->permission);
         if(!$result) {
             return back()->withInput()->with('notify_error' , '修改失败!');
@@ -148,7 +149,12 @@ class RoleController extends BaseController {
 	 * @return Response
 	 */
 	public function destroy($id)
-	{
+	{	
+		$role = Role::find($id);
+		if(!$role) {
+			return back()->with('notify_error' , '您删除的角色不存在!');
+		}
+		
 		if(!Role::destroy($id)) {
             return back()->with('notify_error' , '删除失败!');
         }
