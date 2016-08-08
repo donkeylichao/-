@@ -6,8 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddRoomNameToHousesTable' => $baseDir . '/database/migrations/2016_08_08_070303_add_room_name_to_houses_table.php',
     'AddTimeToUsersTable' => $baseDir . '/database/migrations/2016_08_01_093503_add_time_to_users_table.php',
     'AddTypeToPermissionsTable' => $baseDir . '/database/migrations/2016_08_05_070954_add_type_to_permissions_table.php',
+    'AddVoteToHousesTable' => $baseDir . '/database/migrations/2016_08_08_030401_add_vote_to_houses_table.php',
     'CreateAlbumsTable' => $baseDir . '/database/migrations/2016_08_05_021010_create_albums_table.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2016_07_28_030154_create_categories_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2016_07_28_043630_create_comments_table.php',

@@ -89,8 +89,8 @@
 		</a>
 	</li>-->	
 		
-	<li @if(strpos($uri,'room')) class="active open hsub" @endif>
-		<a href=" {{ url('donkey/admin/room')}}">
+	<li @if(strpos($uri,'room')) class="active" @endif>
+		<a href=" {{ url('donkey/admin/room/index/1')}}">
 			<i class="menu-icon fa fa-home"></i>
 			<span class="menu-text"> 房源管理 </span>
 			
@@ -98,7 +98,7 @@
 		</a>
 	</li>
 		
-	<li @if(strpos($uri,'video')) class="active open hsub" @endif>
+	<li @if(strpos($uri,'video')) class="active" @endif>
 		<a href="{{ url('donkey/admin/video')}}">
 			<i class="menu-icon fa fa-video-camera"></i>
 			<span class="menu-text"> 视频管理 </span>
@@ -106,7 +106,7 @@
 		</a>
 	</li>
 	
-	<li @if(strpos($uri,'music')) class="active open hsub" @endif>
+	<li @if(strpos($uri,'music')) class="active" @endif>
 		<a href="{{ url('donkey/admin/music')}}">
 			<i class="menu-icon fa fa-music"></i>
 			<span class="menu-text"> 音频管理 </span>
@@ -115,7 +115,7 @@
 		</a>
 	</li>
 	
-	<li @if(strpos($uri,'photo')) class="active open hsub" @endif>
+	<li @if(strpos($uri,'photo')) class="active" @endif>
 		<a href="{{ url('donkey/admin/photo')}}">
 			<i class="menu-icon fa fa-image"></i>
 			<span class="menu-text"> 图片管理 </span>
@@ -124,7 +124,7 @@
 		</a>
 	</li>
 	
-	<li @if(strpos($uri,'post')) class="active open hsub" @endif>
+	<li @if(strpos($uri,'post')) class="active" @endif>
 		<a href="{{ url('donkey/admin/post')}}" class="dropdown-toggle">
 			<i class="menu-icon fa fa-pencil-square-o"></i>
 			<span class="menu-text"> 日记管理 </span>
@@ -133,7 +133,7 @@
 		</a>
 	</li>
 	
-	<li @if(strpos($uri,'post')) class="active open hsub" @endif>
+	<li @if(strpos($uri,'post')) class="active" @endif>
 		<a href="{{ url('donkey/admin/comment')}}" class="dropdown-toggle">
 			<i class="menu-icon fa fa-comment"></i>
 			<span class="menu-text"> 评论管理 </span>
@@ -142,7 +142,7 @@
 		</a>
 	</li>
 	
-	<li @if(strpos($uri,'notification')) class="active open hsub" @endif>
+	<li @if(strpos($uri,'notification')) class="active" @endif>
 		<a href="{{ url('donkey/admin/notification')}}" class="dropdown-toggle">
 			<i class="menu-icon fa fa-bullhorn"></i>
 			<span class="menu-text"> 消息管理 </span>

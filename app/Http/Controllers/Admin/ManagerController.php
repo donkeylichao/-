@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BaseController;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use Input;
 use Redirect;
 use Session;
@@ -98,8 +99,11 @@ class ManagerController extends  BaseController{
 	public function edit($id)
 	{
 		$user = User::find($id);
+		$roles = Role::all();
+		
 		$compact = [];
 		$compact[] = 'user';
+		$compact[] = 'roles';
 		return view('admin.manager.edit')->with(compact($compact));
 	}
 
@@ -129,6 +133,8 @@ class ManagerController extends  BaseController{
 		if(!$user->save()){ 
 			return back()->with('notify_error' , '修改失败!');
 		}
+		//同步更新关系表
+		$user->roles()->sync($request->input('roles'));
 		return Redirect::to('donkey/admin/manager')->with('notify_success', '用户' . $user->name . '修改成功！');
 	} 
 

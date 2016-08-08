@@ -29,7 +29,6 @@
 	</div>
 	<div class="main-content">
 		<!-- #section:basics/content.breadcrumbs -->
-		
 		<div class="breadcrumbs" id="breadcrumbs">
 			<script type="text/javascript">
 				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
@@ -40,81 +39,65 @@
 					<i class="ace-icon fa fa-home home-icon"></i>
 					<a href="{{ url('donkey/admin/role') }}">角色管理</a>
 				</li>
-				<li class="active">角色列表</li>
+				<li class="active">编辑角色</li>
 			</ul><!-- /.breadcrumb -->
-
-			<!-- #section:basics/content.searchbox -->
-			<div class="nav-search" id="nav-search">
-				<!--<form class="form-search" method="get" action="{{-- url('donkey/admin/role')--}}">
-					<span class="input-icon">
-						<input type="text" placeholder="输入用户名" class="nav-search-input" id="nav-search-input" name="username" />
-						<i class="ace-icon fa fa-search nav-search-icon"></i>
-					</span>
-					
-					
-					<button type="submit" class="btn btn-primary btn-xs">
-						搜索 
-					</button>
-				</form>-->
-			</div>
-			<!-- /.nav-search -->
-			<!-- /section:basics/content.searchbox -->
 		
 		</div>
-		
 		
 		<!-- /section:basics/content.breadcrumbs -->
 		<div class="page-content">
 			
 			@include('admin.master.notify')
+			{{-- dump(Session::all())--}}
+			{{-- dump($errors->first())--}}
+			<form method="post" action="{{ url('donkey/admin/role/update')}}">
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">权限名称：</label>
+					<div class="col-sm-11">
+						<input type='text' name='name' class="col-xs-10 col-sm-4" value="{{ old('name') ? old('name') : $role->name }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,不能重复*</span>
+						</span>
+					</div>
+				</div>
+				
+				<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+				<input type="hidden" name="id" value="{{ $role->id }}" />
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">显示名称：</label>
+					<div class="col-sm-11">
+						<input type="text" name="display_name"  class="col-xs-10 col-sm-4" value="{{ old('display_name') ? old('display_name') : $role->display_name }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red"></span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">说明：</label>
+					<div class="col-sm-11">
+						<input type='text' name="description" class="col-xs-10 col-sm-4" value="{{ old('description') ? old('description') : $role->description}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>	
+				</div>
 			
-			<div>
-				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/role/create') }}" style="float:right; margin-bottom:5px;" >
-					<i class="ace-icon fa fa-plus bigger-120"></i>添加权限
-				</a>
-				<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
-					<thead>
-						<tr>
-							<th class="center">序号</th>
-							<th class="center">角色名称</th>
-							<th class="center">显示名称</th>
-							<th class="center">说明</th>
-							<th class="center">操作</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<?php $num = 1 ?> 
-						@foreach($roles as $item)
-						<tr>
-							<td>{{ $num++ }}</td>
-							<td>{{ $item->name or ''}}</td>
-							<td>{{ $item->display_name or ''}}</td>
-							<td>{{ $item->description or ''}}</td>
-							<td>
-								<div class="btn-group">
-
-                                    <a class="btn btn-xs btn-default" href="{{ url('donkey/admin/role/show') .'/'. $item->id }}" title="编辑权限">
-                                        <i class="ace-icon fa fa-wrench bigger-120"></i>
-                                    </a>
-
-									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/role/edit') .'/'. $item->id }}" title="编辑角色">
-										<i class="ace-icon fa fa-pencil bigger-120"></i>
-									</a>
-
-									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/role/destroy') .'/'. $item->id}}" title="删除">
-										<i class="ace-icon fa fa-trash-o bigger-120"></i>
-									</a>
-
-								</div>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
+				<div height="10px">&nbsp;</div>
+				
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-info" type="submit">
+						<i class="ace-icon fa fa-check bigger-110"></i>
+						提交修改
+					</button>
+				</div>
+			</form>
 		
-			{!! $roles->render() !!}
 			
 			@include('admin.master.common_footer')
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
@@ -122,7 +105,9 @@
 			</a>
 		</div><!-- /.main-container -->
 		
-	
+		<script>
+			
+		</script>
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->

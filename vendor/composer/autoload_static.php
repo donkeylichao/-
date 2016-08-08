@@ -231,8 +231,10 @@ class ComposerStaticInit4af5906c8c76c72449dfada4a32efc0a
     );
 
     public static $classMap = array (
+        'AddRoomNameToHousesTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_08_070303_add_room_name_to_houses_table.php',
         'AddTimeToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_01_093503_add_time_to_users_table.php',
         'AddTypeToPermissionsTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_05_070954_add_type_to_permissions_table.php',
+        'AddVoteToHousesTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_08_030401_add_vote_to_houses_table.php',
         'CreateAlbumsTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_05_021010_create_albums_table.php',
         'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_28_030154_create_categories_table.php',
         'CreateCommentsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_28_043630_create_comments_table.php',
