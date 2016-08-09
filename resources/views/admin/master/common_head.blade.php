@@ -13,7 +13,8 @@
 		<link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
 
 		<!-- page specific plugin styles -->
-
+		<link rel="stylesheet" href="/assets/css/colorbox.css" />
+		
 		<!-- text fonts -->
 		<link rel="stylesheet" href="/assets/css/ace-fonts.css" />
 
@@ -42,5 +43,5 @@
 		<script src="/assets/js/html5shiv.min.js"></script>
 		<script src="/assets/js/respond.min.js"></script>
 
-		<![endif]-->
-	</head>
+		<![endif]-->	
+	</head>	

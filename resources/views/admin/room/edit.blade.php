@@ -37,9 +37,9 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/role') }}">角色管理</a>
+					<a href="{{ url('donkey/admin/room/index/1') }}">房源管理</a>
 				</li>
-				<li class="active">编辑角色</li>
+				<li class="active">编辑房源</li>
 			</ul><!-- /.breadcrumb -->
 		
 		</div>
@@ -50,38 +50,165 @@
 			@include('admin.master.notify')
 			{{-- dump(Session::all())--}}
 			{{-- dump($errors->first())--}}
-			<form method="post" action="{{ url('donkey/admin/role/update')}}">
+			
+			<form method="post" action="{{ url('donkey/admin/room/update')}}">
 				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">权限名称：</label>
+				<!--<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">类型：</label>
 					<div class="col-sm-11">
-						<input type='text' name='name' class="col-xs-10 col-sm-4" value="{{ old('name') ? old('name') : $role->name }}"/>
+						<select name="h_type" id="house_type" class="col-xs-10 col-sm-4">
+							@foreach(Config::get('common.house_types') as $k=>$v)
+							<option value="{{ $k }}" @if($room->h_type == $k) selected @endif>{{$v}}</option>
+							@endforeach
+						</select>
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填,不能重复*</span>
+							<span class="middle"></span>
 						</span>
-					</div>
-				</div>
-				
-				<input type="hidden" name="_token" value="{{ csrf_token() }}" />
-				<input type="hidden" name="id" value="{{ $role->id }}" />
-				<div height="10px">&nbsp;</div>
+					</div>	
+				</div>	
+				<script>
+					//
+					$(function(){
+						$('#house_type').change(function(){
+							//alert('asdf');
+							var num = $(this).val();
+							//alert(num);
+							if(num == 1){ 
+								$('.play').css('display','none');
+							}else if(num == 2) {
+								$('.play').css('display','block');
+							}
+						});
+					});
+				</script>-->
 				
 				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">显示名称：</label>
+					<label class="col-sm-1 control-label no-padding-right">类型：</label>
 					<div class="col-sm-11">
-						<input type="text" name="display_name"  class="col-xs-10 col-sm-4" value="{{ old('display_name') ? old('display_name') : $role->display_name }}"/>
+						<input type='text' disabled class="col-xs-10 col-sm-4" value="{{ Config::get('common.house_types')[$room->h_type] }}"/>
+						<input type='hidden' name="h_type" class="col-xs-10 col-sm-4" value="{{ $room->h_type}}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red"></span>
 						</span>
 					</div>
 				</div>
+				@if($room->h_type == 2)
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">买卖单价：</label>
+					<div class="col-sm-11">
+						<input type='text' name='univalence' placeholder="单位:元/平米" class="col-xs-10 col-sm-4" value="{{ $room->univalence or ''}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,例如:"12000"*</span>
+						</span>
+					</div>
+				</div>
 				
 				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">说明：</label>
+					<label class="col-sm-1 control-label no-padding-right">税率：</label>
 					<div class="col-sm-11">
-						<input type='text' name="description" class="col-xs-10 col-sm-4" value="{{ old('description') ? old('description') : $role->description}}"/>
+						<input type='text' name='tax_rate' class="col-xs-10 col-sm-4" value="{{ $room->tax_rate or ''}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*选填,例如:6%,填写格式为0.06*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">税费：</label>
+					<div class="col-sm-11">
+						<input type='text' name='taxes' placeholder="单位:元" class="col-xs-10 col-sm-4" value="{{ $room->taxes or ''}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,例如:"20000"*</span>
+						</span>
+					</div>
+				</div>
+				@endif
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">小区名称：</label>
+					<div class="col-sm-11">
+						<input type='text' name='name' class="col-xs-10 col-sm-4" value="{{ old('name') ? old('name') : $room->name }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>
+				</div>
+
+				<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+				<input type="hidden" name="id" value="{{ $room->id }}" />
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">小区位置：</label>
+					<div class="col-sm-11">
+						<input type="text" name="position"  class="col-xs-10 col-sm-4" value="{{ old('position') ? old('position') : $room->position}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,例如 "北京市 朝阳区 XX大街"*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">房子名称：</label>
+					<div class="col-sm-11">
+						<input type="text" name="room_name"  class="col-xs-10 col-sm-4" value="{{ old('room_name') ? old('room_name') : $room->room_name}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,例如 "38楼3单元205"*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">户型：</label>
+					<div class="col-sm-11">
+						<input type="text" name="type"  class="col-xs-10 col-sm-4" value="{{ old('type') ? old('type') : $room->type}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填,例如 "三室两厅"*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">面积：</label>
+					<div class="col-sm-11">
+						<input type='text' name="area" placeholder="单位:平米" class="col-xs-10 col-sm-4" value="{{ old('area') ? old('area') : $room->area}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>	
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">价格：</label>
+					<div class="col-sm-11">
+						<input type='text' name="price" placeholder="单位:元" class="col-xs-10 col-sm-4" value="{{ old('price') ? old('price') : $room->price}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>	
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">备注：</label>
+					<div class="col-sm-11">
+						<input type='text' name="introduction" class="col-xs-10 col-sm-4" value="{{ old('introduction') ? old('introduction') : $room->introduction}}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
@@ -93,7 +220,7 @@
 				<div class="col-md-offset-1 col-md-9">
 					<button class="btn btn-info" type="submit">
 						<i class="ace-icon fa fa-check bigger-110"></i>
-						提交修改
+						提交保存
 					</button>
 				</div>
 			</form>
@@ -106,7 +233,7 @@
 		</div><!-- /.main-container -->
 		
 		<script>
-			
+			$('')
 		</script>
 		<!-- basic scripts -->
 

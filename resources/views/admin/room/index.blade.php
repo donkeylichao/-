@@ -101,14 +101,15 @@
 						@foreach($rooms as $item)
 						<tr>
 							<td>{{ $num++ }}</td>
-							<td>{{ $item->name or ''}}</td>
-							<td>{{ $item->position or ''}}</td>
-							<td>{{ $item->area or ''}}</td>
-							<td>{{ $item->type or ''}}</td>
-							<td>{{ $item->price or ''}}</td>
+							<td>{{ $item->name }}</td>
+							<td>{{ $item->position }}</td>
+							<td>{{ $item->area }}</td>
+							<td>{{ $item->type }}</td>
+							<td>{{ $item->price }}</td>
 							<td>{{ $item->recommend ? '已推荐' : ''}}</td>
-							<td>	
-								<div class="btn-group">	
+							<td>
+								<div class="btn-group">
+									
 									<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/room/recommend') .'/'. $item->id }}" title="推荐">
                                         <i class="ace-icon fa fa-tag bigger-120"></i>
                                     </a>
