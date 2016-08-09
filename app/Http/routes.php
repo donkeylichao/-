@@ -130,6 +130,12 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		Route::get('destroy/{id}' , ['uses'=>'RoomController@destroy' , 'as'=>'admin.room.destroy']);
 		//推荐
 		Route::get('recommend/{id}' , ['uses'=>'RoomController@recommend' , 'as'=>'admin.room.recommend']);
+		//查看房子信息
+		Route::get('show/{id}' , ['uses'=>'RoomController@show' , 'as'=>'admin.room.show']);
+		//上传图片
+		Route::post('upload' , ['uses'=>'RoomController@upload' , 'as'=>'admin.room.upload']);
+		//删除图片
+		Route::get('del_pic/{id}' , ['uses'=>'RoomController@del_pic' , 'as'=>'admin.room.del_pic']);
 	});
 	
 	//视屏管理

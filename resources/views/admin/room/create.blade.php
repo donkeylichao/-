@@ -86,7 +86,7 @@
 				<div class="form-group play" style="display:none;">
 					<label class="col-sm-1 control-label no-padding-right">买卖单价：</label>
 					<div class="col-sm-11">
-						<input type='text' name='univalence' class="col-xs-10 col-sm-4" value="{{ old('univalence') }}"/>
+						<input type='text' name='univalence' placeholder="单位:元/平米" class="col-xs-10 col-sm-4" value="{{ old('univalence') }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填,例如:"12000"*</span>
 						</span>
@@ -110,7 +110,7 @@
 				<div class="form-group play" style="display:none">
 					<label class="col-sm-1 control-label no-padding-right">税费：</label>
 					<div class="col-sm-11">
-						<input type='text' name='taxes' class="col-xs-10 col-sm-4" value="{{ old('taxes') }}"/>
+						<input type='text' name='taxes' placeholder="单位:元" class="col-xs-10 col-sm-4" value="{{ old('taxes') }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填,例如:"20000"*</span>
 						</span>
@@ -171,7 +171,7 @@
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">面积：</label>
 					<div class="col-sm-11">
-						<input type='text' name="area" class="col-xs-10 col-sm-4" value="{{ old('area') }}"/>
+						<input type='text' name="area" placeholder="单位:平米" class="col-xs-10 col-sm-4" value="{{ old('area') }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
@@ -183,7 +183,7 @@
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">价格：</label>
 					<div class="col-sm-11">
-						<input type='text' name="price" class="col-xs-10 col-sm-4" value="{{ old('price') }}"/>
+						<input type='text' name="price" placeholder="单位:元" class="col-xs-10 col-sm-4" value="{{ old('price') }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
