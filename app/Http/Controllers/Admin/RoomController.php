@@ -239,9 +239,19 @@ class RoomController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//TODO
+		$room = House::find($id);
+        foreach($room->photos as $item) {
+            unlink(base_path('public').$item->path);
+            if(!$item->delete()) {
+                return back()->with('notify_error' , '图片删除失败!');
+            }
+        }
+        if(!$room->delete()){
+            return back()->with('notify_error' ,  '房源信息删除失败!');
+        }
+        return back()->with('notify_success' , '删除成功!');
 	}
-	
+
 	/**
 	 *	如果是推荐标记为不推荐，不是，修改为推荐
 	 *
@@ -265,6 +275,15 @@ class RoomController extends BaseController {
 	 */
 	public function del_pic($id) 
 	{
-		//TODO
+		$pic = H_photo::find($id);
+
+        $result = unlink(base_path('public').$pic->path);
+        if(!$result) {
+            return back()->with('notify_error' , '图片文件删除失败!');
+        }
+        if(!$pic->delete()) {
+            return back()->with('notify_error' , '图片删除失败!');
+        }
+        return back()->with('notify_success' , '图片删除成功!');
 	}
 }
