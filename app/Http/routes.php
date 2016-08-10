@@ -109,11 +109,6 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
         Route::post('store_role' , 'RoleController@store_role');
 	});	
 	
-	//分类管理(日记分类)
-	/*Route::group(['prefix'=>'category'] , function(){
-		Route::get('/' , ['as'=>'admin.category' , 'uses'=>'CategoryController@index']);
-	});*/
-	
 	//房源管理
 	Route::group(['prefix'=>'room'] , function(){
 		//房源列表
@@ -137,10 +132,31 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		//删除图片
 		Route::get('del_pic/{id}' , ['uses'=>'RoomController@del_pic' , 'as'=>'admin.room.del_pic']);
 	});
+		
+	//分类管理(视频，音频，图片，日记分类)
+	Route::group(['prefix'=>'category'] , function(){
+		//查看分类树
+		Route::get('/' , ['as'=>'admin.category' , 'uses'=>'CategoryController@index']);
+		//添加分类
+		Route::get('create' , ['as'=>'admin.category.create' , 'uses'=>'CategoryController@create']);
+		//保存添加
+		Route::post('store' , 'CategoryController@store');
+		//跟新分类
+		Route::post('update' , ['as'=>'admin.category.update' , 'uses'=>'CategoryController@update']);
+		//删除分类
+		Route::get('destroy/{id}' , ['as'=>'admin.category.destroy' , 'uses'=>'CategoryController@destroy']);
+	});
 	
 	//视屏管理
 	Route::group(['prefix'=>'video'] , function(){
-		Route::get('/' , ['as'=>'admin.video' , 'uses'=>'VideoController@index']);
+		//视频列表
+		Route::get('index' , ['as'=>'admin.video' , 'uses'=>'VideoController@index']);
+		//添加视频
+		Route::get('create' , ['as'=>'admin.video.create' , 'uses'=>'VideoController@create']);
+		//保存添加
+		Route::post('store' , 'VideoController@store');
+		//回收站
+		Route::get('restore' , ['as'=>'admin.video.restore' , 'uses'=>'VideoController@restore']);
 	});
 	
 	//音频管理

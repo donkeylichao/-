@@ -79,15 +79,6 @@
 			</li>
 		</ul>
 	</li>
-	
-	<!--<li @if(strpos($uri,'category')) class="active" @endif>
-		<a href=" {{ url('donkey/admin/category')}}">
-			<i class="menu-icon fa fa-list"></i>
-			<span class="menu-text"> 分类管理 </span>
-			<b class="arrow"></b>
-			<b class="arrow fa fa-angle-down"></b>
-		</a>
-	</li>-->	
 		
 	<li @if(strpos($uri,'room')) class="active" @endif>
 		<a href=" {{ url('donkey/admin/room/index/1')}}">
@@ -98,38 +89,68 @@
 		</a>
 	</li>
 		
-	<li @if(strpos($uri,'video')) class="active" @endif>
-		<a href="{{ url('donkey/admin/video')}}">
-			<i class="menu-icon fa fa-video-camera"></i>
-			<span class="menu-text"> 视频管理 </span>
-			<b class="arrow"></b>
+	<li @if(strpos($uri,'category')) class="active" @endif>
+		<a href=" {{ url('donkey/admin/category')}}">
+			<i class="menu-icon fa fa-list"></i>
+			<span class="menu-text"> 分类管理 </span>
+			
+			<b class="arrow"></b>			
 		</a>
 	</li>
 	
-	<li @if(strpos($uri,'music')) class="active" @endif>
+	<li @if(strpos($uri,'video')) class="active open hsub" @endif>
+		<a href="{{ url('donkey/admin/video/index')}}" class="dropdown-toggle">
+			<i class="menu-icon fa fa-video-camera"></i>
+			<span class="menu-text"> 视频管理 </span>
+			
+			<b class="arrow fa fa-angle-down"></b>
+		</a>
+		
+		<ul class="submenu">
+			<li @if(strpos($uri,'video/index')) class="active" @endif>
+				<a href="{{ url('donkey/admin/video/index')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					视频列表
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li @if(strpos($uri,'video/restore')) class="active" @endif>
+				<a href="{{ url('donkey/admin/video/restore')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					回收站
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+		</ul>
+	</li>
+	
+	<li @if(strpos($uri,'music')) class="active open hsub" @endif>
 		<a href="{{ url('donkey/admin/music')}}">
 			<i class="menu-icon fa fa-music"></i>
 			<span class="menu-text"> 音频管理 </span>
 			
-			<b class="arrow"></b>
+			<b class="arrow fa fa-angle-down"></b>
 		</a>
 	</li>
 	
-	<li @if(strpos($uri,'photo')) class="active" @endif>
+	<li @if(strpos($uri,'photo')) class="active open hsub" @endif>
 		<a href="{{ url('donkey/admin/photo')}}">
 			<i class="menu-icon fa fa-image"></i>
 			<span class="menu-text"> 图片管理 </span>
 			
-			<b class="arrow"></b>
+			<b class="arrow fa fa-angle-down"></b>
 		</a>
 	</li>
 	
-	<li @if(strpos($uri,'post')) class="active" @endif>
+	<li @if(strpos($uri,'post')) class="active open hsub" @endif>
 		<a href="{{ url('donkey/admin/post')}}" class="dropdown-toggle">
 			<i class="menu-icon fa fa-pencil-square-o"></i>
 			<span class="menu-text"> 日记管理 </span>
 			
-			<b class="arrow"></b>
+			<b class="arrow fa fa-angle-down"></b>
 		</a>
 	</li>
 	

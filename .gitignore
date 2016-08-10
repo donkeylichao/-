@@ -1,3 +1,7 @@
 
 /node_modules
 .env
+
+/public/uploads/musics
+/public/uploads/videos
+/public/uploads/photos
