@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
+use App\Models\Category;
 use App\Http\Controllers\Admin\BaseController;
 use App\Models\Resource;
 use Illuminate\Http\Request;
@@ -27,8 +28,9 @@ class VideoController extends BaseController {
 	{
 		$compact = [];
 
-		$categories = Category::find('id')->child();
+		$categories = Category::with('child')->find(1);
 		$compact[] = 'categories';
+
 		return view('admin.video.create')->with(compact($compact));
 	}
 
