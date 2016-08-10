@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Admin\BaseController;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends BaseController {
 
@@ -13,8 +14,10 @@ class CategoryController extends BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{
-		//
+	{	
+		$categories = Category::where('pid' , 0)->with('child')->get();
+		
+		return view('admin.category.index')->with(compact('categories'));
 	}
 
 	/**
@@ -23,8 +26,12 @@ class CategoryController extends BaseController {
 	 * @return Response
 	 */
 	public function create()
-	{
-		//
+	{	
+		$compact = [];
+		$categories = Category::where('pid' , 0)->get();
+		
+		$compact[] = 'categories';
+		return view('admin.category.create')->with(compact($compact));
 	}
 
 	/**
@@ -32,9 +39,18 @@ class CategoryController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$this->validate($request,['name'=>'required|unique:categories,name'] , ['name.required'=>'分类名称不能为空!','name.unique'=>'分类名称已存在!']);
+		
+		$category = new Category;
+		$category->pid = $request->input('pid');
+		$category->name = rtrim($request->input('name'));
+		
+		if(!$category->save()) {
+			return back()->withInput()->with('notify_error' , '添加分类失败!');
+		}
+		return redirect('donkey/admin/category')->with('notify_success' , '添加分类成功!');
 	}
 
 	/**
@@ -65,9 +81,17 @@ class CategoryController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request)
 	{
-		//
+		$category = Category::find($request->input('id'));
+		
+		$name = $request->input('name');
+		$category->name = $name;
+		
+		if(!$category->save()) {
+			return response()->json(['message' =>'failure']);
+		}
+		return response()->json(['message'=>'success']);
 	}
 
 	/**
@@ -78,7 +102,13 @@ class CategoryController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$category = Category::find($id);
+		//dump($category->child->first());
+		if($category->child->first() != null ) {
+			return back()->with('notify_error' , '只能删除空的根分类!');
+		}
+		$category->forceDelete();
+		return back()->with('notify_success' , '删除成功!');
 	}
 
 }

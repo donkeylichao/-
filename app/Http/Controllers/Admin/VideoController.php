@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Admin\BaseController;
-
+use App\Models\Resource;
 use Illuminate\Http\Request;
 
 class VideoController extends BaseController {
@@ -14,7 +14,8 @@ class VideoController extends BaseController {
 	 */
 	public function index()
 	{
-		//
+		$videos = Resource::where('type_id' , 1)->with('category')->get();
+		return view('admin.video.index')->with(compact('videos'));
 	}
 
 	/**
@@ -24,7 +25,11 @@ class VideoController extends BaseController {
 	 */
 	public function create()
 	{
-		//
+		$compact = [];
+
+		$categories = Category::find('id')->child();
+		$compact[] = 'categories';
+		return view('admin.video.create')->with(compact($compact));
 	}
 
 	/**
@@ -80,5 +85,13 @@ class VideoController extends BaseController {
 	{
 		//
 	}
-
+	
+	/**
+	 *	回收站列表
+	 *
+	 */
+	public function restore()
+	{
+		return view('admin.video.restore');
+	}
 }

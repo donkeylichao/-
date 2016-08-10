@@ -16,3 +16,11 @@
 	</div>
 	{{--@endforeach--}}
 @endif
+
+<div class="alert alert-success alert-dismissible" role="alert" id="success" style="display:none">
+	<strong>修改成功!</strong>
+</div>
+
+<div class="alert alert-danger alert-dismissible" role="alert" id="error" style="display:none">
+	<strong>修改失败!</strong>
+</div>
