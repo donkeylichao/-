@@ -91,7 +91,7 @@
 									@foreach( $room->photos as $item)
 									<li>
 										<a href="{{ $item->path }}" data-rel="colorbox">
-											<img width="100" height="100" alt="150x150" src="{{ $item->path }}" />
+											<img width="100" height="100" src="{{ $item->path }}" />
 										</a> 
 					
 										<div class="tools">

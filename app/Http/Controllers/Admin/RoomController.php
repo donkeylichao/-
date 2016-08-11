@@ -241,7 +241,11 @@ class RoomController extends BaseController {
 	{
 		$room = House::find($id);
         foreach($room->photos as $item) {
-            unlink(base_path('public').$item->path);
+            
+			$file = base_path('public').$item->path;
+			if(file_exists($file)) {
+				unlink(base_path('public').$item->path);
+			}
             if(!$item->delete()) {
                 return back()->with('notify_error' , '图片删除失败!');
             }
@@ -276,11 +280,15 @@ class RoomController extends BaseController {
 	public function del_pic($id) 
 	{
 		$pic = H_photo::find($id);
-
-        $result = unlink(base_path('public').$pic->path);
-        if(!$result) {
-            return back()->with('notify_error' , '图片文件删除失败!');
-        }
+		
+		$file = base_path('public').$pic->path;
+		
+		if(file_exists($file)){
+			$result = unlink(base_path('public').$pic->path);
+			if(!$result) {
+				return back()->with('notify_error' , '图片文件删除失败!');
+			}
+		}
         if(!$pic->delete()) {
             return back()->with('notify_error' , '图片删除失败!');
         }
