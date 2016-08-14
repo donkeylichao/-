@@ -51,10 +51,10 @@
 			{{-- dump(Session::all())--}}
 			{{-- dump($errors->first())--}}
 			
-			<form method="post" action="{{ url('donkey/admin/video/store')}}">
+			<form method="post" action="{{ url('donkey/admin/video/store')}}" enctype="multipart/form-data">
 				
 				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">类型：</label>
+					<label class="col-sm-1 control-label no-padding-right">栏目：</label>
 					<div class="col-sm-11">
 						<select name="category_id" class="col-xs-10 col-sm-4">
 							@foreach($categories->child as $v)
@@ -70,24 +70,36 @@
 				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">小区名称：</label>
+					<label class="col-sm-1 control-label no-padding-right">标题：</label>
 					<div class="col-sm-11">
-						<input type='text' name='name' class="col-xs-10 col-sm-4" value="{{ old('name') }}"/>
+						<input type='text' name='title' class="col-xs-10 col-sm-4" value="{{ old('title') }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
 					</div>
 				</div>
 
-				<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">小区位置：</label>
+					<label class="col-sm-1 control-label no-padding-right">介绍：</label>
 					<div class="col-sm-11">
-						<input type="text" name="position"  class="col-xs-10 col-sm-4" value="{{ old('position') }}"/>
+						<input type="text" name="content"  class="col-xs-10 col-sm-4" value="{{ old('content') }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填,例如 "北京市 朝阳区 XX大街"*</span>
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>
+				</div>
+
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">封面图片：</label>
+					<div class="col-sm-11">
+						<input type="file" name="cover"  class="col-xs-10 col-sm-4" value=""/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必选,只支持jpg,jpeg,png格式*</span>
 						</span>
 					</div>
 				</div>
@@ -95,61 +107,13 @@
 				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">房子名称：</label>
+					<label class="col-sm-1 control-label no-padding-right">视频：</label>
 					<div class="col-sm-11">
-						<input type="text" name="room_name"  class="col-xs-10 col-sm-4" value="{{ old('room_name') }}"/>
+						<input type="file" name="path"  class="col-xs-10 col-sm-4" value=""/>
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填,例如 "38楼3单元205"*</span>
+							<span class="middle" style="color:red">*必填*</span>
 						</span>
 					</div>
-				</div>
-				
-				<div height="10px">&nbsp;</div>
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">户型：</label>
-					<div class="col-sm-11">
-						<input type="text" name="type"  class="col-xs-10 col-sm-4" value="{{ old('type') }}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填,例如 "三室两厅"*</span>
-						</span>
-					</div>
-				</div>
-				
-				<div height="10px">&nbsp;</div>
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">面积：</label>
-					<div class="col-sm-11">
-						<input type='text' name="area" placeholder="单位:平米" class="col-xs-10 col-sm-4" value="{{ old('area') }}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填*</span>
-						</span>
-					</div>	
-				</div>
-				
-				<div height="10px">&nbsp;</div>
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">价格：</label>
-					<div class="col-sm-11">
-						<input type='text' name="price" placeholder="单位:元" class="col-xs-10 col-sm-4" value="{{ old('price') }}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填*</span>
-						</span>
-					</div>	
-				</div>
-				
-				<div height="10px">&nbsp;</div>
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">备注：</label>
-					<div class="col-sm-11">
-						<input type='text' name="introduction" class="col-xs-10 col-sm-4" value="{{ old('introduction') }}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填*</span>
-						</span>
-					</div>	
 				</div>
 			
 				<div height="10px">&nbsp;</div>
@@ -170,7 +134,7 @@
 		</div><!-- /.main-container -->
 		
 		<script>
-			$('')
+
 		</script>
 		<!-- basic scripts -->
 

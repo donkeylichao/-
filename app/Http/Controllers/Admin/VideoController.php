@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
+use App\Http\Requests\VideoRequest;
 use App\Models\Category;
 use App\Http\Controllers\Admin\BaseController;
 use App\Models\Resource;
@@ -39,9 +40,27 @@ class VideoController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(VideoRequest $request)
 	{
-		//
+        $resource = new Resource;
+        dump($request->all());
+        //$title = rtrim($request->input('title'));
+        //$content = rtrim($request->input('content'));
+        //$cover = $request->file('cover');
+        //dump($cover);
+        /*if($cover->isValid()) {
+            dd($cover->getMimeType());
+            switch($cover->getMimeType()){
+                case '1':
+                    break;
+                case '2':
+                    break;
+                case '3':
+                    break;
+                default:
+                    return back()->withInput()->with('notify_error' , '图片类型不符!');
+            }
+        }*/
 	}
 
 	/**
@@ -96,4 +115,18 @@ class VideoController extends BaseController {
 	{
 		return view('admin.video.restore');
 	}
+
+    /**
+     *  随机文件名
+     */
+    public function nrand()
+    {
+        $str = 'abcdefghijklmnopqrstuvwxyzABCEDFGHIJKLMNOPQRSTUVWXYZ1234567890';
+
+        $name = '';
+        for($i=0;$i<6;$i++) {
+            $name .=$str[mt_rand(0,61)];
+        }
+        return $name;
+    }
 }
