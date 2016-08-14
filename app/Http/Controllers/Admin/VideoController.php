@@ -43,26 +43,50 @@ class VideoController extends BaseController {
 	public function store(VideoRequest $request)
 	{
         $resource = new Resource;
-        dump($request->all());
-        //$title = rtrim($request->input('title'));
-        //$content = rtrim($request->input('content'));
-        //$cover = $request->file('cover');
-        //dump($cover);
-        /*if($cover->isValid()) {
-            dd($cover->getMimeType());
+        //dump($request->all());
+        $title = rtrim($request->input('title'));
+        $content = rtrim($request->input('content'));
+
+        //视频，封面公共名字部分
+        $name = time().$this->nrand();
+
+        //创建文件夹用来存放上传文件
+        $dirname = date('Y-m-d' , time());
+        if(!is_dir(base_path('public/uploads/videos/'.$dirname))) {
+            mkdir(base_path('public/uploads/videos/'.$dirname,0777));
+        }
+
+        //获取图片
+        $cover = $request->file('cover');
+
+        if($cover->isValid()) {
+            //dd($cover->getMimeType());
             switch($cover->getMimeType()){
-                case '1':
+                case 'image/jpeg':
+                    $ext = '.jpeg';
                     break;
-                case '2':
+                case 'image/jpg':
+                    $ext = '.jpg';
                     break;
-                case '3':
+                case 'image/png':
+                    $ext = '.png';
                     break;
                 default:
                     return back()->withInput()->with('notify_error' , '图片类型不符!');
             }
-        }*/
+            $name_cover = $name.$ext;
+
+            $cover->move(base_path('public/uploads/videos/'.$dirname) , $name_cover);
+            $resource->cover = '/uploads/videos/'.$dirname.$name_cover;
+        }
+        $resource->title = $title;
+        $resource->content = $content;
+
+        //获取视频文件
+
 	}
 
+    
 	/**
 	 * Display the specified resource.
 	 *
@@ -119,12 +143,12 @@ class VideoController extends BaseController {
     /**
      *  随机文件名
      */
-    public function nrand()
+    public function nrand($num = 6)
     {
         $str = 'abcdefghijklmnopqrstuvwxyzABCEDFGHIJKLMNOPQRSTUVWXYZ1234567890';
 
         $name = '';
-        for($i=0;$i<6;$i++) {
+        for($i=0;$i<$num;$i++) {
             $name .=$str[mt_rand(0,61)];
         }
         return $name;

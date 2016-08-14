@@ -4,6 +4,9 @@
 
 @include('admin.master.common_header')
 
+<script src="/fileupload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/fileupload/js/jquery.iframe-transport.js"></script>
+<script src="/fileupload/js/jquery.fileupload.js"></script>
 <div class="main-container" id="main-container">
 	<script type="text/javascript">
 		try{ace.settings.check('main-container' , 'fixed')}catch(e){}
@@ -67,7 +70,7 @@
 					</div>	
 				</div>	
 
-				<div height="10px">&nbsp;</div>
+				<!--<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">标题：</label>
@@ -89,12 +92,12 @@
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
 					</div>
-				</div>
+				</div>-->
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 				<div height="10px">&nbsp;</div>
 				
-				<div class="form-group">
+				<!--<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">封面图片：</label>
 					<div class="col-sm-11">
 						<input type="file" name="cover"  class="col-xs-10 col-sm-4" value=""/>
@@ -115,8 +118,26 @@
 						</span>
 					</div>
 				</div>
+
+                <div height="10px">&nbsp;</div>-->
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label no-padding-right">视频text：</label>
+                    <div class="col-sm-11">
+                        <input id="fileupload" type="file" name="files[]" data-url="server/php/" class="col-xs-10 col-sm-4" />
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+                    </div>
+                </div>
 			
 				<div height="10px">&nbsp;</div>
+
+                <div id="progress">
+                    <div class="bar" style="width: 0%;"></div>
+                </div>
+
+                <div height="10px">&nbsp;</div>
 				
 				<div class="col-md-offset-1 col-md-9">
 					<button class="btn btn-info" type="submit">
@@ -134,7 +155,53 @@
 		</div><!-- /.main-container -->
 		
 		<script>
+            $(function () {
+                $('#fileupload').fileupload({
+                    dataType: 'json',
+                    done: function (e, data) {
+                        $.each(data.result.files,
+                            function (index, file) {
+                                $('<p/>').text(file.name).appendTo(document.body);
+                            });
+                    }
+                });
 
+                $('#fileupload').fileupload({
+                    progressall: function (e, data) {
+                         var progress = parseInt(data.loaded / data.total * 100, 10);
+                         $('#progress .bar').css(
+                         'width',
+                              progress + '%'
+                         );
+                     }
+                });
+
+                $('#fileupload').fileupload({
+                    dataType: 'json',
+                    add: function (e, data) {
+                        data.context = $('<p/>').text('Uploading...').appendTo(document.body);
+                        data.submit();
+                    },
+                    done: function (e, data) {
+                data.context.text('Upload finished.');
+                    }
+                });
+
+                $('#fileupload').fileupload({
+                    dataType: 'json',
+                    add: function (e, data) {
+                        data.context = $('<button/>').text('Upload')
+                            .appendTo(document.body)
+                            .click(function () {
+                            $(this).replaceWith($('<p/>').text('Uploading...'));
+                                    data.submit();
+                                });
+                    },
+                    done: function (e, data) {
+                    data.context.text('Upload finished.');
+                    }
+                });
+            });
 		</script>
 		<!-- basic scripts -->
 
