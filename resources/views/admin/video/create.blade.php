@@ -70,7 +70,7 @@
 					</div>	
 				</div>	
 
-				<!--<div height="10px">&nbsp;</div>
+				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">标题：</label>
@@ -92,12 +92,12 @@
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
 					</div>
-				</div>-->
+				</div>
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 				<div height="10px">&nbsp;</div>
 				
-				<!--<div class="form-group">
+				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">封面图片：</label>
 					<div class="col-sm-11">
 						<input type="file" name="cover"  class="col-xs-10 col-sm-4" value=""/>
@@ -109,25 +109,26 @@
 				
 				<div height="10px">&nbsp;</div>
 				
-				<div class="form-group">
+				<!--<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">视频：</label>
-					<div class="col-sm-11">
-						<input type="file" name="path"  class="col-xs-10 col-sm-4" value=""/>
-						<span class="help-inline col-xs-12 col-sm-7">
+					<div class="col-sm-11">-->
+						<input type="hidden" name="path" id="video_name" class="col-xs-10 col-sm-4" value="{{ old('path') }}"/>
+						<input type="hidden" name="duration" id="video_size" class="col-xs-10 col-sm-4" value="{{ old('duration') }}"/>
+						<!--<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
 					</div>
-				</div>
-
-                <div height="10px">&nbsp;</div>-->
+				</div>-->
+				
 				<div id="preview"></div>
 				
                 <div class="form-group">
-                    <label class="col-sm-1 control-label no-padding-right">视频text：</label>
+                    <label class="col-sm-1 control-label no-padding-right">视频：</label>
                     <div class="col-sm-11">
-                        <input id="fileupload" type="file" name="video" class="col-xs-10 col-sm-4" />
+                        <input id="fileupload" type="file" name="video" class="col-xs-10 col-sm-4"/>
+						
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" id="upstatus" style="color:red">*必填*</span>
+							<span class="middle" id="upstatus" style="color:red">*必须,只支持mp4,flv,m4v,avi格式*</span>
 						</span>
                     </div>
                 </div>
@@ -136,7 +137,6 @@
 
                 <div id="progress">
                     <div class="bar" style="width: 0%;"></div>
-					<div class="upstatus" style="margin-top:10px;"></div> 
                 </div>
 
                 <div height="10px">&nbsp;</div>
@@ -157,35 +157,38 @@
 		</div><!-- /.main-container -->
 		
 		<script>
-            $(function () {
-                $('#fileupload').change(function(){
-					$('#fileupload').fileupload({
-						url: '/donkey/admin/video/uploadv',
-						dataType: 'json',
-						formData: function(form){
-							return [{name:"text",value:"text"},
-									{name:"_token",value:{{ csrf_token() }}}
-									];
-						},
-						done: function (e, data) {
-							if(data.result.sta) {
-								$('#upstatus').html(data.result.msg);
-								$('#preview').html("<embed src="+data.result.previewSrc+  
-									" allowscriptaccess='always' allowfullscreen='true' wmode='opaque'"+  
-									" width='480' height='400'></embed>");
-							} else {
-								$('#progress . bar').css('width',"0%");
-								$('.upstatus').html("<span style='color:red;'>"+data.result.msg+"</span>");
-							}
-						},
-						progress: function(e,data) {
-							var progress = parseInt(data.loaded / data.total * 100, 10);  
-							$("#progress .bar").css("width", progress + "%");  
-							$(".upstatus").html("正在上传..."); 
+			//function uploadfile(){
+			//$("#fileupload").change(function(){
+				
+				$("#fileupload").change().fileupload({
+					url: '/donkey/admin/video/uploadv',
+					dataType: 'json',	
+					formData: function(form){
+						var path = $("#video_name").val();
+						return [
+							{name:"_token",value:"{{ csrf_token() }}"},
+							{name:"path",value:path}	
+								];
+					},
+					done: function (e, data) {
+						if(data.result.sta) {
+							$('#upstatus').html(data.result.msg);
+							$('#video_name').val(data.result.previewSrc);
+							$('#video_size').val(data.result.duration);
+							//$('#fileupload').css('display','none');
+							/*$('#preview').html("<video src='"+data.result.previewSrc+"' controls='controls'>您的浏览器不支持预览。</video>");*/
+						} else {
+							$('#progress .bar').css('width',"0%");
+							$('#upstatus').html(data.result.msg);
 						}
-					});
+					},
+					progress: function(e,data) {
+						var progress = parseInt(data.loaded / data.total * 100, 10);  
+						$("#progress .bar").css("width", progress + "%");  
+						$("#upstatus").html("正在上传..."); 
+					}
 				});
-            });
+			//});
 		</script>
 		<!-- basic scripts -->
 

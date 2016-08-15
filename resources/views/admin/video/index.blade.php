@@ -85,7 +85,7 @@
 
 					<tbody>
 						<?php $num = 1 ?> 
-						
+						@foreach($videos as $item)
 						<tr>
 							<td>{{ $num++ }}</td>
 							<td>{{ $item->category->name or '' }}</td>
@@ -111,7 +111,7 @@
 								</div>
 							</td>
 						</tr>
-						
+						@endforeach
 					</tbody>
 				</table>
 				{{-- $rooms->appends(['name'=>$name])->render() --}}

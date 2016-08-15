@@ -107,7 +107,7 @@
 		</a>
 		
 		<ul class="submenu">
-			<li @if(strpos($uri,'video/index')) class="active" @endif>
+			<li @if(strpos($uri,'video/index') || strpos($uri,'video/create') || strpos($uri,'video/update')) class="active" @endif>
 				<a href="{{ url('donkey/admin/video/index')}}">
 					<i class="menu-icon fa fa-caret-right"></i>
 					视频列表
@@ -116,8 +116,8 @@
 				<b class="arrow"></b>
 			</li>
 
-			<li @if(strpos($uri,'video/restore')) class="active" @endif>
-				<a href="{{ url('donkey/admin/video/restore')}}">
+			<li @if(strpos($uri,'video/recycle')) class="active" @endif>
+				<a href="{{ url('donkey/admin/video/recycle')}}">
 					<i class="menu-icon fa fa-caret-right"></i>
 					回收站
 				</a>

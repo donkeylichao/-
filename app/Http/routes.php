@@ -147,7 +147,7 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		Route::get('destroy/{id}' , ['as'=>'admin.category.destroy' , 'uses'=>'CategoryController@destroy']);
 	});
 	
-	//视屏管理
+	//视频管理
 	Route::group(['prefix'=>'video'] , function(){
 		//视频列表
 		Route::get('index' , ['as'=>'admin.video' , 'uses'=>'VideoController@index']);
@@ -156,14 +156,18 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		//保存添加
 		Route::post('store' , 'VideoController@store');
 		//回收站
+		Route::get('recycle' , ['as'=>'admin.video.recycle' , 'uses'=>'VideoController@recycle']);
+		//恢复回收站内容
 		Route::get('restore' , ['as'=>'admin.video.restore' , 'uses'=>'VideoController@restore']);
 		//视频上传
 		Route::post('uploadv' , ['as'=>'admin.video.uploadv' , 'uses'=>'VideoController@uploadv']);
+		//视频删除
+		Route::post('destroyv' , ['as'=>'admin.video.destroyv' , 'uses'=>'VideoController@destroyv']);
 	});
 	
 	//音频管理
 	Route::group(['prefix'=>'music'] , function(){
-		Route::get('/' , ['as'=>'admin.music' , 'uses'=>'NusicController@index']);
+		Route::get('/' , ['as'=>'admin.music' , 'uses'=>'MusicController@index']);
 	});
 	
 	//图片管理
