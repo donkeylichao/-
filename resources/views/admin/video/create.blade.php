@@ -120,13 +120,14 @@
 				</div>
 
                 <div height="10px">&nbsp;</div>-->
-
+				<div id="preview"></div>
+				
                 <div class="form-group">
                     <label class="col-sm-1 control-label no-padding-right">视频text：</label>
                     <div class="col-sm-11">
-                        <input id="fileupload" type="file" name="files[]" data-url="server/php/" class="col-xs-10 col-sm-4" />
+                        <input id="fileupload" type="file" name="video" class="col-xs-10 col-sm-4" />
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填*</span>
+							<span class="middle" id="upstatus" style="color:red">*必填*</span>
 						</span>
                     </div>
                 </div>
@@ -135,6 +136,7 @@
 
                 <div id="progress">
                     <div class="bar" style="width: 0%;"></div>
+					<div class="upstatus" style="margin-top:10px;"></div> 
                 </div>
 
                 <div height="10px">&nbsp;</div>
@@ -156,51 +158,33 @@
 		
 		<script>
             $(function () {
-                $('#fileupload').fileupload({
-                    dataType: 'json',
-                    done: function (e, data) {
-                        $.each(data.result.files,
-                            function (index, file) {
-                                $('<p/>').text(file.name).appendTo(document.body);
-                            });
-                    }
-                });
-
-                $('#fileupload').fileupload({
-                    progressall: function (e, data) {
-                         var progress = parseInt(data.loaded / data.total * 100, 10);
-                         $('#progress .bar').css(
-                         'width',
-                              progress + '%'
-                         );
-                     }
-                });
-
-                $('#fileupload').fileupload({
-                    dataType: 'json',
-                    add: function (e, data) {
-                        data.context = $('<p/>').text('Uploading...').appendTo(document.body);
-                        data.submit();
-                    },
-                    done: function (e, data) {
-                data.context.text('Upload finished.');
-                    }
-                });
-
-                $('#fileupload').fileupload({
-                    dataType: 'json',
-                    add: function (e, data) {
-                        data.context = $('<button/>').text('Upload')
-                            .appendTo(document.body)
-                            .click(function () {
-                            $(this).replaceWith($('<p/>').text('Uploading...'));
-                                    data.submit();
-                                });
-                    },
-                    done: function (e, data) {
-                    data.context.text('Upload finished.');
-                    }
-                });
+                $('#fileupload').change(function(){
+					$('#fileupload').fileupload({
+						url: '/donkey/admin/video/uploadv',
+						dataType: 'json',
+						formData: function(form){
+							return [{name:"text",value:"text"},
+									{name:"_token",value:{{ csrf_token() }}}
+									];
+						},
+						done: function (e, data) {
+							if(data.result.sta) {
+								$('#upstatus').html(data.result.msg);
+								$('#preview').html("<embed src="+data.result.previewSrc+  
+									" allowscriptaccess='always' allowfullscreen='true' wmode='opaque'"+  
+									" width='480' height='400'></embed>");
+							} else {
+								$('#progress . bar').css('width',"0%");
+								$('.upstatus').html("<span style='color:red;'>"+data.result.msg+"</span>");
+							}
+						},
+						progress: function(e,data) {
+							var progress = parseInt(data.loaded / data.total * 100, 10);  
+							$("#progress .bar").css("width", progress + "%");  
+							$(".upstatus").html("正在上传..."); 
+						}
+					});
+				});
             });
 		</script>
 		<!-- basic scripts -->

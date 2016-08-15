@@ -157,6 +157,8 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		Route::post('store' , 'VideoController@store');
 		//回收站
 		Route::get('restore' , ['as'=>'admin.video.restore' , 'uses'=>'VideoController@restore']);
+		//视频上传
+		Route::post('uploadv' , ['as'=>'admin.video.uploadv' , 'uses'=>'VideoController@uploadv']);
 	});
 	
 	//音频管理

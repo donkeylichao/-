@@ -86,6 +86,50 @@ class VideoController extends BaseController {
 
 	}
 
+	
+	/**
+	 *	视屏上传
+	 */
+	public function uploadv(Request $request)
+	{
+		$video = $request->input('video');
+		
+		//返回的数组
+		$data = ['sta'=>TRUE,'msg'=>'上传成功!'];
+		
+		//判断上传是否有效
+		if(!$video->isValid()) {
+			$data['sta'] = FALSE;
+			$data['msg'] = '上传内容不合法!';
+		}
+		
+		//判断上传类型
+		$arrExt = ['mp4','flv','avi','mkv'];
+		if(!in_array($video->getExtension(),$arrExt)) {
+			$data['sta'] = FAlSE;
+			$data['msg'] = '不支持此类型上传!';
+		}
+		
+		//设置上传目录
+		$ymd = date('Y-m-d' , time());
+		$path = base_path('public/uploads/').$ymd;
+		if(!file_exists($path)) {
+			mkdir($path,0777);
+		}
+		
+		//设置文件名称
+		$name = time().$this->nrand().$video->getExtension();
+		
+		//上传文件
+		if(!$video->move($path,$name)) {
+			$data['sta'] = FALSE;
+			$data['msg'] = '上传失败!';
+		} else {
+			$data['name'] = $name;
+		}
+		
+		echo $data->toJson();
+	}
     
 	/**
 	 * Display the specified resource.
