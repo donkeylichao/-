@@ -37,9 +37,9 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/room/index/1') }}">房源管理</a>
+					<a href="{{ url('donkey/admin/video/index') }}">视频管理</a>
 				</li>
-				<li class="active">查看房源</li>
+				<li class="active">查看视频</li>
 			</ul><!-- /.breadcrumb -->
 		
 		</div>
@@ -53,97 +53,55 @@
 				<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
 					<thead>
 						<tr>
-							<td colspan="6" class="center"><h4>房子详细信息</h4></td>
+							<td colspan="6" class="center"><h4>视频详细信息</h4></td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><strong>小区名称</strong></td>
-							<td>{{ $room->name }}</td>
-							<td><strong>小区位置</strong></td>
-							<td>{{ $room->position }}</td>
-							<td><strong>价格</strong></td>
-							<td>@if($room->price) {{$room->price.'元'}} @endif</td>
+							<td><strong>标题</strong></td>
+							<td>{{ $video->title }}</td>
+							<td><strong>发布者</strong></td>
+							<td>{{ $video->user->name }}</td>
+							<td><strong>所属栏目</strong></td>
+							<td>{{ $video->category->name }}</td>
 						</tr>
-						@if($room->h_type == 2)
 						<tr>
-							<td><strong>买卖单价</strong></td>
-							<td>{{ $room->univalence ? $room->univalence.'元/平米' : ''}}</td>
-							<td><strong>买卖税率</strong></td>
-							<td>{{ $room->tax_rate }}</td>
-							<td><strong>税费</strong></td>
-							<td>{{ $room->taxes ? $room->taxes.'元' : ''}}</td>
+							<td><strong>作者</strong></td>
+							<td>{{ $video->author or ''}}</td>
+							<td><strong>时长</strong></td>
+							<td>{{ $video->duration or ''}}</td>
+							<td><strong>文件大小</strong></td>
+							<td>{{ $video->size or ''}}</td>
 						</tr>
-						@endif
 						<tr>
-							<td><strong>房子名称</strong></td>
-							<td>{{ $room->room_name }}</td>
-							<td><strong>户型</strong></td>
-							<td>{{ $room->type }}</td>
-							<td><strong>面积</strong></td>
-							<td>{{ $room->area ? $room->area.'平米' : ''}}</td>
+							<td><strong>介绍内容</strong></td>
+							<td colspan="5"><strong>{{ $video->content }}</strong></td>
 						</tr>
 						<tr>
 							<td><strong>图片</strong></td>
-							<td colspan="4">								
+							<td colspan="5">								
 								<ul class="ace-thumbnails clearfix">
-									
-									@foreach( $room->photos as $item)
 									<li>
-										<a href="{{ $item->path }}" data-rel="colorbox">
-											<img width="100" height="100" alt="150x150" src="{{ $item->path }}" />
-										</a> 
-					
-										<div class="tools">
-											<a href="#">
-												<i class="ace-icon fa fa-link"></i>
-											</a>
-
-											<a href="#">
-												<i class="ace-icon fa fa-paperclip"></i>
-											</a>
-
-											<a href="#">
-												<i class="ace-icon fa fa-pencil"></i>
-											</a>
-
-											<a href="{{ url('donkey/admin/room/del_pic').'/'.$item->id }}">
-												<i class="ace-icon fa fa-times red"></i>
-											</a>
-										</div>
+										<a href="{{ $video->cover }}" data-rel="colorbox">
+											<img width="150" height="150" alt="150x150" src="{{ $video->cover }}" />
+											<div class="text">
+												<div class="inner">点击查看大图</div>
+											</div>
+										</a>
 									</li>
-									@endforeach
 								</ul>
-							</td>
-							<td>
-								<a href="javascript:upload_image()">
-									<i class="fa fa-cloud-upload">上传图片</i>
-								</a>
 							</td>
 						</tr>
 						<tr>
-							<td><strong>备注</strong></td>
-							<td colspan="5">{{ $room->introduction }}</td>
+							<td><strong>视频</strong></td>
+							<td colspan="5">
+								
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			
-			<form action="{{ url('donkey/admin/room/upload') }}" method="post" enctype="multipart/form-data">
-				<input id="uploads" type="file" name="picture[]" value="" style="display:none" multiple="multiple"/>
-				<input type="hidden" name="_token" value="{{ csrf_token() }}" style="display:none"/>
-				<input type="hidden" name="id" value="{{ $room->id }}" style="display:none"/>
-				<button id="sub" type="submit" style="display:none;"></button>
-			</form>
-			
-			<script>
-				function upload_image(){
-					$('#uploads').click();
-				}
-				$('#uploads').change(function(){
-					$('#sub').click();
-				})
-			</script>
 			@include('admin.master.common_footer')
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>

@@ -100,7 +100,7 @@
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">封面图片：</label>
 					<div class="col-sm-11">
-						<input type="file" name="cover"  class="col-xs-10 col-sm-4" value=""/>
+						<input type="file" name="cover" class="col-xs-10 col-sm-4"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必选,只支持jpg,jpeg,png格式*</span>
 						</span>
@@ -113,7 +113,8 @@
 					<label class="col-sm-1 control-label no-padding-right">视频：</label>
 					<div class="col-sm-11">-->
 						<input type="hidden" name="path" id="video_name" class="col-xs-10 col-sm-4" value="{{ old('path') }}"/>
-						<input type="hidden" name="duration" id="video_size" class="col-xs-10 col-sm-4" value="{{ old('duration') }}"/>
+						<input type="hidden" name="duration" id="video_duration" class="col-xs-10 col-sm-4" value="{{ old('duration') }}"/>
+						<input type="hidden" name="size" id="video_size" class="col-xs-10 col-sm-4" value="{{ old('size') }}"/>
 						<!--<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
@@ -138,8 +139,18 @@
                 <div id="progress">
                     <div class="bar" style="width: 0%;"></div>
                 </div>
-
-                <div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">作者：</label>
+					<div class="col-sm-11">
+						<input type="text" name="author"  class="col-xs-10 col-sm-4" value="{{ old('author') }}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>
+				</div>
+				
+				<div height="10px">&nbsp;</div>
 				
 				<div class="col-md-offset-1 col-md-9">
 					<button class="btn btn-info" type="submit">
@@ -174,7 +185,8 @@
 						if(data.result.sta) {
 							$('#upstatus').html(data.result.msg);
 							$('#video_name').val(data.result.previewSrc);
-							$('#video_size').val(data.result.duration);
+							$('#video_size').val(data.result.size);
+							$('#video_duration').val(data.result.duration);
 							//$('#fileupload').css('display','none');
 							/*$('#preview').html("<video src='"+data.result.previewSrc+"' controls='controls'>您的浏览器不支持预览。</video>");*/
 						} else {

@@ -23,7 +23,7 @@ class CreateResourcesTable extends Migration {
 			$table->string('cover')->nullable()->comment('列表显示图片');
 			$table->string('path')->nullable()->comment('文件上传路径');
 			$table->integer('duration')->nullable()->comment('时长');
-			$table->float('size')->nullable()->comment('资源大小');
+			$table->integer('size')->nullable()->comment('资源大小');
 			$table->timestamps();
 			$table->softDeletes();
 		});

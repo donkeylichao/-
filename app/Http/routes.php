@@ -155,14 +155,24 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		Route::get('create' , ['as'=>'admin.video.create' , 'uses'=>'VideoController@create']);
 		//保存添加
 		Route::post('store' , 'VideoController@store');
+		//修改视频
+		Route::get('edit/{id}' , ['as'=>'admin.video.edit' , 'uses'=>'VideoController@edit']);
+		//保存修改
+		Route::post('update' , 'VideoController@update');
 		//回收站
 		Route::get('recycle' , ['as'=>'admin.video.recycle' , 'uses'=>'VideoController@recycle']);
 		//恢复回收站内容
-		Route::get('restore' , ['as'=>'admin.video.restore' , 'uses'=>'VideoController@restore']);
+		Route::get('restore/{id}' , ['as'=>'admin.video.restore' , 'uses'=>'VideoController@restore']);
+		//彻底删除回收站内容
+		Route::get('delete/{id}' , ['as'=>'admin.video.delete' , 'uses'=>'VideoController@delete']);
 		//视频上传
-		Route::post('uploadv' , ['as'=>'admin.video.uploadv' , 'uses'=>'VideoController@uploadv']);
+		Route::post('uploadv' , 'VideoController@uploadv');
 		//视频删除
-		Route::post('destroyv' , ['as'=>'admin.video.destroyv' , 'uses'=>'VideoController@destroyv']);
+		Route::get('destroy/{id}' , ['as'=>'admin.video.destroy' , 'uses'=>'VideoController@destroy']);
+		//查看视频
+		Route::get('show/{id}' , ['as'=>'admin.video.show' , 'uses'=>'VideoController@show']);
+		//编辑信息
+		Route::get('edit/{id}' , ['as'=>'admin.video.edit' , 'uses'=>'VideoController@edit']);
 	});
 	
 	//音频管理
@@ -171,8 +181,8 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	});
 	
 	//图片管理
-	Route::group(['prefix'=>'photo'] , function(){
-		Route::get('/' , ['as'=>'admin.photo' , 'uses'=>'PhotoController@index']);
+	Route::group(['prefix'=>'album'] , function(){
+		Route::get('/' , ['as'=>'admin.album' , 'uses'=>'AlbumController@index']);
 	});
 	
 	//日记管理

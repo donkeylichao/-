@@ -16,16 +16,32 @@ return [
 		11 => '个人中心',
 	],
 	
+	//房子管理的
 	'house_types' => [
 		1 => '出租',
 		2 => '买卖',
 	],
 	
+	//分类管理的
 	'resource_types' => [
 		1 => '视频',
 		2 => '音频',
 		3 => '图片',
 		4 => '日记',
+	],
+	
+	//提示消息notification的
+	'types' => [
+		1 => '视频',
+		2 => '音频',
+		3 => '相册',
+	],
+	
+	//消息提示展示路劲
+	'notify_routes' => [
+		1 => 'donkey/admin/video/show/',
+		2 => 'donkey/admin/music/show/',
+		3 => 'donkey/admin/album/show/',
 	],
 
 ];

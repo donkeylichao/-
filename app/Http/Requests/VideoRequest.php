@@ -26,6 +26,7 @@ class VideoRequest extends Request {
             'content'=>'required',
             'cover'=>'required',
             'path'=>'required',
+			'author'=>'required',
 		];
 	}
 
@@ -36,6 +37,7 @@ class VideoRequest extends Request {
             'content.required'=>'内容不能为空!',
             'cover.required'=>'封面图片不能为空!',
             'path.required'=>'视频必须上传!',
+			'author.required'=>'作者不能为空!',
         ];
     }
 

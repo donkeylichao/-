@@ -107,7 +107,7 @@
 		</a>
 		
 		<ul class="submenu">
-			<li @if(strpos($uri,'video/index') || strpos($uri,'video/create') || strpos($uri,'video/update')) class="active" @endif>
+			<li @if(strpos($uri,'video/index') || strpos($uri,'video/create') || strpos($uri,'video/edit')) class="active" @endif>
 				<a href="{{ url('donkey/admin/video/index')}}">
 					<i class="menu-icon fa fa-caret-right"></i>
 					视频列表

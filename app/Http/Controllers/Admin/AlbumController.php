@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\BaseController;
 
 use Illuminate\Http\Request;
 
-class PhotoController extends BaseController {
+class AlbumController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
