@@ -195,7 +195,7 @@ class VideoController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$video = Resource::find($id);
+		$video = Resource::withTrashed()->where('id',$id)->first();
 		return view('admin.video.show')->with(compact('video'));
 	}
 
