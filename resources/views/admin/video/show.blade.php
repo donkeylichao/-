@@ -109,7 +109,7 @@
 								<span>或者扫描右方二维码下载到手机</span>
 							</td>
 							<td colspan="4">
-								<span class="qrcode">{!! QrCode::size(150)->margin(0)->generate("http://192.168.4.115/donkey/download/video/" . $video->id) !!}</span>
+								<span class="qrcode">{!! QrCode::size(150)->margin(0)->generate(url("/donkey/download/video/" . $video->id)) !!}</span>
 							</td>
 						</tr>
 					</tbody>
