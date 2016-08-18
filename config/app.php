@@ -136,6 +136,7 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
+		'SimpleSoftwareIO\QrCode\QrCodeServiceProvider',
 		/*
 		 * Application Service Providers...
 		 */
@@ -193,6 +194,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Entrust'   => 'Zizaco\Entrust\EntrustFacade',
+		'QrCode'    => 'SimpleSoftwareIO\QrCode\Facades\QrCode',
 	],
 
 ];

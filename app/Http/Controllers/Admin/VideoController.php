@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Auth;
 use DB;
 use Input;
+use Config;
 
 class VideoController extends BaseController {
 
@@ -155,7 +156,7 @@ class VideoController extends BaseController {
 		$data['size'] = $video->getClientSize();
 		
 		//判断上传类型
-		$arrExt = ['mp4','flv','avi','m4v'];
+		$arrExt = Config::get('common.video_types');
 		if(!in_array($video->getClientOriginalExtension(),$arrExt)) {
 			$data['sta'] = FAlSE;
 			$data['msg'] = '不支持此类型上传!';

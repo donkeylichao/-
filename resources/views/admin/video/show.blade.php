@@ -95,7 +95,21 @@
 						<tr>
 							<td><strong>视频</strong></td>
 							<td colspan="5">
-								
+								<video style="width:200px" controls="controls">
+									您的浏览器不支持video标签
+									<source src="{{ $video->path }}" type="video/mp4"></source>
+								</video>
+							</td>
+						</tr>
+						<tr>
+							<td><strong>下载</strong></td>
+							<td>
+								<a href="{{ url('donkey/download/video/' . $video->id) }}">下载到本地</a>
+								<br><br>
+								<span>或者扫描右方二维码下载到手机</span>
+							</td>
+							<td colspan="4">
+								<span class="qrcode">{!! QrCode::size(150)->margin(0)->generate("http://192.168.4.115/donkey/download/video/" . $video->id) !!}</span>
 							</td>
 						</tr>
 					</tbody>
@@ -124,10 +138,6 @@
 
 		<!-- page specific plugin scripts -->
 		<script src="/assets/js/jquery.colorbox-min.js"></script>
-		
-		<!-- ace scripts -->
-		<script src="/assets/js/ace-elements.min.js"></script>
-		<script src="/assets/js/ace.min.js"></script>
 		
 		<script type="text/javascript">
 			jQuery(function($) {

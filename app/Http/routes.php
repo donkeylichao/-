@@ -205,7 +205,13 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		Route::get('/' , ['as'=>'admin.personal' , 'uses'=>'PersonalController@index']);
 	});
 });
-
+/**********************************************************
+	app后台资源下载相关路由
+********************************************************/
+Route::group(['prefix' => 'donkey/download' , 'namespace'=>'Download' ] , function(){
+	//视频下载
+	Route::get('video/{id}' , 'DownloadController@video');
+});
 
 
 

@@ -102,7 +102,7 @@
 					<div class="col-sm-11">
 						<input type="file" name="cover" class="col-xs-10 col-sm-4"/>
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必选,只支持jpg,jpeg,png格式*</span>
+							<span class="middle" style="color:red">*必选,只支持 jpg, jpeg, png格式*</span>
 						</span>
 					</div>
 				</div>
@@ -129,7 +129,13 @@
                         <input id="fileupload" type="file" name="video" class="col-xs-10 col-sm-4"/>
 						
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" id="upstatus" style="color:red">*必须,只支持mp4,flv,m4v,avi格式*</span>
+							<span class="middle" id="upstatus" style="color:red">
+								*必须,只支持
+								@foreach(Config::get('common.video_types') as $v)
+									{{ $v.',' }}
+								@endforeach
+								格式*
+							</span>
 						</span>
                     </div>
                 </div>

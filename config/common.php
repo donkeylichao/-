@@ -43,5 +43,10 @@ return [
 		2 => 'donkey/admin/music/show/',
 		3 => 'donkey/admin/album/show/',
 	],
+	
+	//上传的视频格式
+	'video_types' => [
+		'mp4',
+	],
 
 ];
