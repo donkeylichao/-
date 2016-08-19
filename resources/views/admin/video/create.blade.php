@@ -60,9 +60,11 @@
 					<label class="col-sm-1 control-label no-padding-right">栏目：</label>
 					<div class="col-sm-11">
 						<select name="category_id" class="col-xs-10 col-sm-4">
-							@foreach($categories->child as $v)
-							<option value="{{ $v->id }}">{{ $v->name }}</option>
-							@endforeach
+							@if(count($categories) > 0)
+								@foreach($categories->child as $v)
+									<option value="{{ $v->id }}">{{ $v->name }}</option>
+								@endforeach
+							@endif
 						</select>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle"></span>
@@ -193,6 +195,7 @@
 							$('#video_name').val(data.result.previewSrc);
 							$('#video_size').val(data.result.size);
 							$('#video_duration').val(data.result.duration);
+							$('#progress .bar').css('width','0%');
 							//$('#fileupload').css('display','none');
 							/*$('#preview').html("<video src='"+data.result.previewSrc+"' controls='controls'>您的浏览器不支持预览。</video>");*/
 						} else {

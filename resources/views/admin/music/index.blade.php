@@ -38,14 +38,14 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/video/index') }}">视频管理</a>
+					<a href="{{ url('donkey/admin/music/index') }}">音频管理</a>
 				</li>
 				<li class="active">视频列表</li>
 			</ul><!-- /.breadcrumb -->
 
 			<!-- #section:basics/content.searchbox -->
 			<div class="nav-search" id="nav-search">
-				<form class="form-search" method="get" action="{{ url('donkey/admin/video/index') }}">
+				<form class="form-search" method="get" action="{{ url('donkey/admin/music/index') }}">
 					<span class="input-icon">
 						<input type="text" placeholder="输入视频名称搜索" class="nav-search-input" id="nav-search-input" name="name"/>
 						<i class="ace-icon fa fa-search nav-search-icon"></i>
@@ -67,8 +67,8 @@
 			@include('admin.master.notify')
 			
 			<div>
-				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/video/create') }}" style="float:right; margin-bottom:5px;" >
-					<i class="ace-icon fa fa-plus bigger-120"></i>添加视频
+				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/music/create') }}" style="float:right; margin-bottom:5px;" >
+					<i class="ace-icon fa fa-plus bigger-120"></i>添加音频
 				</a>
 				<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
 					<thead>
@@ -86,7 +86,7 @@
 
 					<tbody>
 						<?php $num = 1 ?> 
-						@foreach($videos as $item)
+						@foreach($musics as $item)
 						<tr>
 							<td>{{ $num++ }}</td>
 							<td>{{ $item->category->name or '' }}</td>
@@ -98,15 +98,15 @@
 							<td>
 								<div class="btn-group">
 									
-                                    <a class="btn btn-xs btn-warning" href="{{ url('donkey/admin/video/show') .'/'.  $item->id}}" title="查看">
+                                    <a class="btn btn-xs btn-warning" href="{{ url('donkey/admin/music/show') .'/'.  $item->id}}" title="查看">
                                         <i class="ace-icon fa fa-eye bigger-120"></i>
                                     </a>
 
-									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/video/edit') .'/'. $item->id }}" title="编辑">
+									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/music/edit') .'/'. $item->id }}" title="编辑">
 										<i class="ace-icon fa fa-pencil bigger-120"></i>
 									</a>
 
-									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/video/destroy') .'/'. $item->id }}" title="删除">
+									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/music/destroy') .'/'. $item->id }}" title="删除">
 										<i class="ace-icon fa fa-trash-o bigger-120"></i>
 									</a>
 
@@ -116,7 +116,7 @@
 						@endforeach
 					</tbody>
 				</table>
-				{!! $videos->appends(['name'=>$name])->render() !!}
+				{!! $musics->appends(['name'=>$name])->render() !!}
 				
 			</div>
 			

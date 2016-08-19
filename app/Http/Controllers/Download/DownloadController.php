@@ -26,9 +26,13 @@ class DownloadController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function music($id)
 	{
-		//
+		$music = Resource::find($id);
+		if(!file_exists( public_path($music->path))) {
+			return "<h2>您下载的音频已经被转移，无法下载，详情咨询站长!</h2>";
+		}
+		return response()->download(public_path($music->path),$music->title);
 	}
 
 	/**

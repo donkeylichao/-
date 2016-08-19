@@ -40,9 +40,9 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/video/index') }}">视频管理</a>
+					<a href="{{ url('donkey/admin/music/index') }}">音频管理</a>
 				</li>
-				<li class="active">编辑视频</li>
+				<li class="active">编辑音频</li>
 			</ul><!-- /.breadcrumb -->
 		
 		</div>
@@ -54,14 +54,14 @@
 			{{-- dump(Session::all())--}}
 			{{-- dump($errors->first())--}}
 			
-			<form method="post" action="{{ url('donkey/admin/video/update')}}" enctype="multipart/form-data">
+			<form method="post" action="{{ url('donkey/admin/music/update')}}" enctype="multipart/form-data">
 				
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">栏目：</label>
 					<div class="col-sm-11">
 						<select name="category_id" class="col-xs-10 col-sm-4">
 							@foreach($categories->child as $v)
-							<option value="{{ $v->id }}" @if($v->id == $video->category_id) "selected" @endif >{{ $v->name }}</option>
+							<option value="{{ $v->id }}" @if($v->id == $music->category_id) "selected" @endif >{{ $v->name }}</option>
 							@endforeach
 						</select>
 						<span class="help-inline col-xs-12 col-sm-7">
@@ -75,7 +75,7 @@
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">标题：</label>
 					<div class="col-sm-11">
-						<input type='text' name='title' class="col-xs-10 col-sm-4" value="{{ old('title') ? old('title') : $video->title}}"/>
+						<input type='text' name='title' class="col-xs-10 col-sm-4" value="{{ old('title') ? old('title') : $music->title}}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
@@ -87,7 +87,7 @@
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">介绍：</label>
 					<div class="col-sm-11">
-						<input type="text" name="content"  class="col-xs-10 col-sm-4" value="{{ old('content') ? old('content') : $video->content}}"/>
+						<input type="text" name="content"  class="col-xs-10 col-sm-4" value="{{ old('content') ? old('content') : $music->content}}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span> 
@@ -95,7 +95,7 @@
 				</div>
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                <input type="hidden" name="id" value="{{ $video->id }}" />
+                <input type="hidden" name="id" value="{{ $music->id }}" />
 				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
@@ -113,7 +113,7 @@
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">作者：</label>
 					<div class="col-sm-11">
-						<input type="text" name="author"  class="col-xs-10 col-sm-4" value="{{ old('author') ? old('author') : $video->author}}"/>
+						<input type="text" name="author"  class="col-xs-10 col-sm-4" value="{{ old('author') ? old('author') : $music->author}}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span>

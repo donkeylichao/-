@@ -128,12 +128,32 @@
 	</li>
 	
 	<li @if(strpos($uri,'music')) class="active open hsub" @endif>
-		<a href="{{ url('donkey/admin/music')}}">
+		<a href="{{ url('donkey/admin/music')}}" class="dropdown-toggle">
 			<i class="menu-icon fa fa-music"></i>
 			<span class="menu-text"> 音频管理 </span>
 			
 			<b class="arrow fa fa-angle-down"></b>
 		</a>
+		
+		<ul class="submenu">
+			<li @if(strpos($uri,'music/index') || strpos($uri,'music/create') || strpos($uri,'music/edit') || strpos($uri,'music/show')) class="active" @endif>
+				<a href="{{ url('donkey/admin/music/index')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					音频列表
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li @if(strpos($uri,'music/recycle')) class="active" @endif>
+				<a href="{{ url('donkey/admin/music/recycle')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					回收站
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+		</ul>
 	</li>
 	
 	<li @if(strpos($uri,'photo')) class="active open hsub" @endif>

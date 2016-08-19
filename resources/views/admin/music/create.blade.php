@@ -40,9 +40,9 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/video/index') }}">视频管理</a>
+					<a href="{{ url('donkey/admin/music/index') }}">音频管理</a>
 				</li>
-				<li class="active">编辑视频</li>
+				<li class="active">添加音频</li>
 			</ul><!-- /.breadcrumb -->
 		
 		</div>
@@ -54,15 +54,17 @@
 			{{-- dump(Session::all())--}}
 			{{-- dump($errors->first())--}}
 			
-			<form method="post" action="{{ url('donkey/admin/video/update')}}" enctype="multipart/form-data">
+			<form method="post" action="{{ url('donkey/admin/music/store')}}" enctype="multipart/form-data">
 				
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">栏目：</label>
 					<div class="col-sm-11">
 						<select name="category_id" class="col-xs-10 col-sm-4">
-							@foreach($categories->child as $v)
-							<option value="{{ $v->id }}" @if($v->id == $video->category_id) "selected" @endif >{{ $v->name }}</option>
-							@endforeach
+							@if(count($categories) > 0)
+								@foreach($categories->child as $v)
+								<option value="{{ $v->id }}">{{ $v->name }}</option>
+								@endforeach
+							@endif
 						</select>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle"></span>
@@ -75,7 +77,7 @@
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">标题：</label>
 					<div class="col-sm-11">
-						<input type='text' name='title' class="col-xs-10 col-sm-4" value="{{ old('title') ? old('title') : $video->title}}"/>
+						<input type='text' name='title' class="col-xs-10 col-sm-4" value="{{ old('title') }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
@@ -87,15 +89,14 @@
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">介绍：</label>
 					<div class="col-sm-11">
-						<input type="text" name="content"  class="col-xs-10 col-sm-4" value="{{ old('content') ? old('content') : $video->content}}"/>
+						<input type="text" name="content"  class="col-xs-10 col-sm-4" value="{{ old('content') }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
-						</span> 
+						</span>
 					</div>
 				</div>
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                <input type="hidden" name="id" value="{{ $video->id }}" />
 				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
@@ -103,17 +104,54 @@
 					<div class="col-sm-11">
 						<input type="file" name="cover" class="col-xs-10 col-sm-4"/>
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*只支持jpg,jpeg,png格式,可不填*</span>
+							<span class="middle" style="color:red">*必选,只支持 jpg, jpeg, png格式*</span>
 						</span>
 					</div>
 				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<!--<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">视频：</label>
+					<div class="col-sm-11">-->
+						<input type="hidden" name="path" id="music_name" class="col-xs-10 col-sm-4" value="{{ old('path') }}"/>
+						<input type="hidden" name="duration" id="music_duration" class="col-xs-10 col-sm-4" value="{{ old('duration') }}"/>
+						<input type="hidden" name="size" id="music_size" class="col-xs-10 col-sm-4" value="{{ old('size') }}"/>
+						<!--<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>
+				</div>-->
+				
+				<div id="preview"></div>
+				
+                <div class="form-group">
+                    <label class="col-sm-1 control-label no-padding-right">音频：</label>
+                    <div class="col-sm-11">
+                        <input id="fileupload" type="file" name="music" class="col-xs-10 col-sm-4"/>
+						
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" id="upstatus" style="color:red">
+								*必须,只支持
+								@foreach(Config::get('common.music_types') as $v)
+									{{ $v.',' }}
+								@endforeach
+								格式*
+							</span>
+						</span>
+                    </div>
+                </div>
 			
 				<div height="10px">&nbsp;</div>
+
+                <div id="progress">
+                    <div class="bar" style="width: 0%;"></div>
+                </div>
 				
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">作者：</label>
 					<div class="col-sm-11">
-						<input type="text" name="author"  class="col-xs-10 col-sm-4" value="{{ old('author') ? old('author') : $video->author}}"/>
+						<input type="text" name="author"  class="col-xs-10 col-sm-4" value="{{ old('author') }}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
@@ -137,15 +175,15 @@
 			</a>
 		</div><!-- /.main-container -->
 		
-		<!--<script>
+		<script>
 			//function uploadfile(){
 			//$("#fileupload").change(function(){
 				
 				$("#fileupload").change().fileupload({
-					url: '/donkey/admin/video/uploadv',
+					url: '/donkey/admin/music/uploadm',
 					dataType: 'json',	
 					formData: function(form){
-						var path = $("#video_name").val();
+						var path = $("#music_name").val();
 						return [
 							{name:"_token",value:"{{ csrf_token() }}"},
 							{name:"path",value:path}	
@@ -154,9 +192,10 @@
 					done: function (e, data) {
 						if(data.result.sta) {
 							$('#upstatus').html(data.result.msg);
-							$('#video_name').val(data.result.previewSrc);
-							$('#video_size').val(data.result.size);
-							$('#video_duration').val(data.result.duration);
+							$('#music_name').val(data.result.path);
+							$('#music_size').val(data.result.size);
+							$('#music_duration').val(data.result.duration);
+							$('#progress .bar').css('width','0%');
 							//$('#fileupload').css('display','none');
 							/*$('#preview').html("<video src='"+data.result.previewSrc+"' controls='controls'>您的浏览器不支持预览。</video>");*/
 						} else {
@@ -171,7 +210,7 @@
 					}
 				});
 			//});
-		</script>-->
+		</script>
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->

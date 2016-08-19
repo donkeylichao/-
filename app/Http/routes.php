@@ -177,7 +177,28 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	
 	//音频管理
 	Route::group(['prefix'=>'music'] , function(){
-		Route::get('/' , ['as'=>'admin.music' , 'uses'=>'MusicController@index']);
+		//显示音频列表
+		Route::get('index' , ['as'=>'admin.music' , 'uses'=>'MusicController@index']);
+		//添加音频
+		Route::get('create' , ['as'=>'admin.music.create' , 'uses'=>'MusicController@create']);
+		//保存音频
+		Route::post('store' , 'MusicController@store');
+		//上传音频
+		Route::post('uploadm' , 'MusicController@uploadm');
+		//查看内容
+		Route::get('show/{id}' , ['as'=>'admin.music.show' , 'uses'=>'MusicController@show']);
+		//编辑音频
+		Route::get('edit/{id}' , ['as'=>'admin.music.edit' , 'uses'=>'MusicController@edit']);
+		//保存编辑
+		Route::post('update' , 'MusicController@update');
+		//放入回收站
+		Route::get('destroy/{id}' , 'MusicController@destroy');
+		//回收站列表
+		Route::get('recycle' , ['as'=>'admin.music.recycle' , 'uses'=>'MusicController@recycle']);
+		//恢复回收站内容
+		Route::get('restore/{id}' , ['as'=>'admin.music.restore' , 'uses'=>'MusicController@restore']);
+		//彻底删除
+		Route::get('delete/{id}' , ['as'=>'admin.music.delete' , 'uses'=>'MusicController@delete']);
 	});
 	
 	//图片管理
@@ -211,6 +232,8 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 Route::group(['prefix' => 'donkey/download' , 'namespace'=>'Download' ] , function(){
 	//视频下载
 	Route::get('video/{id}' , 'DownloadController@video');
+	//音频下载
+	Route::get('music/{id}' , 'DownloadController@music');
 });
 
 

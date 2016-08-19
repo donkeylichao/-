@@ -37,9 +37,9 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/video/index') }}">视频管理</a>
+					<a href="{{ url('donkey/admin/music/index') }}">音频管理</a>
 				</li>
-				<li class="active">查看视频</li>
+				<li class="active">查看音频</li>
 			</ul><!-- /.breadcrumb -->
 		
 		</div>
@@ -59,31 +59,31 @@
 					<tbody>
 						<tr>
 							<td><strong>标题</strong></td>
-							<td>{{ $video->title }}</td>
+							<td>{{ $music->title }}</td>
 							<td><strong>发布者</strong></td>
-							<td>{{ $video->user->name }}</td>
+							<td>{{ $music->user->name }}</td>
 							<td><strong>所属栏目</strong></td>
-							<td>{{ $video->category->name }}</td>
+							<td>{{ $music->category->name }}</td>
 						</tr>
 						<tr>
 							<td><strong>作者</strong></td>
-							<td>{{ $video->author or ''}}</td>
+							<td>{{ $music->author or ''}}</td>
 							<td><strong>时长</strong></td>
-							<td>{{ $video->duration or ''}}</td>
+							<td>{{ $music->duration or ''}}</td>
 							<td><strong>文件大小</strong></td>
-							<td>{{ $video->size or ''}}</td>
+							<td>{{ $music->size or ''}}</td>
 						</tr>
 						<tr>
 							<td><strong>介绍内容</strong></td>
-							<td colspan="5"><strong>{{ $video->content }}</strong></td>
+							<td colspan="5"><strong>{{ $music->content }}</strong></td>
 						</tr>
 						<tr>
 							<td><strong>图片</strong></td>
 							<td colspan="5">								
 								<ul class="ace-thumbnails clearfix">
 									<li>
-										<a href="{{ $video->cover }}" data-rel="colorbox">
-											<img width="150" height="150" alt="150x150" src="{{ $video->cover }}" />
+										<a href="{{ $music->cover }}" data-rel="colorbox">
+											<img width="150" height="150" alt="150x150" src="{{ $music->cover }}" />
 											<div class="text">
 												<div class="inner">点击查看大图</div>
 											</div>
@@ -93,23 +93,23 @@
 							</td>
 						</tr>
 						<tr>
-							<td><strong>视频</strong></td>
+							<td><strong>音频</strong></td>
 							<td colspan="5">
 								<video style="width:200px" controls="controls">
 									您的浏览器不支持video标签
-									<source src="{{ $video->path }}" type="video/mp4"></source>
+									<source src="{{ $music->path }}"></source>
 								</video>
 							</td>
 						</tr>
 						<tr>
 							<td><strong>下载</strong></td>
 							<td>
-								<a href="{{ url('donkey/download/video/' . $video->id) }}">下载到本地</a>
+								<a href="{{ url('donkey/download/music/' . $music->id) }}">下载到本地</a>
 								<br><br>
 								<span>或者扫描右方二维码下载到手机</span>
 							</td>
 							<td colspan="4">
-								<span class="qrcode">{!! QrCode::margin(0)->size(150)->generate(url("/donkey/download/video/" . $video->id)) !!}</span>
+								<span class="qrcode">{!! QrCode::size(150)->margin(0)->generate(url("donkey/download/music/" . $music->id)) !!}</span>
 							</td>
 						</tr>
 					</tbody>

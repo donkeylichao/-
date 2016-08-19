@@ -48,5 +48,10 @@ return [
 	'video_types' => [
 		'mp4',
 	],
+	
+	//上传音频格式
+	'music_types' => [
+		'mp3',
+	],
 
 ];
