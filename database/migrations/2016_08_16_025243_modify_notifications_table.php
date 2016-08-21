@@ -18,6 +18,7 @@ class ModifyNotificationsTable extends Migration {
 			$table->integer('resource_id')->nullable()->comment('视频，音频id');
 			$table->integer('album_id')->nullable()->comment('相册的id');
 			$table->tinyInteger('type')->comment('资源类型');
+            $table->integer('modify_type')->comment('操作类型，添加为1，编辑2，删除3');
 		});
 	}
 
@@ -33,6 +34,7 @@ class ModifyNotificationsTable extends Migration {
 			$table->dropColumn('resource_id');
 			$table->dropColumn('album_id');
 			$table->dropColumn('type');
+            $table->dropColumn('modify_type');
 		});
 	}
 

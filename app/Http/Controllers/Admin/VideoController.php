@@ -10,6 +10,7 @@ use Auth;
 use DB;
 use Input;
 use Config;
+use Cache;
 
 class VideoController extends BaseController {
 
@@ -19,17 +20,29 @@ class VideoController extends BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{
-		$videos = Resource::where('type_id' , 1)->with('category')->orderBy('created_at','desc');
-		$name = Input::get('name');
-		
-		//搜索
-		if($name) {
-			$videos = $videos->where('title','like','%' . $name . '%');
-		} 
-		
-		$videos = $videos->paginate(10);
-		
+    {
+        $videos = Resource::where('type_id', 1)->with('category')->orderBy('created_at', 'desc');
+        $name = Input::get('name');
+
+        //搜索
+        if ($name) {
+            $videos = $videos->where('title', 'like', '%' . $name . '%');
+        }
+        //生成唯一键
+        $key = md5($videos->toSql());
+
+        if(!Cache::get($key)) {
+            //查出来
+            $videos = $videos->paginate(10);
+            //缓存起来
+            Cache::put($key,$videos,5);
+        } else {
+            $videos = Cache::get($key);
+        }
+        //dd($videos);
+        //Cache::put('123','123456',3);
+        //$a = Cache::get('123');
+        //echo $a;
 		return view('admin.video.index')->with(compact('videos','name'));
 	}
 
