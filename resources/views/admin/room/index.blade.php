@@ -201,12 +201,12 @@
 					var $box = $(this).closest('.infobox');
 					var barColor = !$box.hasClass('infobox-dark') ? $box.css('color') : '#FFF';
 					$(this).sparkline('html',
-									 {
-										tagValuesAttribute:'data-values',
-										type: 'bar',
-										barColor: barColor ,
-										chartRangeMin:$(this).data('min') || 0
-									 });
+						{
+							tagValuesAttribute:'data-values',
+							type: 'bar',
+							barColor: barColor ,
+							chartRangeMin:$(this).data('min') || 0
+						});
 				});
 			
 			

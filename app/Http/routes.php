@@ -147,7 +147,7 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		Route::get('destroy/{id}' , ['as'=>'admin.category.destroy' , 'uses'=>'CategoryController@destroy']);
 	});
 	
-	//视屏管理
+	//视频管理
 	Route::group(['prefix'=>'video'] , function(){
 		//视频列表
 		Route::get('index' , ['as'=>'admin.video' , 'uses'=>'VideoController@index']);
@@ -155,18 +155,55 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		Route::get('create' , ['as'=>'admin.video.create' , 'uses'=>'VideoController@create']);
 		//保存添加
 		Route::post('store' , 'VideoController@store');
+		//修改视频
+		Route::get('edit/{id}' , ['as'=>'admin.video.edit' , 'uses'=>'VideoController@edit']);
+		//保存修改
+		Route::post('update' , 'VideoController@update');
 		//回收站
-		Route::get('restore' , ['as'=>'admin.video.restore' , 'uses'=>'VideoController@restore']);
+		Route::get('recycle' , ['as'=>'admin.video.recycle' , 'uses'=>'VideoController@recycle']);
+		//恢复回收站内容
+		Route::get('restore/{id}' , ['as'=>'admin.video.restore' , 'uses'=>'VideoController@restore']);
+		//彻底删除回收站内容
+		Route::get('delete/{id}' , ['as'=>'admin.video.delete' , 'uses'=>'VideoController@delete']);
+		//视频上传
+		Route::post('uploadv' , 'VideoController@uploadv');
+		//视频删除
+		Route::get('destroy/{id}' , ['as'=>'admin.video.destroy' , 'uses'=>'VideoController@destroy']);
+		//查看视频
+		Route::get('show/{id}' , ['as'=>'admin.video.show' , 'uses'=>'VideoController@show']);
+		//编辑信息
+		Route::get('edit/{id}' , ['as'=>'admin.video.edit' , 'uses'=>'VideoController@edit']);
 	});
 	
 	//音频管理
 	Route::group(['prefix'=>'music'] , function(){
-		Route::get('/' , ['as'=>'admin.music' , 'uses'=>'NusicController@index']);
+		//显示音频列表
+		Route::get('index' , ['as'=>'admin.music' , 'uses'=>'MusicController@index']);
+		//添加音频
+		Route::get('create' , ['as'=>'admin.music.create' , 'uses'=>'MusicController@create']);
+		//保存音频
+		Route::post('store' , 'MusicController@store');
+		//上传音频
+		Route::post('uploadm' , 'MusicController@uploadm');
+		//查看内容
+		Route::get('show/{id}' , ['as'=>'admin.music.show' , 'uses'=>'MusicController@show']);
+		//编辑音频
+		Route::get('edit/{id}' , ['as'=>'admin.music.edit' , 'uses'=>'MusicController@edit']);
+		//保存编辑
+		Route::post('update' , 'MusicController@update');
+		//放入回收站
+		Route::get('destroy/{id}' , 'MusicController@destroy');
+		//回收站列表
+		Route::get('recycle' , ['as'=>'admin.music.recycle' , 'uses'=>'MusicController@recycle']);
+		//恢复回收站内容
+		Route::get('restore/{id}' , ['as'=>'admin.music.restore' , 'uses'=>'MusicController@restore']);
+		//彻底删除
+		Route::get('delete/{id}' , ['as'=>'admin.music.delete' , 'uses'=>'MusicController@delete']);
 	});
 	
 	//图片管理
-	Route::group(['prefix'=>'photo'] , function(){
-		Route::get('/' , ['as'=>'admin.photo' , 'uses'=>'PhotoController@index']);
+	Route::group(['prefix'=>'album'] , function(){
+		Route::get('/' , ['as'=>'admin.album' , 'uses'=>'AlbumController@index']);
 	});
 	
 	//日记管理
@@ -189,7 +226,15 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		Route::get('/' , ['as'=>'admin.personal' , 'uses'=>'PersonalController@index']);
 	});
 });
-
+/**********************************************************
+	app后台资源下载相关路由
+********************************************************/
+Route::group(['prefix' => 'donkey/download' , 'namespace'=>'Download' ] , function(){
+	//视频下载
+	Route::get('video/{id}' , 'DownloadController@video');
+	//音频下载
+	Route::get('music/{id}' , 'DownloadController@music');
+});
 
 
 

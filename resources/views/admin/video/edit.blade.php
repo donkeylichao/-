@@ -4,6 +4,9 @@
 
 @include('admin.master.common_header')
 
+<script src="/fileupload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/fileupload/js/jquery.iframe-transport.js"></script>
+<script src="/fileupload/js/jquery.fileupload.js"></script>
 <div class="main-container" id="main-container">
 	<script type="text/javascript">
 		try{ace.settings.check('main-container' , 'fixed')}catch(e){}
@@ -37,9 +40,9 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/room/index/1') }}">房源管理</a>
+					<a href="{{ url('donkey/admin/video/index') }}">视频管理</a>
 				</li>
-				<li class="active">编辑房源</li>
+				<li class="active">编辑视频</li>
 			</ul><!-- /.breadcrumb -->
 		
 		</div>
@@ -51,14 +54,14 @@
 			{{-- dump(Session::all())--}}
 			{{-- dump($errors->first())--}}
 			
-			<form method="post" action="{{ url('donkey/admin/room/update')}}">
+			<form method="post" action="{{ url('donkey/admin/video/update')}}" enctype="multipart/form-data">
 				
-				<!--<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">类型：</label>
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">栏目：</label>
 					<div class="col-sm-11">
-						<select name="h_type" id="house_type" class="col-xs-10 col-sm-4">
-							@foreach(Config::get('common.house_types') as $k=>$v)
-							<option value="{{ $k }}" @if($room->h_type == $k) selected @endif>{{$v}}</option>
+						<select name="category_id" class="col-xs-10 col-sm-4">
+							@foreach($categories->child as $v)
+							<option value="{{ $v->id }}" @if($v->id == $video->category_id) "selected" @endif >{{ $v->name }}</option>
 							@endforeach
 						</select>
 						<span class="help-inline col-xs-12 col-sm-7">
@@ -66,155 +69,57 @@
 						</span>
 					</div>	
 				</div>	
-				<script>
-					//
-					$(function(){
-						$('#house_type').change(function(){
-							//alert('asdf');
-							var num = $(this).val();
-							//alert(num);
-							if(num == 1){ 
-								$('.play').css('display','none');
-							}else if(num == 2) {
-								$('.play').css('display','block');
-							}
-						});
-					});
-				</script>-->
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">类型：</label>
-					<div class="col-sm-11">
-						<input type='text' disabled class="col-xs-10 col-sm-4" value="{{ Config::get('common.house_types')[$room->h_type] }}"/>
-						<input type='hidden' name="h_type" class="col-xs-10 col-sm-4" value="{{ $room->h_type}}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red"></span>
-						</span>
-					</div>
-				</div>
-				@if($room->h_type == 2)
+
 				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">买卖单价：</label>
+					<label class="col-sm-1 control-label no-padding-right">标题：</label>
 					<div class="col-sm-11">
-						<input type='text' name='univalence' placeholder="单位:元/平米" class="col-xs-10 col-sm-4" value="{{ $room->univalence or ''}}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填,例如:"12000"*</span>
-						</span>
-					</div>
-				</div>
-				
-				<div height="10px">&nbsp;</div>
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">税率：</label>
-					<div class="col-sm-11">
-						<input type='text' name='tax_rate' class="col-xs-10 col-sm-4" value="{{ $room->tax_rate or ''}}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*选填,例如:6%,填写格式为0.06*</span>
-						</span>
-					</div>
-				</div>
-				
-				<div height="10px">&nbsp;</div>
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">税费：</label>
-					<div class="col-sm-11">
-						<input type='text' name='taxes' placeholder="单位:元" class="col-xs-10 col-sm-4" value="{{ $room->taxes or ''}}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填,例如:"20000"*</span>
-						</span>
-					</div>
-				</div>
-				@endif
-				<div height="10px">&nbsp;</div>
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">小区名称：</label>
-					<div class="col-sm-11">
-						<input type='text' name='name' class="col-xs-10 col-sm-4" value="{{ old('name') ? old('name') : $room->name }}"/>
+						<input type='text' name='title' class="col-xs-10 col-sm-4" value="{{ old('title') ? old('title') : $video->title}}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
 						</span>
 					</div>
 				</div>
 
-				<input type="hidden" name="_token" value="{{ csrf_token() }}" />
-				<input type="hidden" name="id" value="{{ $room->id }}" />
 				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">小区位置：</label>
+					<label class="col-sm-1 control-label no-padding-right">介绍：</label>
 					<div class="col-sm-11">
-						<input type="text" name="position"  class="col-xs-10 col-sm-4" value="{{ old('position') ? old('position') : $room->position}}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填,例如 "北京市 朝阳区 XX大街"*</span>
-						</span>
-					</div>
-				</div>
-				
-				<div height="10px">&nbsp;</div>
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">房子名称：</label>
-					<div class="col-sm-11">
-						<input type="text" name="room_name"  class="col-xs-10 col-sm-4" value="{{ old('room_name') ? old('room_name') : $room->room_name}}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填,例如 "38楼3单元205"*</span>
-						</span>
-					</div>
-				</div>
-				
-				<div height="10px">&nbsp;</div>
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">户型：</label>
-					<div class="col-sm-11">
-						<input type="text" name="type"  class="col-xs-10 col-sm-4" value="{{ old('type') ? old('type') : $room->type}}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填,例如 "三室两厅"*</span>
-						</span>
-					</div>
-				</div>
-				
-				<div height="10px">&nbsp;</div>
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">面积：</label>
-					<div class="col-sm-11">
-						<input type='text' name="area" placeholder="单位:平米" class="col-xs-10 col-sm-4" value="{{ old('area') ? old('area') : $room->area}}"/>
+						<input type="text" name="content"  class="col-xs-10 col-sm-4" value="{{ old('content') ? old('content') : $video->content}}"/>
 						<span class="help-inline col-xs-12 col-sm-7">
 							<span class="middle" style="color:red">*必填*</span>
-						</span>
-					</div>	
+						</span> 
+					</div>
 				</div>
-				
+
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="id" value="{{ $video->id }}" />
 				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">价格：</label>
+					<label class="col-sm-1 control-label no-padding-right">封面图片：</label>
 					<div class="col-sm-11">
-						<input type='text' name="price" placeholder="单位:元" class="col-xs-10 col-sm-4" value="{{ old('price') ? old('price') : $room->price}}"/>
+						<input type="file" name="cover" class="col-xs-10 col-sm-4"/>
 						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填*</span>
+							<span class="middle" style="color:red">*只支持jpg,jpeg,png格式,可不填*</span>
 						</span>
-					</div>	
-				</div>
-				
-				<div height="10px">&nbsp;</div>
-				
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right">备注：</label>
-					<div class="col-sm-11">
-						<input type='text' name="introduction" class="col-xs-10 col-sm-4" value="{{ old('introduction') ? old('introduction') : $room->introduction}}"/>
-						<span class="help-inline col-xs-12 col-sm-7">
-							<span class="middle" style="color:red">*必填*</span>
-						</span>
-					</div>	
+					</div>
 				</div>
 			
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">作者：</label>
+					<div class="col-sm-11">
+						<input type="text" name="author"  class="col-xs-10 col-sm-4" value="{{ old('author') ? old('author') : $video->author}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>
+				</div>
+				
 				<div height="10px">&nbsp;</div>
 				
 				<div class="col-md-offset-1 col-md-9">
@@ -232,9 +137,41 @@
 			</a>
 		</div><!-- /.main-container -->
 		
-		<script>
-			$('')
-		</script>
+		<!--<script>
+			//function uploadfile(){
+			//$("#fileupload").change(function(){
+				
+				$("#fileupload").change().fileupload({
+					url: '/donkey/admin/video/uploadv',
+					dataType: 'json',	
+					formData: function(form){
+						var path = $("#video_name").val();
+						return [
+							{name:"_token",value:"{{ csrf_token() }}"},
+							{name:"path",value:path}	
+								];
+					},
+					done: function (e, data) {
+						if(data.result.sta) {
+							$('#upstatus').html(data.result.msg);
+							$('#video_name').val(data.result.previewSrc);
+							$('#video_size').val(data.result.size);
+							$('#video_duration').val(data.result.duration);
+							//$('#fileupload').css('display','none');
+							/*$('#preview').html("<video src='"+data.result.previewSrc+"' controls='controls'>您的浏览器不支持预览。</video>");*/
+						} else {
+							$('#progress .bar').css('width',"0%");
+							$('#upstatus').html(data.result.msg);
+						}
+					},
+					progress: function(e,data) {
+						var progress = parseInt(data.loaded / data.total * 100, 10);  
+						$("#progress .bar").css("width", progress + "%");  
+						$("#upstatus").html("正在上传..."); 
+					}
+				});
+			//});
+		</script>-->
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
@@ -265,215 +202,6 @@
 		<script src="/assets/js/ace-elements.min.js"></script>
 		<script src="/assets/js/ace.min.js"></script>
 
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
-			jQuery(function($) {
-				$('.easy-pie-chart.percentage').each(function(){
-					var $box = $(this).closest('.infobox');
-					var barColor = $(this).data('color') || (!$box.hasClass('infobox-dark') ? $box.css('color') : 'rgba(255,255,255,0.95)');
-					var trackColor = barColor == 'rgba(255,255,255,0.95)' ? 'rgba(255,255,255,0.25)' : '#E2E2E2';
-					var size = parseInt($(this).data('size')) || 50;
-					$(this).easyPieChart({
-						barColor: barColor,
-						trackColor: trackColor,
-						scaleColor: false,
-						lineCap: 'butt',
-						lineWidth: parseInt(size/10),
-						animate: /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase()) ? false : 1000,
-						size: size
-					});
-				})
-			
-				$('.sparkline').each(function(){
-					var $box = $(this).closest('.infobox');
-					var barColor = !$box.hasClass('infobox-dark') ? $box.css('color') : '#FFF';
-					$(this).sparkline('html',
-									 {
-										tagValuesAttribute:'data-values',
-										type: 'bar',
-										barColor: barColor ,
-										chartRangeMin:$(this).data('min') || 0
-									 });
-				});
-			
-			
-			  //flot chart resize plugin, somehow manipulates default browser resize event to optimize it!
-			  //but sometimes it brings up errors with normal resize event handlers
-			  $.resize.throttleWindow = false;
-			
-			  var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
-			  var data = [
-				{ label: "social networks",  data: 38.7, color: "#68BC31"},
-				{ label: "search engines",  data: 24.5, color: "#2091CF"},
-				{ label: "ad campaigns",  data: 8.2, color: "#AF4E96"},
-				{ label: "direct traffic",  data: 18.6, color: "#DA5430"},
-				{ label: "other",  data: 10, color: "#FEE074"}
-			  ]
-			  function drawPieChart(placeholder, data, position) {
-			 	  $.plot(placeholder, data, {
-					series: {
-						pie: {
-							show: true,
-							tilt:0.8,
-							highlight: {
-								opacity: 0.25
-							},
-							stroke: {
-								color: '#fff',
-								width: 2
-							},
-							startAngle: 2
-						}
-					},
-					legend: {
-						show: true,
-						position: position || "ne", 
-						labelBoxBorderColor: null,
-						margin:[-30,15]
-					}
-					,
-					grid: {
-						hoverable: true,
-						clickable: true
-					}
-				 })
-			 }
-			 drawPieChart(placeholder, data);
-			
-			 /**
-			 we saved the drawing function and the data to redraw with different position later when switching to RTL mode dynamically
-			 so that's not needed actually.
-			 */
-			 placeholder.data('chart', data);
-			 placeholder.data('draw', drawPieChart);
-			
-			
-			  //pie chart tooltip example
-			  var $tooltip = $("<div class='tooltip top in'><div class='tooltip-inner'></div></div>").hide().appendTo('body');
-			  var previousPoint = null;
-			
-			  placeholder.on('plothover', function (event, pos, item) {
-				if(item) {
-					if (previousPoint != item.seriesIndex) {
-						previousPoint = item.seriesIndex;
-						var tip = item.series['label'] + " : " + item.series['percent']+'%';
-						$tooltip.show().children(0).text(tip);
-					}
-					$tooltip.css({top:pos.pageY + 10, left:pos.pageX + 10});
-				} else {
-					$tooltip.hide();
-					previousPoint = null;
-				}
-				
-			 });
-				var d1 = [];
-				for (var i = 0; i < Math.PI * 2; i += 0.5) {
-					d1.push([i, Math.sin(i)]);
-				}
-			
-				var d2 = [];
-				for (var i = 0; i < Math.PI * 2; i += 0.5) {
-					d2.push([i, Math.cos(i)]);
-				}
-			
-				var d3 = [];
-				for (var i = 0; i < Math.PI * 2; i += 0.2) {
-					d3.push([i, Math.tan(i)]);
-				}
-				
-			
-				var sales_charts = $('#sales-charts').css({'width':'100%' , 'height':'220px'});
-				$.plot("#sales-charts", [
-					{ label: "Domains", data: d1 },
-					{ label: "Hosting", data: d2 },
-					{ label: "Services", data: d3 }
-				], {
-					hoverable: true,
-					shadowSize: 0,
-					series: {
-						lines: { show: true },
-						points: { show: true }
-					},
-					xaxis: {
-						tickLength: 0
-					},
-					yaxis: {
-						ticks: 10,
-						min: -2,
-						max: 2,
-						tickDecimals: 3
-					},
-					grid: {
-						backgroundColor: { colors: [ "#fff", "#fff" ] },
-						borderWidth: 1,
-						borderColor:'#555'
-					}
-				});
-			
-			
-				$('#recent-box [data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				function tooltip_placement(context, source) {
-					var $source = $(source);
-					var $parent = $source.closest('.tab-content')
-					var off1 = $parent.offset();
-					var w1 = $parent.width();
-			
-					var off2 = $source.offset();
-					//var w2 = $source.width();
-			
-					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-					return 'left';
-				}
-			
-			
-				$('.dialogs,.comments').ace_scroll({
-					size: 300
-			    });
-				
-				
-				//Android's default browser somehow is confused when tapping on label which will lead to dragging the task
-				//so disable dragging when clicking on label
-				var agent = navigator.userAgent.toLowerCase();
-				if("ontouchstart" in document && /applewebkit/.test(agent) && /android/.test(agent))
-				  $('#tasks').on('touchstart', function(e){
-					var li = $(e.target).closest('#tasks li');
-					if(li.length == 0)return;
-					var label = li.find('label.inline').get(0);
-					if(label == e.target || $.contains(label, e.target)) e.stopImmediatePropagation() ;
-				});
-			
-				$('#tasks').sortable({
-					opacity:0.8,
-					revert:true,
-					forceHelperSize:true,
-					placeholder: 'draggable-placeholder',
-					forcePlaceholderSize:true,
-					tolerance:'pointer',
-					stop: function( event, ui ) {
-						//just for Chrome!!!! so that dropdowns on items don't appear below other items after being moved
-						$(ui.item).css('z-index', 'auto');
-					}
-					}
-				);
-				$('#tasks').disableSelection();
-				$('#tasks input:checkbox').removeAttr('checked').on('click', function(){
-					if(this.checked) $(this).closest('li').addClass('selected');
-					else $(this).closest('li').removeClass('selected');
-				});
-			
-			
-				//show the dropdowns on top or bottom depending on window height and menu position
-				$('#task-tab .dropdown-hover').on('mouseenter', function(e) {
-					var offset = $(this).offset();
-			
-					var $w = $(window)
-					if (offset.top > $w.scrollTop() + $w.innerHeight() - 100) 
-						$(this).addClass('dropup');
-					else $(this).removeClass('dropup');
-				});
-			
-			})
-		</script>
 	</body>
 </html>
 	

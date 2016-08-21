@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
-use Auth;
+use Auth,Config;
+use App\Models\Album;
+use App\Models\Resource;
 
 class BaseController extends Controller {
 	
@@ -43,28 +45,66 @@ class BaseController extends Controller {
 	 
 	 /**
 	  * 记录用户操作信息
-	  *	@resource 操作的内容id,如果是删除内容，传删除内容的名称
+	  *	@resource 操作内容的名称
 	  *	@handle 操作类型，有效类型为create,update,delete
-	  *	视频:create，update为id,delete为名称
-	  *	音频：create,update为id,delete为名称
-	  *	相册：create,update为id,delete为相册名称，对相册图片的添加和删除都属于更新相册。
+	  * @type 类型，是哪个类型资源产生的消息 1视频2音频3相册
+	  *	视频: create,update,delete为名称
+	  *	音频：create,update,delete为名称
 	  *	
 	  */
-	public function record($handle,$resource)
+	public function record($handle,$resource,$type)
 	{
+		//获取当前用户的id;
 		$user_id = Auth::user()->id;
+		
+		//新建一个消息实例;
 		$notify = new Notification;
-		$notify->user_id = $user_id;
+		
+		$notify->user_id = $user_id;//产生消息的用户
+		
+		//判断类型
+		switch($type) {
+			case 1:
+				$res = Resource::withTrashed()->find($resource);
+				$title = $res->title;
+				$resource_id = $res->id;
+				$album_id = '';
+				break;
+			case 2:
+				$res = Resource::withTrashed()->find($resource);
+				$title = $res->title;
+				$resource_id = $res->id;
+				$album_id = '';
+				break;
+			case 3:
+				$alb = Album::withTrashed()->find($resource);
+				$title = $alb->name;
+				$album_id = $alb->id;
+				$resource_id = '';
+				break;
+		}
+		
+		$notify->type = $type;
 		
 		switch($handle) {
-			case create:
-				$notify->body = '添加了';
-				$notify->from_id = $resource;
-			case update:
-				$notify->body = "更新了";
-				$notify->from_id = $resource;
-			case delete:
-				$notify->body = "删除了" . $resource;
+			case 'create':
+				$notify->body = '添加了' . Config::get('common.types')[$type] . '《' . $title . '》';
+				$notify->resource_id = $resource_id;
+				$notify->album_id = $album_id;
+				$notify->modify_type = 1;
+				break;
+			case 'update':
+				$notify->body = "更新了" . Config::get('common.types')[$type] . '《' . $title . '》';
+				$notify->resource_id = $resource_id;
+				$notify->album_id = $album_id;
+				$notify->modify_type = 2;
+				break;
+			case 'delete':
+				$notify->body = "删除了" . Config::get('common.types')[$type] . '《' . $title . '》';
+				$notify->resource_id = $resource_id;
+				$notify->album_id = $album_id;
+				$notify->modify_type = 3;
+				break;
 		}
 		$notify->save();
 	}

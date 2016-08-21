@@ -23,6 +23,7 @@
         "Illuminate\\Validation\\ValidationServiceProvider",
         "Illuminate\\View\\ViewServiceProvider",
         "Zizaco\\Entrust\\EntrustServiceProvider",
+        "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider",
         "App\\Providers\\AppServiceProvider",
         "App\\Providers\\BusServiceProvider",
         "App\\Providers\\ConfigServiceProvider",
@@ -124,7 +125,8 @@
         "auth.password": "Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider",
         "auth.password.tokens": "Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider",
         "translator": "Illuminate\\Translation\\TranslationServiceProvider",
-        "translation.loader": "Illuminate\\Translation\\TranslationServiceProvider"
+        "translation.loader": "Illuminate\\Translation\\TranslationServiceProvider",
+        "qrcode": "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
     },
     "when": {
         "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider": [
@@ -158,6 +160,9 @@
 
         ],
         "Illuminate\\Translation\\TranslationServiceProvider": [
+
+        ],
+        "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider": [
 
         ]
     }
