@@ -86,7 +86,6 @@ class VideoController extends BaseController {
 
 	}
 
-    
 	/**
 	 * Display the specified resource.
 	 *
