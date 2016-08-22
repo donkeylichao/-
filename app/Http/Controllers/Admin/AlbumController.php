@@ -14,7 +14,7 @@ class AlbumController extends BaseController {
 	 */
 	public function index()
 	{
-		//
+		return view('admin.album.index')->with('message' , '待开发!');
 	}
 
 	/**
@@ -80,5 +80,12 @@ class AlbumController extends BaseController {
 	{
 		//
 	}
-
+	
+	/**
+	 *
+	 */
+	public function recycle()
+	{
+		return view('admin.album.recycle')->with('message' , '待开发!');
+	}
 }

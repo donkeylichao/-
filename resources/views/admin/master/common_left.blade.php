@@ -156,13 +156,33 @@
 		</ul>
 	</li>
 	
-	<li @if(strpos($uri,'photo')) class="active open hsub" @endif>
-		<a href="{{ url('donkey/admin/photo')}}">
+	<li @if(strpos($uri,'album')) class="active open hsub" @endif>
+		<a href="{{ url('donkey/admin/album')}}" class="dropdown-toggle">
 			<i class="menu-icon fa fa-image"></i>
-			<span class="menu-text"> 图片管理 </span>
-			
+			<span class="menu-text"> 相册管理 </span>
+				
 			<b class="arrow fa fa-angle-down"></b>
 		</a>
+
+		<ul class="submenu">
+			<li @if(strpos($uri,'album/index') || strpos($uri,'album/create') || strpos($uri,'album/edit') || strpos($uri,'album/show')) class="active" @endif>
+				<a href="{{ url('donkey/admin/album/index')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					相册列表
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li @if(strpos($uri,'album/recycle')) class="active" @endif>
+				<a href="{{ url('donkey/admin/album/recycle')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					回收站
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+		</ul>
 	</li>
 	
 	<li @if(strpos($uri,'post')) class="active open hsub" @endif>
@@ -172,6 +192,26 @@
 			
 			<b class="arrow fa fa-angle-down"></b>
 		</a>
+		
+		<ul class="submenu">
+			<li @if(strpos($uri,'post/index') || strpos($uri,'post/create') || strpos($uri,'post/edit') || strpos($uri,'post/show')) class="active" @endif>
+				<a href="{{ url('donkey/admin/post/index')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					日记列表
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li @if(strpos($uri,'post/recycle')) class="active" @endif>
+				<a href="{{ url('donkey/admin/post/recycle')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					回收站
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+		</ul>
 	</li>
 	
 	<li @if(strpos($uri,'post')) class="active" @endif>

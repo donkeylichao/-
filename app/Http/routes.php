@@ -203,7 +203,10 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	
 	//图片管理
 	Route::group(['prefix'=>'album'] , function(){
-		Route::get('/' , ['as'=>'admin.album' , 'uses'=>'AlbumController@index']);
+		//相册列表
+		Route::get('index' , ['as'=>'admin.album' , 'uses'=>'AlbumController@index']);
+		//回收站
+		Route::get('recycle' , ['as'=>'admin.album.recycle' , 'uses'=>'AlbumController@index']);
 	});
 	
 	//日记管理
