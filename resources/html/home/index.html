@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>donkeyli index</title>
+		<meta name="description" content="" />
+		<meta name="keyword" content="" />
+		
+		<!--响应式布局手机是否缩放-->
+		<meta name="viewport" content="width=device-width;initial-scale=1.0"/>
+		
+		<!-- bootstrap & fontawesome -->
+		<!--<link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />-->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../assets/css/font-awesome.min.css" />
+		
+		<link rel="stylesheet" href="../../assets/css/ace-fonts.css" />
+		
+		<link rel="stylesheet" href="../css/common.css" /> 
+		
+		<script src="../../assets/js/jquery.min.js"></script>
+		<script src="../../assets/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse" style="margin-bottom:0px">
+		    <div class="container">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">DonkeyLi</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">房源 <span class="sr-only">(current)</span></a></li>
+							<li><a href="#">视频</a></li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">日记 <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Link</a></li>
+						</ul>
+					</div><!-- /.navbar-collapse -->
+			  </div><!-- /.container-fluid -->
+			</div>
+		</nav>
+		<div id="slidershow" class="carousel slide" style="margin:0 auto;">
+			<!-- 设置图片轮播的顺序 -->
+			<ol class="carousel-indicators">
+				<li class="active slider-item" data-target="#slidershow" data-slide-to="0"></li>
+				<li class="slider-item" data-target="#slidershow" data-slide-to="1"></li>
+				<li class="slider-item" data-target="#slidershow" data-slide-to="2"></li>
+			</ol>
+			<!-- 设置轮播图片 -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<a href="##"><img src="../img/1.jpg" alt=""></a>
+					<div class="carousel-caption">
+						<h3>图片标题1</h3>
+						<p>描述内容1...</p>
+					</div>
+				</div>
+				<div class="item">
+					<a href="##"><img src="../img/2.jpg" alt=""></a>
+					<div class="carousel-caption">
+						<h3>图片标题2</h3>
+						<p>描述内容2...</p>
+					</div>
+				</div>
+				<div class="item">
+					<a href="##"><img src="../img/3.jpg" alt=""></a>
+					<div class="carousel-caption">
+						<h3>图片标题3</h3>
+						<p>描述内容3...</p>
+					</div>
+				</div>
+				<!-- 设置轮播图片控制器 -->
+				<div class="slider-page">
+					<a class="left carousel-control" href="javascript:;;" >
+						<span class="glyphicon glyphicon-chevron-left"></span>
+					</a>
+					<a class="right carousel-control" href="javascript:;;">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(function(){
+				var length,
+				currentIndex = 0,
+				interval,
+				hasStarted = false; //是否已经开始轮播
+				t = 3000; //轮播时间间隔
+				length = $(".item").length;
+				//将除了第一张的图片都设置为隐藏
+				$(".item:not(:first)").hide();
+				//将第一个slider-item设为激活状态 
+				$(".slider-item:first").addClass("active");
+				//影藏向前向后按钮
+				$(".slider-page").hide();
+				//鼠标上悬时显示向前、向后翻按钮,停止滑动，鼠标离开时隐藏向前、向后翻按钮，开始滑动
+				$('.item, .carousel-control').hover(function() { 
+					stop(); 
+					$('.slider-page').show(); 
+				}, function() { 
+					$('.slider-page').hide(); 
+					start(); 
+				}); 
+				$('.slider-item').hover(function(e) { 
+					stop(); 
+					var preIndex = $(".slider-item").filter(".active").index(); 
+					currentIndex = $(this).index(); 
+					play(preIndex, currentIndex); 
+				}, function() { 
+					start(); 
+				}); 
+				$('.left').unbind('click'); 
+				$('.left').bind('click', function() { 
+					pre(); 
+				}); 
+				$('.right').unbind('click'); 
+				$('.right').bind('click', function() { 
+					next(); 
+				}); 
+				 /** 
+				   * 向前翻页 
+				   */
+				function pre() { 
+					var preIndex = currentIndex; 
+					currentIndex = (--currentIndex + length) % length; 
+					play(preIndex, currentIndex); 
+				} 
+				  /** 
+				   * 向后翻页 
+				   */
+				function next() { 
+					var preIndex = currentIndex; 
+					currentIndex = ++currentIndex % length; 
+					play(preIndex, currentIndex); 
+				} 
+				/** 
+				  * 从preIndex页翻到currentIndex页 
+				  * preIndex 整数，翻页的起始页 
+				  * currentIndex 整数，翻到的那页 
+				  */
+				function play(preIndex, currentIndex) { 
+					$('.item').eq(preIndex).fadeOut(0) 
+					.parent().children().eq(currentIndex).fadeIn(1000); 
+					$('.slider-item').removeClass('active'); 
+					$('.slider-item').eq(currentIndex).addClass('active'); 
+				} 
+				  /** 
+				   * 开始轮播 
+				   */
+				function start() { 
+					if(!hasStarted) { 
+					hasStarted = true; 
+					interval = setInterval(next, t); 
+					} 
+				} 
+				  /** 
+				   * 停止轮播 
+				   */
+				function stop() { 
+					clearInterval(interval); 
+					hasStarted = false; 
+				} 
+				  //开始轮播 
+				start(); 
+			});
+		</script>
+		<footer class="footer">
+			<p>©donkeyLi</p>
+		</footer>
+	</body>
+</html>
