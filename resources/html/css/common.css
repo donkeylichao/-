@@ -7,8 +7,8 @@ body{
 	line-height: 1;
 }
 #header{width:100%;height:30px;background-color:#ccc;}
-#content{margin:0 auto;}
-#listBox{width:100%;border:1px solid red;}
+#content{margin:0 auto; }
+#listBox{width:100%;}
 
 /*禁用iphone中的safari的字号自动调整*/
 html{
@@ -44,17 +44,15 @@ video{
     display: inline;
     float: left;
     height: auto;
-    margin-right: 10px;
-	margin-bottom: 15px;
+    margin-left: 10px;
     padding-top: 11px;
-	padding-bottom: 0;
-    width: 224px;
+    width: 214px;
 }
 .flow-box .img-box {
     display: block;
     margin: 0 auto;
     position: relative;
-    width: 204px;
+    width: 194px;
 }
 
 .flow-box .flow-info {
@@ -100,7 +98,7 @@ element.style {
     display: inline-block;
     float: left;
     margin-left: 10px;
-    width: 140px;
+    width: 125px;
 }
 .comment-btn {
     display: inline-block;
