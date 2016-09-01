@@ -35,3 +35,16 @@ function waterfall(){
 		$("#listBox").css("height",maxH+80+"px");
 	})
 };
+//flow-box阴影效果
+$(".flow-box").hover(function(){
+	$(this).addClass('shadow');
+},
+function(){
+	$(this).removeClass('shadow');
+});
+
+//导航条的active效果
+$(".navbar-nav li").click(function(){
+	$(".navbar-nav li").removeClass('active');
+	$(this).addClass('active');
+});
