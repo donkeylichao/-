@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>donkeyli index</title>
+		<meta name="description" content="" />
+		<meta name="keyword" content="" />
+		
+		<!--响应式布局手机是否缩放-->
+		<meta name="viewport" content="width=device-width;initial-scale=1.0"/>
+		
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../assets/css/font-awesome.min.css" />
+		
+		<link rel="stylesheet" href="../../assets/css/ace-fonts.css" />
+		
+		<link rel="stylesheet" href="../css/common.css" /> 
+		
+		<script src="../../assets/js/jquery.min.js"></script>
+		<script src="../../assets/js/bootstrap.min.js"></script>
+		
+		<!--special class-->
+		<link rel="stylesheet" href="../../../public/video/video-js.css" /> 
+		<link rel="stylesheet" href="../css/video-detail.css" /> 
+		<script src="../../../public/video/video.js"></script>
+		
+		<script>
+			_V_.options.flash.swf = "../../../public/video-js/video-js.swf";
+		</script>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse" style="margin-bottom:0px">
+		    <div class="container">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">DonkeyLi</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">房源 <span class="sr-only">(current)</span></a></li>
+							<li><a href="#">视频</a></li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">日记 <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Link</a></li>
+						</ul>
+					</div><!-- /.navbar-collapse -->
+			  </div><!-- /.container-fluid -->
+			</div>
+		</nav>
+		<div class="container">
+			<div class="page-header">
+				<h3>视频列表<small> > 视频播放</small></h3>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-12 xs-sm-12" style="margin-bottom:20px;">		
+					<video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="100%" height="320"
+						poster="http://video-js.zencoder.com/oceans-clip.png"
+						data-setup="{}">
+						<source src="../../../public/video/leo.mp4" type='video/mp4' />
+						<source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
+						<source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+						<track kind="captions" src="captions.vtt" srclang="en" label="English" />
+					</video>
+				</div>
+				<div class="col-md-6 col-sm-12 xs-sm-12" style="margin-bottom:20px;">
+					<p class="comment"><em>评论列表</em></p>
+					<div class="media">
+						<a class="pull-left" href="#">
+							<img src="../images/b5.jpg" style="width:64px;height:64px;" alt="...">
+						</a>
+						<div class="media-body">
+							<h4 class="media-heading">Media heading</h4>
+							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+							scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum 
+							in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+							vulputate fringilla. Donec lacinia congue felis in faucibus. 
+							<div class="media">
+								<a class="pull-left" href="#">
+									<img src="../images/b5.jpg" style="width:64px;height:64px;" alt="...">
+								</a>
+								<div class="media-body">
+									<h4 class="media-heading">Media heading</h4>
+									Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+									scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum 
+									in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+									vulputate fringilla. Donec lacinia congue felis in faucibus. 
+								</div>
+							</div>
+						</div>
+						<div class="media">
+							<a class="pull-left" href="#">
+								<img src="../images/b5.jpg" style="width:64px;height:64px;" alt="...">
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading">Media heading</h4>
+								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+								scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum 
+								in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+								vulputate fringilla. Donec lacinia congue felis in faucibus. 
+							</div>
+						</div>
+						<div class="media">
+							<a class="pull-left" href="#">
+								<img src="../images/b5.jpg" style="width:64px;height:64px;" alt="...">
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading">Media heading</h4>
+								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+								scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum 
+								in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+								vulputate fringilla. Donec lacinia congue felis in faucibus. 
+							</div>
+						</div>
+						<div class="media">
+							<a class="pull-left" href="#">
+								<img src="../images/b5.jpg" style="width:64px;height:64px;" alt="...">
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading">Media heading</h4>
+								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+								scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum 
+								in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+								vulputate fringilla. Donec lacinia congue felis in faucibus. 
+							</dsiv>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+		<footer class="footer">
+			<p>©donkeyLi</p>
+		</footer>
+	</body>
+</html>
