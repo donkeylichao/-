@@ -37,17 +37,17 @@
 											<a class="houseListTitle" target="_blank" href="{{ url('donkey/room/'.$type.'/show') .'/'. $item->id }}" title="{{ $item->name}}">{{ $item->name }}</a>
 										</div>
 										<div class="details-item">
-											<span>{{ $item->area }}平方米</span>
-											<em>|</em>
+											<span class="hidden-xs">{{ $item->area }}平方米</span>
+											<em class="hidden-xs">|</em>
 											<span>{{ $item->type }}</span>
-											<em>|</em>
-											<span>押一付三</span>
+											<em class="hidden-xs">|</em>
+											<span class="hidden-xs">押一付三</span>
 										</div>
 										<div class="details-item">
 											<span class="comm-address" title="{{ $item->position }}"> {{ $item->position }} </span>
 										</div>
 										<div class="details-item details-bottom">
-											<span class="broker-name">整租</span>
+											<span class="broker-name hidden-xs">整租</span>
 										</div>
 									</div>
 									<div class="pro-price">
