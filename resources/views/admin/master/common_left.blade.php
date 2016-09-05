@@ -223,6 +223,15 @@
 		</a>
 	</li>
 	
+	<li @if(strpos($uri,'emoji')) class="active" @endif>
+		<a href="{{ url('donkey/admin/emoji/index')}}" >"
+			<i class="menu-icon fa fa-smile-o"></i>
+			<span class="menu-text"> 表情管理 </span>
+			
+			<b class="arrow"></b>
+		</a>
+	</li>
+	
 	<li @if(strpos($uri,'notification')) class="active" @endif>
 		<a href="{{ url('donkey/admin/notification')}}" class="dropdown-toggle">
 			<i class="menu-icon fa fa-bullhorn"></i>

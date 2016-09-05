@@ -14,12 +14,17 @@
 /******************************************************************
 home ,前台的所有路由
 *****************************************************************/
-Route::group(['prefix'=>'donkey/home' , 'namespace'=>'Home'] , function(){
-	
-	Route::get('/', 'WelcomeController@index');
-
-	Route::get('', 'HomeController@index');
-
+Route::group(['prefix'=>'donkey' , 'namespace'=>'Home'] , function(){
+	//首页
+	Route::controller('home', 'HomeController');
+	//房子列表页
+	Route::controller('room/{type?}' , 'RoomController');
+	//视频列表
+	//Route::controller('video' , 'VideoController');
+	//日记列表
+	//Route::controller('post' , 'VideoController');
+	//评论
+	//Route::controller('comment' , 'CommentController');
 });
 
 
@@ -227,6 +232,22 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	//个人中心
 	Route::group(['prefix'=>'personal'] , function(){
 		Route::get('/' , ['as'=>'admin.personal' , 'uses'=>'PersonalController@index']);
+	});
+	
+	//表情管理
+	Route::group(['prefix'=>'emoji'] , function(){
+		//表情列表
+		Route::get('index' , ['as'=>'admin.emoji' , 'uses'=>'EmojiController@index']);
+		//添加表情
+		Route::get('create' , ['as'=>'admin.emoji.create' , 'uses'=>'EmojiController@create']);
+		//保存添加
+		Route::post('store' , 'EmojiController@store');
+		//修改表情
+		Route::get('edit/{id}' , ['as'=>'admin.emoji.edit' , 'uses'=>'EmojiController@edit']);
+		//保存修改
+		Route::post('update' , 'EmojiController@update');
+		//删除表情
+		Route::get('destroy/{id}' , ['as'=>'amdin.emoji.destroy' , 'uses'=>'EmojiController@destroy']);
 	});
 });
 /**********************************************************

@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-use App\Models\Comment;
+use App\Models\House;
+use App\Models\Category;
+use Input;
 
-class HomeController extends Controller {
+class RoomController extends Controller {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -21,27 +23,29 @@ class HomeController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	/*public function __construct()
 	{
 		//$this->middleware('auth');
-	}
+	}*/
 
 	/**
 	 * Show the application dashboard to the user.
 	 *
 	 * @return Response
 	 */
-	public function getIndex()
+	public function getIndex($type = 1)
 	{
-		//return view('home');
-		/*$string = "April 15, 2014 April 16, 2017";
-		$pattern = '/(\w+) (\d+), (\d+)/i';
-		$replacement = '$2,$3';
-		echo preg_replace($pattern,$replacement,$string);*/
-		//$comments = Comment::find(1);
-	
-		//$comments->content;
-		return view("home.index.index");
+		$rooms = House::where("h_type" , $type)->groupBy("recommend")->paginate(10);
+		//$rooms = House::all();
+		$compact = [];
+		$compact[] = "rooms";
+		$compact[] = "type";
+		//dd($rooms);
+		return view("home.room.index")->with(compact($compact));
 	}
-
+	
+	public function getShow($type , $id)
+	{
+		echo $id;
+	}
 }
