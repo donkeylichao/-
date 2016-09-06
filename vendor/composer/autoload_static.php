@@ -280,6 +280,7 @@ class ComposerStaticInit4af5906c8c76c72449dfada4a32efc0a
 
     public static $classMap = array (
         'AddAuthorToResourcesTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_16_011544_add_author_to_resources_table.php',
+        'AddPositionUrlToHosesTables' => __DIR__ . '/../..' . '/database/migrations/2016_09_06_030845_add_position_url_to_hoses_tables.php',
         'AddRoomNameToHousesTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_08_070303_add_room_name_to_houses_table.php',
         'AddTimeToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_01_093503_add_time_to_users_table.php',
         'AddTypeToPermissionsTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_05_070954_add_type_to_permissions_table.php',

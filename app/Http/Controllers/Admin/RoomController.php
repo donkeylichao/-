@@ -78,6 +78,7 @@ class RoomController extends BaseController {
 		$house->h_type = $request->input('h_type');
 		$house->introduction = $request->input('introduction');
 		$house->user_id = Auth::user()->id;
+		$house->position_url = $request->input("position_url");
 		
 		//保存信息
 		if(!$house->save()) {
@@ -224,6 +225,7 @@ class RoomController extends BaseController {
 		$room->area = $request->input('area');
 		$room->price = $request->input('price');
 		$room->introduction = $request->input('introduction');
+		$room->position_url = $request->input('position_url');
 		
 		if(!$room->save()) {
 			return back()->withInput()->with('notify_error' , '修改失败!');

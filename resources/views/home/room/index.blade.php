@@ -8,7 +8,13 @@
 		@include("home.master.header")
 	<div class="container">
 			<div class="page-header">
-				<h3>房源列表 <small>> 出租</small></h3>
+				<h3>房源列表 <small>> 
+				@if($type == 1)
+					出租
+				@else
+					买卖
+				@endif
+				</small></h3>
 			</div>
 		</div>
 		<div id="content" class="container">
@@ -40,20 +46,27 @@
 											<span class="hidden-xs">{{ $item->area }}平方米</span>
 											<em class="hidden-xs">|</em>
 											<span>{{ $item->type }}</span>
+											@if($item->h_type == 1)
 											<em class="hidden-xs">|</em>
 											<span class="hidden-xs">押一付三</span>
+											@endif
 										</div>
 										<div class="details-item">
 											<span class="comm-address" title="{{ $item->position }}"> {{ $item->position }} </span>
 										</div>
 										<div class="details-item details-bottom">
+											@if($item->h_type == 1)
 											<span class="broker-name hidden-xs">整租</span>
+											@endif	
 										</div>
 									</div>
 									<div class="pro-price">
 									<span class="price-det">
-										<strong>{{ $item->price }}</strong>
-										元/月
+										<strong> @if($item->h_type == 2 && strlen($item->price) >= 5) {{ substr_replace($item->price,'万元',strlen($item->price)-4) }}
+											@else 
+												{{ $item->price .'元/月'}}
+											@endif
+										</strong>
 										</span>
 									</div>
 								</li>

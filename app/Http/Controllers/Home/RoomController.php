@@ -46,6 +46,12 @@ class RoomController extends Controller {
 	
 	public function getShow($type , $id)
 	{
-		echo $id;
+		$room = House::find($id);
+		if(empty($room)) {
+			return back()->with("notify_error" , "此房屋消息不存在!");
+		}
+		$compact = [];
+		$compact[] = 'room';
+		return view("home.room.show")->with(compact($compact));
 	}
 }

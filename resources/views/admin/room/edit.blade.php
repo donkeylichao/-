@@ -206,6 +206,18 @@
 				<div height="10px">&nbsp;</div>
 				
 				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right">地图路径：</label>
+					<div class="col-sm-11">
+						<input type='text' name="position_url" class="col-xs-10 col-sm-4" value="{{ old('position_url') ? old('position_url') : $room->position_url}}"/>
+						<span class="help-inline col-xs-12 col-sm-7">
+							<span class="middle" style="color:red">*必填*</span>
+						</span>
+					</div>	
+				</div>
+				
+				<div height="10px">&nbsp;</div>
+				
+				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right">备注：</label>
 					<div class="col-sm-11">
 						<input type='text' name="introduction" class="col-xs-10 col-sm-4" value="{{ old('introduction') ? old('introduction') : $room->introduction}}"/>

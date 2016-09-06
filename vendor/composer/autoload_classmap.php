@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddAuthorToResourcesTable' => $baseDir . '/database/migrations/2016_08_16_011544_add_author_to_resources_table.php',
+    'AddPositionUrlToHosesTables' => $baseDir . '/database/migrations/2016_09_06_030845_add_position_url_to_hoses_tables.php',
     'AddRoomNameToHousesTable' => $baseDir . '/database/migrations/2016_08_08_070303_add_room_name_to_houses_table.php',
     'AddTimeToUsersTable' => $baseDir . '/database/migrations/2016_08_01_093503_add_time_to_users_table.php',
     'AddTypeToPermissionsTable' => $baseDir . '/database/migrations/2016_08_05_070954_add_type_to_permissions_table.php',
