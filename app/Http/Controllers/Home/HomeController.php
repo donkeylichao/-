@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Category;
 
 class HomeController extends Controller {
 
@@ -21,10 +22,11 @@ class HomeController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	/*public function __construct()
 	{
-		//$this->middleware('auth');
-	}
+		$video_types = Category::where("pid",1)->get();
+		Cache::put("video_types",$video_types,10);
+	}*/
 
 	/**
 	 * Show the application dashboard to the user.

@@ -18,6 +18,7 @@
 			</div>
 		</div>
 		<div id="content" class="container">
+			@include("admin.master.notify")
 			<div class="row row-offcanvas  row-offcanvas-right">
 				<div class="col-sm-9 left-content">
 					<p class="pull-right visible-xs">
@@ -30,9 +31,14 @@
 						<ul id="houselist-mod" class="houselist-mod col-sm-12">
 							<div class="row"> 
 								@foreach($rooms as $item)
-								<li class="list-item col-sm-12">
+								<li class="list-item col-sm-12" @if($item->recommend == 1) style="border:1px solid #ff6600;" @endif>
+									@if($item->recommend == 1)
+									<span class="fa fa-tag" style="color:#ff6600; font-size:30px; position:absolute;left:0px;top:-12px; z-index:999"></span>
+									@endif
 									<div class="item-img">
-										<img style="width:180px;height:135px;" src="{{ $item->photos->first()->path }}">
+										<a href="{{ url('donkey/room/'.$type.'/show') .'/'. $item->id }}">
+											<img style="width:180px;height:135px;" src="{{ $item->photos->first()->path }}">
+										</a>
 										<div class="icon-duotu">
 											<span class="dt-bg"></span>
 											<i>多图</i>
@@ -57,6 +63,8 @@
 										<div class="details-item details-bottom">
 											@if($item->h_type == 1)
 											<span class="broker-name hidden-xs">整租</span>
+											@else
+											<span class="broker-name hidden-xs">{{ $item->univalence .'元/平米'}}</span>
 											@endif	
 										</div>
 									</div>

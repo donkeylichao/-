@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\House;
 use App\Models\Category;
 use Input;
+use Cache,Request;
 
 class RoomController extends Controller {
 
@@ -26,6 +27,8 @@ class RoomController extends Controller {
 	/*public function __construct()
 	{
 		//$this->middleware('auth');
+		$video_types = Category::where("pid",1)->get();
+		Cache::put("video_types",$video_types,10);
 	}*/
 
 	/**
@@ -34,8 +37,13 @@ class RoomController extends Controller {
 	 * @return Response
 	 */
 	public function getIndex($type = 1)
-	{
-		$rooms = House::where("h_type" , $type)->groupBy("recommend")->paginate(10);
+	{	
+		$key = Request::getUri();
+		$rooms = Cache::get($key,function() use ($type,$key){
+			$rooms = House::where("h_type" , $type)->orderBy("recommend","desc")->paginate(10);
+			//Cache::put($key,$rooms,10);
+			return $rooms;
+		});
 		//$rooms = House::all();
 		$compact = [];
 		$compact[] = "rooms";

@@ -20,9 +20,9 @@ Route::group(['prefix'=>'donkey' , 'namespace'=>'Home'] , function(){
 	//房子列表页
 	Route::controller('room/{type?}' , 'RoomController');
 	//视频列表
-	//Route::controller('video' , 'VideoController');
+	Route::controller('video/{category_id?}' , 'VideoController');
 	//日记列表
-	//Route::controller('post' , 'VideoController');
+	//Route::controller('post' , 'PostController');
 	//评论
 	//Route::controller('comment' , 'CommentController');
 });
