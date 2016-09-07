@@ -24,7 +24,7 @@
 						<source src="{{ $resource->path }}" type='video/mp4' />
 						<source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
 						<source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
-						<track kind="captions" src="captions.vtt" srclang="en" label="English" />
+						<!--<track kind="captions" src="captions.vtt" srclang="en" label="English" />-->
 					</video>
 				</div>
 				<div class="col-md-6 col-sm-12 xs-sm-12" style="margin-bottom:20px;">
@@ -92,9 +92,99 @@
 							</div>
 						</div>
 					</div>
+					<button id="tucao" type="button" class="btn btn-primary btn-sm pull-right" style="margin-right:20px">我要吐槽</button>
+						<div class="Main" style="display:none;">     
+							<div class="Input_Box">     
+								<textarea class="Input_text"></textarea>     
+								<div class="faceDiv"> </div>     
+								<div class="Input_Foot"> <a class="imgBtn fa fa-smile-o" href="javascript:void(0);"></a><a class="postBtn">确定</a> </div>     
+							</div>     
+						</div> 			
 				</div>
 			</div>
 		</div>
+		<script>
+			$("#tucao").click(function(){
+				var show = $(this).html();
+				if(show == "我要吐槽") {
+					$(this).html("取消吐槽");
+					$(".Main").css("display","block");
+				}else{
+					$(this).html("我要吐槽");
+					$(".Main").css("display","none");
+				}
+			})
+			var ImgIputHandler={     
+				facePath:{!! $emojis !!}    
+				,     
+				
+				Init:function(){     
+					var isShowImg=false;     
+					$(".Input_text").focusout(function(){     
+						$(this).parent().css("border-color", "#cccccc");     
+						$(this).parent().css("box-shadow", "none");     
+						$(this).parent().css("-moz-box-shadow", "none");     
+						$(this).parent().css("-webkit-box-shadow", "none");     
+					});     
+					$(".Input_text").focus(function(){     
+					$(this).parent().css("border-color", "rgba(19,105,172,.75)");     
+					$(this).parent().css("box-shadow", "0 0 3px rgba(19,105,192,.5)");     
+					$(this).parent().css("-moz-box-shadow", "0 0 3px rgba(241,39,232,.5)");     
+					$(this).parent().css("-webkit-box-shadow", "0 0 3px rgba(19,105,252,3)");     
+					});     
+					$(".imgBtn").click(function(){ 
+						if(isShowImg==false){     
+							isShowImg=true;     
+							$(this).parent().prev().animate({marginTop:"-115px"},300);     
+							if($(".faceDiv").children().length==0){     
+								for(var i=0;i<ImgIputHandler.facePath.length;i++ ){     
+									$(".faceDiv").append("<img dmark=\""+ImgIputHandler.facePath[i].mark+"\" title=\"" +ImgIputHandler.facePath[i].name+"\" src=\"" +ImgIputHandler.facePath[i].path+ "\" />");     
+								}    
+								$(".faceDiv>img").click(function(){     	  
+									isShowImg=false;     
+									$(this).parent().animate({marginTop:"0px"},300);  
+									
+									//alert($(this).parent().prev().get(0));	
+									//alert($(".Input_text")[0]);								
+									
+									ImgIputHandler.insertAtCursor($(this).parent().prev().get(0),$(this).attr("dmark"));     
+								});     
+							}     
+						}else{     
+							isShowImg=false;     
+							$(this).parent().prev().animate({marginTop:"0px"},300);     
+						}     
+					});     
+					$(".postBtn").click(function(){     
+						alert($(".Input_text").val());     
+					});     
+				},     
+				insertAtCursor:function(myField, myValue) {		     
+				if (document.selection) {     
+					myField.focus();     
+					sel = document.selection.createRange();     
+					sel.text = myValue;     
+					sel.select();     
+				} else if (myField.selectionStart || myField.selectionStart == "0") {     
+					var startPos = myField.selectionStart;     
+					var endPos = myField.selectionEnd;     
+					var restoreTop = myField.scrollTop;     
+					myField.value = myField.value.substring(0, startPos) +  myValue +  myField.value.substring(endPos, myField.value.length);     
+					if (restoreTop > 0) {     
+						myField.scrollTop = restoreTop;     
+					}     
+					myField.focus();     
+					myField.selectionStart = startPos  + myValue.length;     
+					myField.selectionEnd = startPos  + myValue.length;     
+				} else {     
+					myField.value  = myValue;     
+					myField.focus();     
+				}     
+				}
+			}      
+			ImgIputHandler.Init();
+			//console.log(ImgIputHandler.facePath);			
+		</script>
 		<footer class="footer">
 			<p>©donkeyLi</p>
 		</footer>

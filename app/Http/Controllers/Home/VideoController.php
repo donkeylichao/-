@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Resource;
 use App\Models\Category;
 use Cache,Request;
+use App\Models\Emoji;
 
 class VideoController extends Controller {
 
@@ -58,11 +59,20 @@ class VideoController extends Controller {
 	
 	public function getShow($category_id,$id)
 	{
+		$compact = [];
+		$emojis = Cache::get("emojis",function(){
+			$emojis = json_encode(Emoji::select('mark','path','name')->get(),JSON_UNESCAPED_UNICODE);
+			Cache::put("emojis",$emojis,10);
+			return $emojis;
+		});
+		$compact[] = "emojis";
+		
+		//dd($category);
 		$resource = Resource::find($id);
 		if(empty($resource)) {
 			return back()->with("notify_error" , "此视频已删除!");
 		}
-		$compact = [];
+
 		$compact[] = 'resource';
 		return view("home.video.show")->with(compact($compact));
 	}
