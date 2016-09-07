@@ -73,6 +73,7 @@ class VideoController extends Controller {
 			return back()->with("notify_error" , "此视频已删除!");
 		}
 
+        $compact[] = 'category_id';
 		$compact[] = 'resource';
 		return view("home.video.show")->with(compact($compact));
 	}

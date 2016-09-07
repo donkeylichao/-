@@ -12,11 +12,14 @@
 		@include("home.master.header")
 		<div class="container">
 			<div class="page-header">
-				<h3>视频列表<small> > 视频播放</small></h3>
+				<h3>视频列表<small> > 视频播放 > {{ $resource->title }}</small></h3>
 			</div>
 		</div>
 		<div class="container">
-			<div class="row">
+            <form action="{{ url('donkey/video').'/'. $category_id .'/comment'}}" method="post">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <input type="hidden" name="resource_id" value="{{ $resource->id }}" />
+            <div class="row">
 				<div class="col-md-6 col-sm-12 xs-sm-12 fixed" style="margin-bottom:20px;">		
 					<video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="100%" height="320"
 						poster=""
@@ -92,26 +95,27 @@
 							</div>
 						</div>
 					</div>
-					<button id="tucao" type="button" class="btn btn-primary btn-sm pull-right" style="margin-right:20px">我要吐槽</button>
-						<div class="Main" style="display:none;">     
-							<div class="Input_Box">     
+					<button id="tucao" type="button" class="btn btn-primary btn-sm pull-right" style="margin-right:20px;margin-bottom:30px;">我要吐槽</button>
+						<!--<div class="Main" style="display:none;"> -->
+							<div class="Input_Box" style="display:none;">
 								<textarea class="Input_text"></textarea>     
 								<div class="faceDiv"> </div>     
-								<div class="Input_Foot"> <a class="imgBtn fa fa-smile-o" href="javascript:void(0);"></a><a class="postBtn">确定</a> </div>     
-							</div>     
-						</div> 			
+								<div class="Input_Foot"> <a class="imgBtn fa fa-smile-o" href="javascript:void(0);"></a><a class="postBtn">确定</a></div>
+							</div>
+						<!--</div> 	-->
 				</div>
 			</div>
+            </form>
 		</div>
 		<script>
 			$("#tucao").click(function(){
 				var show = $(this).html();
 				if(show == "我要吐槽") {
 					$(this).html("取消吐槽");
-					$(".Main").css("display","block");
+					$(".Input_Box").css("display","block");
 				}else{
 					$(this).html("我要吐槽");
-					$(".Main").css("display","none");
+					$(".Input_Box").css("display","none");
 				}
 			})
 			var ImgIputHandler={     
