@@ -38,7 +38,147 @@ video{
 	}*/
 }
 
-/*表情的样式*/
+/*评论头样式*/
+.cmt-list-type {
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    position: relative;
+}
+.clear-g::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+ul {
+    list-style: outside none none;
+}
+.bottom-border {
+	margin-left:66px;
+	border-bottom: 1px solid #4398ed;
+	position:relative;
+	top:29px;
+}
+.type-lists .type-list {
+    color: #4398ed;
+    float: left;
+    font-family: "Microsoft Yahei";
+    font-size: 16px;
+    height: 29px;
+    text-align: center;
+    width: 66px;
+}
+.type-lists .active {
+    background: rgba(0, 0, 0, 0) url("//changyan.sohu.com/mdevp/extensions/cmt-list/041/images/cmtlist-bg-active.png") no-repeat scroll 0 0;
+    bottom: -1px;
+    position: relative;
+}
+.cmt-list-number {
+    bottom: 0;
+    position: absolute;
+    right: 0;
+}
+.comment-number {
+    color: #4398ed;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+}
+.number {
+    color: #4398ed;
+    font-family: Impact;
+    font-size: 20px;
+    margin: 0 5px;
+}
+
+/*最新评论样式*/
+.block-title-gw {
+    padding: 18px 0 0;
+}
+.title-name-gw {
+    color: #4398ed;
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+}
+
+/*评论列表样式*/
+.comment-lists {
+	border-top:1px solid #e6e6e6;
+	min-height:240px;
+}
+.block-cont-gw {
+    border-bottom: 1px dashed #e5e5e5;
+    padding: 13px 0 11px;
+}
+.block-cont-gw1{
+	border-top: 1px dashed #e5e5e5;
+	padding: 13px 0 11px;
+	margin-left:50px;
+	margin-top:5px;
+}
+.cont-head-gw {
+    z-index: 1;
+	float:left;
+}
+.head-img-gw {
+    height: 42px;
+    width: 42px;
+}
+.msg-wrap-gw {
+    position: relative;
+	padding-left:62px;
+}
+.wrap-user-gw {
+    height: 24px;
+    line-height: 16px;
+}
+.user-time-gw {
+    color: silver;
+    float: right;
+    font-family: Arial;
+    padding: 5px 0 0;
+	width:auto;
+}
+.user-name-gw {
+    display: inline-block;
+    padding: 5px 7px 0 0;
+}
+.user-name-gw a {
+    color: #4398ed;
+	text-decoration: none;
+}
+.wrap-issue-gw {
+    padding: 12px 0 0;
+	word-wrap: break-word;
+}
+.issue-wrap-gw {
+    font-size: 14px;
+    line-height: 22px;
+}
+.wrap-action-gw {
+    line-height: 16px;
+    margin: 11px 0 0;
+}
+.action-click-gw {
+    text-align: right;
+	position: relative;
+}
+.gap-gw {
+    display: inline-block;
+    height: 11px;
+    margin: 0 9px -1px;
+    overflow: hidden;
+    width: 1px;
+}
+.reply:hover{
+	color:red;
+	cursor: pointer;
+}
+.icon-name-bg {
+    color: #4398ed;
+}
+/*表情框的样式*/
 .wrapper-cont-dw {
     height: auto;
     margin-top: 5px;
@@ -46,8 +186,22 @@ video{
     width: 288px;
 }
 .Main {
-    border:1px solid red;
+    /*border:1px solid red;*/
+    height:190px;
+	
+}
+.Main-reply {
+    /*border:1px solid red;*/
     height:150px;
+}
+.Main .img-circle {
+	width:44px;
+	height:44px;
+	margin:0px 0px 5px 5px;
+	box-shadow: 0 0 2px #ccc; 
+}
+.Main .name {
+	margin-left:10px;
 }
 .Input_Box {     
     width: 92%;     
@@ -65,7 +219,7 @@ video{
     -moz-box-shadow: 0 0 5px #ccc;     
     -webkit-box-shadow: 0 0 5px #ccc;     
     box-shadow: 0 0 5px #ccc;   
-    margin-top:35px;
+    /*margin-top:35px;*/
 } 
 .Input_Box>textarea {     
     width: 100%;     

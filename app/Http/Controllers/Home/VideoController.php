@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request as FormRequest;
 use App\Models\Resource;
 use App\Models\Category;
-use Cache,Request;
+use App\Models\Comments;
+use Cache,Request,Input;
 use App\Models\Emoji;
 
 class VideoController extends Controller {
@@ -57,6 +59,9 @@ class VideoController extends Controller {
 		return view("home.video.index")->with(compact($compact));
 	}
 	
+	/**
+	 *	显示某一个视频
+	 */
 	public function getShow($category_id,$id)
 	{
 		$compact = [];
@@ -76,5 +81,18 @@ class VideoController extends Controller {
         $compact[] = 'category_id';
 		$compact[] = 'resource';
 		return view("home.video.show")->with(compact($compact));
+	}
+	
+	/**
+	 * 发表评论
+	 *
+	 */
+	public function postComment(FormRequest $request)
+	{
+		$contents = rtrim($request->input("contents"));
+		if($contents == "") {
+			return back()->with("notify_error","评论内容不能为空!");
+		}
+		
 	}
 }
