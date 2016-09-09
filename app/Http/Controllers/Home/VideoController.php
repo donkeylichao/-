@@ -8,7 +8,7 @@ use App\Models\Comment;
 use App\Models\Favour;
 use App\Models\FavourCount;
 use Cache,Request,Input;
-use Config,Auth;
+use Config,Auth,DB;
 use App\Models\Emoji;
 
 class VideoController extends Controller {
@@ -137,6 +137,15 @@ class VideoController extends Controller {
 	 */
 	public function postFavour()
 	{
-		echo Input::get('comment_id');
+		$comment_id = Input::get('comment_id');
+		$ip = Request::ip();
+		$ifDo = FavourCount::where("comment_id",$comment_id)->where("ip",$ip)->first();
+		if(empty($ifDo)) {
+			FavourCount::create(['comment_id'=>$comment_id,'ip'=>$ip,'choices'=>1]);
+			$favour = Favour::firstOrCreate(['comment_id' => $comment_id]);
+			//$favour->increment("favours",1);
+			return 0;
+		} 
+		return 1;
 	}
 }
