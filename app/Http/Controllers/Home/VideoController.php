@@ -4,8 +4,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request as FormRequest;
 use App\Models\Resource;
 use App\Models\Category;
-use App\Models\Comments;
+use App\Models\Comment;
+use App\Models\Favour;
+use App\Models\FavourCount;
 use Cache,Request,Input;
+use Config,Auth;
 use App\Models\Emoji;
 
 class VideoController extends Controller {
@@ -48,7 +51,7 @@ class VideoController extends Controller {
 		$key = Request::getUri();
 		$videos = Cache::get($key,function() use ($key,$category_id){
 			$videos = Resource::where("category_id" , $category_id)->paginate(10);
-			Cache::put($key,$videos,10);
+			Cache::put($key,$videos,Config::get("common.cache_time")[0]);
 			return $videos;
 		});
 		$compact[] = "videos";
@@ -66,18 +69,29 @@ class VideoController extends Controller {
 	{
 		$compact = [];
 		$emojis = Cache::get("emojis",function(){
-			$emojis = json_encode(Emoji::select('mark','path','name')->get(),JSON_UNESCAPED_UNICODE);
-			Cache::put("emojis",$emojis,10);
+			$emojis = json_encode(Emoji::select('mark','path','name')->orderBy("created_at","desc")->get(),JSON_UNESCAPED_UNICODE);
+			Cache::put("emojis",$emojis,Config::get("common.cache_time")[0]);
 			return $emojis;
 		});
 		$compact[] = "emojis";
 		
 		//dd($category);
 		$resource = Resource::find($id);
-		if(empty($resource)) {
+		/*if(empty($resource)) {
 			return back()->with("notify_error" , "此视频已删除!");
-		}
-
+		}*/
+		//评论列表
+		$comments = Comment::where("resource_id",$id)->where("pid",0)->orderBy("created_at","desc")->get();
+		
+		//评论条数
+		$count = Comment::where("resource_id",$id)->count();
+		
+		//栏目名称
+		$category_name = Category::find($category_id)->name;
+		
+		$compact[] = 'category_name';
+		$compact[] = 'count';
+		$compact[] = 'comments';
         $compact[] = 'category_id';
 		$compact[] = 'resource';
 		return view("home.video.show")->with(compact($compact));
@@ -94,5 +108,35 @@ class VideoController extends Controller {
 			return back()->with("notify_error","评论内容不能为空!");
 		}
 		
+		//获取评论者id
+		//$user_id = Auth::user()->id;
+		$user_id = 1;
+		//获取提交内容
+		$content = rtrim($request->Input("contents"));
+		$pid = $request->Input("pid");
+		$resource_id = $request->Input("resource_id");
+		
+		//dd($content);
+		$comment = new Comment;
+		$comment->resource_id = $resource_id;
+		$comment->pid = $pid;
+		$comment->user_id = $user_id;
+		$comment->content = $content;
+		
+		if(!$comment->save()) {
+			return back()->withInput()->with("notify_error","添加评论失败!");
+		}
+		$category_id = $request->input("category_id");
+		//dd($category_id);
+		//return redirect("/donkey/video/" . $category_id ."/show/" . $resource_id);
+		return back()->with("notify_success","评论成功!");
+	}
+	
+	/**
+	 * 踩或赞操作
+	 */
+	public function postFavour()
+	{
+		echo Input::get('comment_id');
 	}
 }

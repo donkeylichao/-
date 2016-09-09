@@ -6,7 +6,7 @@
 		@include("home.master.header")
 		<div class="container">
 			<div class="page-header">
-				<h3>视频列表<small> <em>></em> {{ $category_name }}</small></h3>
+				<h3><a href="{{ url('donkey/video') }}"  style="color:#777;">视频列表</a><small> <em>></em> {{ $category_name }}</small></h3>
 			</div>
 		</div>
 		<div id="content" class="container">
@@ -25,7 +25,7 @@
 					</div>
 					<div class="comment-box">
 						<div class="comment-num">
-							<p>评论<font>2</font>条 <small>{{ substr($item->created_at,0,10) }}</small></p>
+							<p>评论<font>{{ $item->comments->count() }}</font>条 <small>{{ substr($item->created_at,0,10) }}</small></p>
 						</div>
 						<div class="comment-btn">
 							<a class="GotoComment" target="_blank" href="{{ url('donkey/video/'.$item->category_id.'/show').'/'.$item->id }}">看看</a>

@@ -12,13 +12,15 @@
 		@include("home.master.header")
 		<div class="container">
 			<div class="page-header">
-				<h3>视频列表<small> > 视频播放 > {{ $resource->title }}</small></h3>
+				<h3><a href="{{ url('donkey/video').'/'.$category_id}}" style="color:#777;">{{ $category_name }}</a><small> > {{ $resource->title }}</small></h3>
 			</div>
 		</div>
 		<div class="container">
             <form action="{{ url('donkey/video').'/'. $category_id .'/comment'}}" method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+			<input type="hidden" name="category_id" value="{{ $category_id }}" />
             <input type="hidden" name="resource_id" value="{{ $resource->id }}" />
+            <input id="pid" type="hidden" name="pid" value="" />
             <input id="comments" type="hidden" name="contents" />
             <div class="row">
 				<!--视频播放开始-->
@@ -50,18 +52,18 @@
 							<span class="comment-number">
 							<!--<span class="number">2758</span>
 							人参与,-->
-							<span class="number">1249</span>
+							<span class="number">{{ $count }}</span>
 							条评论
 							</span>
 						</div>
 					</div>
 					
 					<span>
-						<button id="tucao" type="button" class="btn btn-primary btn-sm pull-right" style="margin:15px 15px 0px 0px;">我要吐槽</button>
+						<button id="tucao" type="button" data="0" class="btn btn-primary btn-sm pull-right" style="margin:15px 15px 0px 0px;">我要吐槽</button>
 					</span>	
 					<div class="Main" style="display:none;">
-						<img src="/images/b5.jpg" class="img-circle"/>
-						<span class="name">用户:<strong>Ctrl+S</strong></span>
+						<img src="{{ Auth::check() ? Auth::user()->headimg : '/images/s5.jpg' }}" class="img-circle"/>
+						<span class="name">用户:<strong>{{ Auth::check() ? Auth::user()->name : "未登录"}}</strong></span>
 						<div class="Input_Box">
 							<textarea class="Input_text"></textarea>						
 							<div class="faceDiv"></div>     
@@ -84,46 +86,50 @@
 				
 					<!--评论列表-->
 					<div node-type="cmt-list" class="comment-lists">
-						
+						@foreach($comments as $item)
 						<div class="clear-g block-cont-gw" user-id="483743751" node-type="cmt-item">
 							<div class="cont-head-gw">
 								<div class="head-img-gw">
 									<div class="img-corner"></div>
-									<img height="42" width="42" class="img-circle" alt="" src="http://sucimg.itc.cn/avatarimg/483743751_1468749593256_c55">
+									<img height="42" width="42" class="img-circle" alt="" src="{{ $item->user->headimg or '/images/s5.jpg'}}">
 								</div>
 							</div>
 							<div class="cont-msg-gw">
 								<div class="msg-wrap-gw">
 									<div class="wrap-user-gw global-clear-spacing">
-										<span class="user-time-gw">47分钟前</span>
-										<span class="user-name-gw">小点钟</span>
+										<span class="user-time-gw hidden-xs">{{ $item->created_at }}</span>
+										<span class="user-name-gw">{{ $item->user->name or ''}}</span>
 									</div>
 							
 									<div class="wrap-issue-gw">
 										<p class="issue-wrap-gw">
-											<span class="wrap-word-gw">66666<img src="/uploads/emojis/1473057834.gif"/></span>
+											<span class="wrap-word-gw">{!! $item->content !!}</span>
 										</p>
 									</div>
 									<div class="clear-g wrap-action-gw" node-type="btns-bar">
 										<div class="action-click-gw global-clear-spacing" node-type="action-click-gw">
 											
+											<span class="click-reply-gw visible-xs" style="float:left;color:silver;">
+												<span>{{ substr($item->created_at,0,16) }}</span>
+											</span>
+										
 											<i class="gap-gw"></i>
 											<span class="click-ding-gw" node-type="support">
-												<a href="javascript:;">
+												<a href="javascript:;" data="{{ $item->id }}">
 													<i class="fa fa-thumbs-o-up"></i>
-													<em class="icon-name-bg">3</em>
+													<em class="icon-name-bg">{{ $item->favour ? $item->favour->favours : 0}}</em>
 												</a>
 											</span>
 											<i class="gap-gw"></i>
 											<span class="click-cai-gw" node-type="oppose">
-												<a href="javascript:;">
+												<a href="javascript:;" data="{{ $item->id }}">
 													<i class="fa fa-thumbs-o-down"></i>
-													<em class="icon-name-bg"></em>
+													<em class="icon-name-bg">{{ $item->favour ? $item->favour->treads : 0}}</em>
 												</a>
 											</span>
 											<i class="gap-gw"></i>
 											<span class="click-reply-gw" node-type="reply">
-												<span class="reply">回复</span>
+												<span class="reply" data="{{ $item->id }}">回复</span>
 											</span>
 											
 											<div class='Main-reply' style="display:none;">
@@ -141,191 +147,57 @@
 									</div>
 								</div>
 							</div>
-							
+							@if(count($item->childs) > 0)
+							@foreach($item->childs as $item1)
 							<div class="clear-g block-cont-gw1" user-id="483743751" node-type="cmt-item">
 								<div class="cont-head-gw">
 									<div class="head-img-gw">
 										<div class="img-corner"></div>
-										<img height="42" width="42" class="img-circle" alt="" src="http://sucimg.itc.cn/avatarimg/483743751_1468749593256_c55">
+										<img height="42" width="42" class="img-circle" alt="" src="{{ $item1->user->headimg or '/images/s5.jpg'}}">
 									</div>
 								</div>
 								<div class="cont-msg-gw">
 									<div class="msg-wrap-gw">
 										<div class="wrap-user-gw global-clear-spacing">
-											<span class="user-time-gw">47分钟前</span>
-											<span class="user-name-gw">小点钟</span>
+											<span class="user-time-gw hidden-xs">{{ $item1->created_at }}</span>
+											<span class="user-name-gw">{{ $item1->user->name or ''}}</span>
 										</div>
 								
 										<div class="wrap-issue-gw">
 											<p class="issue-wrap-gw">
-												<span class="wrap-word-gw">66666<img src="/uploads/emojis/1473057834.gif"/></span>
+												<span class="wrap-word-gw">{!! $item1->content !!}</span>
 											</p>
 										</div>
 										<div class="clear-g wrap-action-gw" node-type="btns-bar">
 											<div class="action-click-gw global-clear-spacing" node-type="action-click-gw">
 												
+												<span class="click-reply-gw visible-xs" style="float:left;color:silver;">
+													<span>{{ substr($item1->created_at,0,16) }}</span>
+												</span>
+												
 												<i class="gap-gw"></i>
 												<span class="click-ding-gw" node-type="support">
-													<a href="javascript:;">
+													<a href="javascript:;" data="{{ $item1->id }}">
 														<i class="fa fa-thumbs-o-up"></i>
-														<em class="icon-name-bg">3</em>
+														<em class="icon-name-bg">{{ $item1->favour ? $item1->favour->favours : 0}}</em>
 													</a>
 												</span>
 												<i class="gap-gw"></i>
 												<span class="click-cai-gw" node-type="oppose">
-													<a href="javascript:;">
+													<a href="javascript:;" data="{{ $item1->id }}">
 														<i class="fa fa-thumbs-o-down"></i>
-														<em class="icon-name-bg"></em>
+														<em class="icon-name-bg">{{ $item1->favour ? $item1->favour->treads : 0}}</em>
 													</a>
 												</span>
 											</div>
 										</div>
 									</div>
 								</div>	
-							</div>		
-							<div class="clear-g block-cont-gw1" user-id="483743751" node-type="cmt-item">
-								<div class="cont-head-gw">
-									<div class="head-img-gw">
-										<div class="img-corner"></div>
-										<img height="42" width="42" class="img-circle" alt="" src="http://sucimg.itc.cn/avatarimg/483743751_1468749593256_c55">
-									</div>
-								</div>
-								<div class="cont-msg-gw">
-									<div class="msg-wrap-gw">
-										<div class="wrap-user-gw global-clear-spacing">
-											<span class="user-time-gw">47分钟前</span>
-											<span class="user-name-gw">小点钟</span>
-										</div>
-								
-										<div class="wrap-issue-gw">
-											<p class="issue-wrap-gw">
-												<span class="wrap-word-gw">66666<img src="/uploads/emojis/1473057834.gif"/></span>
-											</p>
-										</div>
-										<div class="clear-g wrap-action-gw" node-type="btns-bar">
-											<div class="action-click-gw global-clear-spacing" node-type="action-click-gw">
-												
-												<i class="gap-gw"></i>
-												<span class="click-ding-gw" node-type="support">
-													<a href="javascript:;">
-														<i class="fa fa-thumbs-o-up"></i>
-														<em class="icon-name-bg">3</em>
-													</a>
-												</span>
-												<i class="gap-gw"></i>
-												<span class="click-cai-gw" node-type="oppose">
-													<a href="javascript:;">
-														<i class="fa fa-thumbs-o-down"></i>
-														<em class="icon-name-bg"></em>
-													</a>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>	
-							</div>				
-							<div class="clear-g block-cont-gw1" user-id="483743751" node-type="cmt-item">
-								<div class="cont-head-gw">
-									<div class="head-img-gw">
-										<div class="img-corner"></div>
-										<img height="42" width="42" class="img-circle" alt="" src="http://sucimg.itc.cn/avatarimg/483743751_1468749593256_c55">
-									</div>
-								</div>
-								<div class="cont-msg-gw">
-									<div class="msg-wrap-gw">
-										<div class="wrap-user-gw global-clear-spacing">
-											<span class="user-time-gw">47分钟前</span>
-											<span class="user-name-gw">小点钟</span>
-										</div>
-								
-										<div class="wrap-issue-gw">
-											<p class="issue-wrap-gw">
-												<span class="wrap-word-gw">66666<img src="/uploads/emojis/1473057834.gif"/></span>
-											</p>
-										</div>
-										<div class="clear-g wrap-action-gw" node-type="btns-bar">
-											<div class="action-click-gw global-clear-spacing" node-type="action-click-gw">
-												
-												<i class="gap-gw"></i>
-												<span class="click-ding-gw" node-type="support">
-													<a href="javascript:;">
-														<i class="fa fa-thumbs-o-up"></i>
-														<em class="icon-name-bg">3</em>
-													</a>
-												</span>
-												<i class="gap-gw"></i>
-												<span class="click-cai-gw" node-type="oppose">
-													<a href="javascript:;">
-														<i class="fa fa-thumbs-o-down"></i>
-														<em class="icon-name-bg"></em>
-													</a>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>	
-							</div>											
-												
+							</div>
+							@endforeach
+							@endif
 						</div>
-						
-						<div class="clear-g block-cont-gw" user-id="483743751" node-type="cmt-item">
-								<div class="cont-head-gw">
-									<div class="head-img-gw">
-										<div class="img-corner"></div>
-										<img height="42" width="42" class="img-circle" alt="" src="http://sucimg.itc.cn/avatarimg/483743751_1468749593256_c55">
-									</div>
-								</div>
-								<div class="cont-msg-gw">
-									<div class="msg-wrap-gw">
-										<div class="wrap-user-gw global-clear-spacing">
-											<span class="user-time-gw">47分钟前</span>
-											<span class="user-name-gw">小点钟</span>
-										</div>
-								
-										<div class="wrap-issue-gw">
-											<p class="issue-wrap-gw">
-												<span class="wrap-word-gw">66666<img src="/uploads/emojis/1473057834.gif"/></span>
-											</p>
-										</div>
-										<div class="clear-g wrap-action-gw" node-type="btns-bar">
-											<div class="action-click-gw global-clear-spacing" node-type="action-click-gw">
-												
-												<i class="gap-gw"></i>
-												<span class="click-ding-gw" node-type="support">
-													<a href="javascript:;">
-														<i class="fa fa-thumbs-o-up"></i>
-														<em class="icon-name-bg">3</em>
-													</a>
-												</span>
-												<i class="gap-gw"></i>
-												<span class="click-cai-gw" node-type="oppose">
-													<a href="javascript:;">
-														<i class="fa fa-thumbs-o-down"></i>
-														<em class="icon-name-bg"></em>
-													</a>
-												</span>
-												<i class="gap-gw"></i>
-												<span class="click-reply-gw" node-type="reply">
-													<span class="reply">回复</span>
-												</span>
-												
-												<div class='Main-reply' style="display:none;">
-													<div class='Input_Box'>
-														<textarea class='Input_text'></textarea>
-														<div class='faceDiv'></div>
-														<div class='Input_Foot'>
-															<a class='imgBtn fa fa-smile-o' href='javascript:void(0);'></a>
-															<a class='postBtn'>确定</a>
-														</div>
-													</div>
-												</div>
-										
-											</div>
-										</div>
-									</div>
-								</div>	
-							</div>				
-						
+						@endforeach
 					</div>
 					<!--评论列表结束-->
 				</div>
@@ -337,48 +209,80 @@
 		</div>
 		<!--container结束-->
 		<script>
+			//踩或赞操作
+			$(".fa-thumbs-o-up").click(function(){
+				var comment_id = $(this).parent().attr("data");
+				var _token = "{{ csrf_token() }}";
+				$.ajax({
+					type : "POST",
+					url  : "{{ url('donkey/video').'/'.$category_id.'/favour'}}",
+					data : {'comment_id':comment_id,'_token':_token},
+					success : function(smg){
+						alert(smg);
+					}
+				});
+			});
+			//评论操作
 			$("#tucao").click(function(){
+				//所有回复框影藏
 				$(".Main-reply").css("display","none");
-
+				//所有取消回复变成回复
 				$(".reply").html("回复");
+				//所有faceDiv的marginTop为0
+				$(".faceDiv").css("margin-top","0px");
+				//isShowImg变为false
+				isShowImg = false;
 				
 				var show = $(this).html();
+				var pid = $(this).attr("data");
+				
 				if(show == "我要吐槽") {
 					$(this).html("取消吐槽");
 					$(".Main").css("display","block");
+					$("#pid").val(pid);
 				}else{
 					$(this).html("我要吐槽");
 					$(".Main").css("display","none");
+					$(this).parent().next().children().children(".faceDiv").css("margin-top","0px");
+					isShowImg = false;
 				}
 			});
 			
 			$(".reply").click(function(){
-				if($(".Main").css("display") == "block"){
-					$(".Main").css("display","none");
-				}
-				if($("#tucao").html() == "取消吐槽"){
-					$("#tucao").html("我要吐槽");
-				}
+				//吐槽框影藏
+				$(".Main").css("display","none");
+				//吐槽的字变
+				$("#tucao").html("我要吐槽");
+				//所有faceDiv的marginTop为0
+				$(".faceDiv").css("margin-top","0px");
+				//isShowImg变为false
+				isShowImg = false;
 				
 				$(".Main-reply").not($(this)).css("display","none");
 
 				$(".reply").not($(this)).html("回复");
 				
 				var show = $(this).html();
+				var pid = $(this).attr("data");
+				
 				if(show == "回复") {
 					$(this).html("取消回复");
 					$(this).parent().next().css("display","block");
+					$("#pid").val(pid);
 				}else{
 					$(this).html("回复");
 					$(this).parent().next().css("display","none");
+					$(this).parent().next().children().children(".faceDiv").css("margin-top","0px");
+					isShowImg = false;
 				}
 			})
+			var isShowImg=false; 
 			var ImgIputHandler={     
 				facePath:{!! $emojis !!}    
 				,     
 				
 				Init:function(){     
-					var isShowImg=false;     
+					//var isShowImg=false;     
 					$(".Input_text").focusout(function(){     
 						$(this).parent().css("border-color", "#cccccc");     
 						$(this).parent().css("box-shadow", "none");     

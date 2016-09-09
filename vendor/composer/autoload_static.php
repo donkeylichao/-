@@ -289,6 +289,8 @@ class ComposerStaticInit4af5906c8c76c72449dfada4a32efc0a
         'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_28_030154_create_categories_table.php',
         'CreateCommentsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_28_043630_create_comments_table.php',
         'CreateEmojisTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_05_045529_create_emojis_table.php',
+        'CreateFavourCountsTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_09_084737_create_favour_counts_table.php',
+        'CreateFavoursTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_09_083009_create_favours_table.php',
         'CreateHPhotosTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_101514_create_h_photos_table.php',
         'CreateHousesTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_094510_create_houses_table.php',
         'CreateNotificationsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_29_031518_create_notifications_table.php',
