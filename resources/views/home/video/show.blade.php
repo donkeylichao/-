@@ -209,19 +209,39 @@
 		</div>
 		<!--container结束-->
 		<script>
-			//踩或赞操作
+			//赞操作
 			$(".fa-thumbs-o-up").click(function(){
 				var comment_id = $(this).parent().attr("data");
 				var _token = "{{ csrf_token() }}";
+                var favours = $(this).next();
 				$.ajax({
 					type : "POST",
 					url  : "{{ url('donkey/video').'/'.$category_id.'/favour'}}",
 					data : {'comment_id':comment_id,'_token':_token},
 					success : function(smg){
-						alert(smg);
+                        if(smg == 0) {
+                            favours.html(Number(favours.html())+1);
+                        }
 					}
 				});
 			});
+            //踩操作
+            $(".fa-thumbs-o-down").click(function(){
+                var comment_id = $(this).parent().attr("data");
+                var _token = "{{ csrf_token() }}";
+                var treads = $(this).next();
+                $.ajax({
+                    type : "POST",
+                    url  : "{{ url('donkey/video').'/'.$category_id.'/tread'}}",
+                    data : {'comment_id':comment_id,'_token':_token},
+                    success : function(smg){
+                        if(smg == 0) {
+                            treads.html(Number(treads.html())+1);
+                        }
+                    }
+                });
+            });
+
 			//评论操作
 			$("#tucao").click(function(){
 				//所有回复框影藏

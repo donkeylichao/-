@@ -82,7 +82,7 @@ class Comment extends Model {
 	//子评论
 	public function childs()
 	{
-		return $this->hasMany("App\Models\Comment","pid","id");
+		return $this->hasMany('App\Models\Comment',"pid","id");
 	}
 	
 	//评论的用户
