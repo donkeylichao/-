@@ -133,7 +133,7 @@ class VideoController extends Controller {
 	}
 	
 	/**
-	 * 踩或赞操作
+	 * 赞操作
 	 */
 	public function postFavour()
 	{
@@ -143,9 +143,26 @@ class VideoController extends Controller {
 		if(empty($ifDo)) {
 			FavourCount::create(['comment_id'=>$comment_id,'ip'=>$ip,'choices'=>1]);
 			$favour = Favour::firstOrCreate(['comment_id' => $comment_id]);
-			//$favour->increment("favours",1);
+			$favour->increment("favours",1);
 			return 0;
 		} 
 		return 1;
 	}
+
+    /**
+     * 赞操作
+     */
+    public function postTread()
+    {
+        $comment_id = Input::get('comment_id');
+        $ip = Request::ip();
+        $ifDo = FavourCount::where("comment_id",$comment_id)->where("ip",$ip)->first();
+        if(empty($ifDo)) {
+            FavourCount::create(['comment_id'=>$comment_id,'ip'=>$ip,'choices'=>0]);
+            $favour = Favour::firstOrCreate(['comment_id' => $comment_id]);
+            $favour->increment("treads",1);
+            return 0;
+        }
+        return 1;
+    }
 }

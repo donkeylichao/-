@@ -301,4 +301,11 @@ ul {
 }     
 .faceDiv>img:active {     
     padding: 4px 3px 2px 3px;     
-}    
+}
+/*赞或踩的样式*/
+.click-cai-gw a:hover {
+    text-decoration:none;
+}
+.click-ding-gw a:hover {
+    text-decoration:none;
+}
