@@ -35,7 +35,7 @@ class Word2Pdf extends Command implements SelfHandling, ShouldBeQueued {
 	 */
 	public function handle()
 	{
-		$word = Word::where("id",$this->word_id);
+		$word = Word::find($this->word_id);
 		//获取word文件
 		$wordfile = public_path($word->path);
 		//新文件保存名称
