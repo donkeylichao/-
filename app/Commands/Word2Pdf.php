@@ -14,10 +14,10 @@ class Word2Pdf extends Command implements SelfHandling, ShouldBeQueued {
 	
 	protected $word_id;
 	protected $startOpenofficeExc = 'soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard';
-	protected $openoffice = public_path('');
-	protected $jodconverter = public_path('');
-	protected $javaPath = '';
-	protected $pdf2swf = '';
+	//protected $openoffice = public_path('');
+	protected $jodconverter = public_path('/jodconverter-2.2.2/docs/jodconverter-2.2.2-javadoc.jar');
+	//protected $javaPath = '';
+	//protected $pdf2swf = '';
 	/**
 	 * Create a new command instance.
 	 *
@@ -42,7 +42,7 @@ class Word2Pdf extends Command implements SelfHandling, ShouldBeQueued {
 		$newname = str_replace(".doc",".pdf",$word->path);
 		//$filename = pathinfo($wordfile,PATHINFO_FILENAME);
 		$outname = str_replace(".doc",".pdf",$wordfile);
-		$p = "java -jar". $jodconverPath.' '.$wordfile.' '.$outname,$out,$status;
+		$p = "java -jar". $this->jodconverter.' '.$wordfile.' '.$outname,$out,$status;
 		exec($p);
 		//删除word文档
 		if($status === 0) {

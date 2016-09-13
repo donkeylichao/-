@@ -18,7 +18,7 @@ class DownloadController extends Controller {
 		if(!file_exists(public_path($video->path))) {
 			return "<h2>您下载的视频已被转移，无法下载，详情咨询站长！</h2>";
 		}
-		return response()->download(public_path($video->path),$video->title);
+		return response()->download(public_path($video->path),'video.mp4');
 	}
 
 	/**

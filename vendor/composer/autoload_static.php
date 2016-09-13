@@ -295,6 +295,7 @@ class ComposerStaticInit4af5906c8c76c72449dfada4a32efc0a
         'CreateHousesTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_27_094510_create_houses_table.php',
         'CreateNotificationsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_29_031518_create_notifications_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreatePdfsTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_13_070453_create_pdfs_table.php',
         'CreatePostsTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_05_020951_create_posts_table.php',
         'CreateResourcesTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_28_042234_create_resources_table.php',
         'CreateScansTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_28_044430_create_scans_table.php',

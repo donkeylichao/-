@@ -202,7 +202,16 @@
 
 				<b class="arrow"></b>
 			</li>
+			
+			<li @if(strpos($uri,'post/type_index')) class="active" @endif>
+				<a href="{{ url('donkey/admin/post/type_index')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					分类列表
+				</a>
 
+				<b class="arrow"></b>
+			</li>
+			
 			<li @if(strpos($uri,'post/recycle')) class="active" @endif>
 				<a href="{{ url('donkey/admin/post/recycle')}}">
 					<i class="menu-icon fa fa-caret-right"></i>
@@ -214,7 +223,36 @@
 		</ul>
 	</li>
 	
-	<li @if(strpos($uri,'post')) class="active" @endif>
+	<li @if(strpos($uri,'pdf')) class="active open hsub" @endif>
+		<a href="{{ url('donkey/admin/pdf')}}" class="dropdown-toggle">
+			<i class="menu-icon fa fa-file"></i>
+			<span class="menu-text"> 文档管理 </span>
+			
+			<b class="arrow fa fa-angle-down"></b>
+		</a>
+		
+		<ul class="submenu">
+			<li @if(strpos($uri,'pdf/index') || strpos($uri,'pdf/create') || strpos($uri,'pdf/edit') || strpos($uri,'pdf/show')) class="active" @endif>
+				<a href="{{ url('donkey/admin/pdf/index')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					文档列表
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li @if(strpos($uri,'pdf/recycle')) class="active" @endif>
+				<a href="{{ url('donkey/admin/pdf/recycle')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					回收站
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+		</ul>
+	</li>
+	
+	<li @if(strpos($uri,'comment')) class="active" @endif>
 		<a href="{{ url('donkey/admin/comment')}}" class="dropdown-toggle">
 			<i class="menu-icon fa fa-comment"></i>
 			<span class="menu-text"> 评论管理 </span>

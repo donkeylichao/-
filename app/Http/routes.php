@@ -216,7 +216,56 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	
 	//日记管理
 	Route::group(['prefix'=>'post'] , function(){
-		Route::get('/' , ['as'=>'admin.post' , 'uses'=>'PostController@index']);
+		//显示日记列表
+		Route::get('index' , ['as'=>'admin.post' , 'uses'=>'PostController@index']);
+		//添加分类
+		Route::get('create_type',['as'=>'admin.post.create_types' , 'uses'=>'PostController@create_type']);
+		//保存分类
+		Route::post('store_type' , 'PostController@store_type');
+		//分类列表
+		Route::get('type_index' , ['as'=>'admin.pdf.type_index' , 'uses'=>'PostController@type_index']);
+		//编辑分类
+		Route::post('type_update' , 'PostController@type_update');
+		//删除分类
+		Route::get('destroy_type/{id}' , ['as'=>'admin.pdf.destroy_type' , 'uses'=>'PostController@destroy_type']);
+		//添加日记
+		Route::get('create',['as'=>'admin.post.create' , 'uses'=>'PostController@create']);
+		//保存日记
+		Route::post('store' , 'PostController@store');
+		//编辑日记
+		Route::get('edit/{id}' , ['as'=>'admin.post.edit' , 'uses'=>'PostController@edit']);
+		//保存编辑
+		Route::post('update' , 'PostController@update');
+		//删除日记
+		Route::get('destroy/{id}' , ['as'=>'admin.post.delete' , 'uses'=>'PostController@destroy']);
+		//回收站
+		Route::get('recycle' , ['as'=>'admin.post.recycle' , 'uses'=>'PostController@recycle']);
+		//彻底删除
+		Route::get('delete/{id}' , ['as'=>'admin.post.delete' , 'uses'=>'PostController@delete']);
+		//回复回收站的内容
+		Route::get('restore/{id}' , ['as'=>'admin.post.restore' , 'uses'=>'PostController@restore']);
+	});
+	
+	//pdf文件管理
+	Route::group(['prefix'=>'pdf'] , function(){
+		//文件列表
+		Route::get('index',['as'=>'admin.pdf' , 'uses'=>'PdfController@index']);
+		//添加分组
+		Route::get('create_type' , ['as'=>'admin.pdf.create_type' , 'uses'=>'PdfController@create_type']);
+		//保存添加分组
+		Route::post('store_type' , 'PdfController@store_type');
+		//上传文件
+		Route::get('create' , ['as'=>'admin.pdf.create' , 'uses'=>'PdfController@create']);
+		//保存上传
+		Route::post('store' , ['as'=>'admin.pdf.store' , 'uses'=>'PdfController@store']);
+		//删除
+		Route::get('destroy/{id}' , 'PdfController@destroy');
+		//回收站列表
+		Route::get('recycle' , ['as'=>'admin.pdf.recycle' , 'uses'=>'PdfController@recycle']);
+		//恢复内容
+		Route::get('restore/{id}' , ['as'=>'admin.pdf.restore' , 'uses'=>'PdfController@restore']);
+		//彻底删除
+		Route::get('delete' , ['as'=>'admin.pdf.delete' , 'uses'=>'PdfController@delete']);
 	});
 	
 	//评论管理
