@@ -94,11 +94,11 @@
 							<td>{{ $item->title or ''}}</td>
 							<td>{{ $item->area->title or ''}}</td>
 							<td>{{ $item->user->name or ''}}</td>
-							<td>{{ substr($item->created_at,0,10)  }}</td>
+							<td>{{ $item->created_at  }}</td>
 							<td>
 								<div class="btn-group">
 									
-									<a class="btn btn-xs btn-warning" href="{{ url('donkey/admin/pdf/show') .'/'. $item->id }}" title="查看">
+									<a class="btn btn-xs btn-warning" target="_new" href="{{ url('donkey/admin/pdf/show') .'/'. $item->id }}" title="查看">
 										<i class="ace-icon fa fa-eye bigger-120"></i>
 									</a>
 					

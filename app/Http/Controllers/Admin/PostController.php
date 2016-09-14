@@ -211,7 +211,7 @@ class PostController extends BaseController {
 	public function recycle()
 	{
 		$compact = [];
-		$posts = Post::onlyTrashed();
+		$posts = Post::onlyTrashed()->where("pid","<>",0);
 		$title = Input::get('title');
 		if($title) {
 			$posts = $posts->where('title','like',"%".$title."%");

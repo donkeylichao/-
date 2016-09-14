@@ -16,6 +16,7 @@ return array(
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2016_07_28_030154_create_categories_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2016_07_28_043630_create_comments_table.php',
     'CreateEmojisTable' => $baseDir . '/database/migrations/2016_09_05_045529_create_emojis_table.php',
+    'CreateFailedJobsTable' => $baseDir . '/database/migrations/2016_09_14_034551_create_failed_jobs_table.php',
     'CreateFavourCountsTable' => $baseDir . '/database/migrations/2016_09_09_084737_create_favour_counts_table.php',
     'CreateFavoursTable' => $baseDir . '/database/migrations/2016_09_09_083009_create_favours_table.php',
     'CreateHPhotosTable' => $baseDir . '/database/migrations/2016_07_27_101514_create_h_photos_table.php',

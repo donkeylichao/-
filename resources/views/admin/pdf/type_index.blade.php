@@ -38,7 +38,7 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/post/index') }}">日记管理</a>
+					<a href="{{ url('donkey/admin/pdf/index') }}">文档管理</a>
 				</li>
 				<li class="active">分类列表</li>
 			</ul><!-- /.breadcrumb -->
@@ -51,7 +51,7 @@
 			@include('admin.master.notify')
 			
 			<div>
-				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/post/create_type') }}" style="float:right; margin-bottom:5px;" >
+				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/pdf/create_type') }}" style="float:right; margin-bottom:5px;" >
 					<i class="ace-icon fa fa-plus bigger-120"></i>添加分类
 				</a>
 				
@@ -65,7 +65,7 @@
 					</thead>
 
 					<tbody>
-						@foreach($types as $item)
+						@foreach($lists as $item)
 						<tr>
 							<td class="center">{{ $item->id }}</td>
 							<td>
@@ -75,7 +75,7 @@
 								<div class="btn-group">
 									<a style="text-decoration:none; color:#fff" class="btn btn-xs btn-danger"
 									onclick="return confirm('确定删除吗?删除后将不能恢复')"
-									href="{{ url('donkey/admin/post/destroy_type').'/'.$item->id }}">删除</a>
+									href="{{ url('donkey/admin/pdf/destroy_type').'/'.$item->id }}">删除</a>
 								</div>
 							</td>
 						</tr>
@@ -85,7 +85,7 @@
 								$(':text').change(function(){
 									var v = $(this).val();
 									var id = $(this).attr("data").toString();
-									var url = "{{ url('donkey/admin/post/type_update')}}";
+									var url = "{{ url('donkey/admin/pdf/type_update')}}";
 									var token = "{{ csrf_token() }}";
 									//alert(url);
 									$.ajax({

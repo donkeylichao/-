@@ -250,10 +250,18 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	Route::group(['prefix'=>'pdf'] , function(){
 		//文件列表
 		Route::get('index',['as'=>'admin.pdf' , 'uses'=>'PdfController@index']);
+		//浏览pdf文档
+		Route::get('show/{id}' , ['as'=>'admin.pdf.show' , 'uses'=>'PdfController@show']);
 		//添加分组
 		Route::get('create_type' , ['as'=>'admin.pdf.create_type' , 'uses'=>'PdfController@create_type']);
 		//保存添加分组
 		Route::post('store_type' , 'PdfController@store_type');
+		//分组列表
+		Route::get('type_index' , ['as'=>'admin.pdf.type_index' , 'uses'=>'PdfController@type_index']);
+		//跟新分组列表
+		Route::post('type_update' , 'PdfController@type_update');
+		//删除分组
+		Route::get('destroy_type/{id}' , ['as'=>'admin.pdf.destroy_type' , 'uses'=>'PdfController@destroy_type']);
 		//上传文件
 		Route::get('create' , ['as'=>'admin.pdf.create' , 'uses'=>'PdfController@create']);
 		//保存上传
@@ -265,7 +273,7 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		//恢复内容
 		Route::get('restore/{id}' , ['as'=>'admin.pdf.restore' , 'uses'=>'PdfController@restore']);
 		//彻底删除
-		Route::get('delete' , ['as'=>'admin.pdf.delete' , 'uses'=>'PdfController@delete']);
+		Route::get('delete/{id}' , ['as'=>'admin.pdf.delete' , 'uses'=>'PdfController@delete']);
 	});
 	
 	//评论管理

@@ -38,16 +38,16 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="{{ url('donkey/admin/post/index') }}">日记管理</a>
+					<a href="{{ url('donkey/admin/pdf/index') }}">文件管理</a>
 				</li>
 				<li class="active">回收站</li>
 			</ul><!-- /.breadcrumb -->
 
 			<!-- #section:basics/content.searchbox -->
 			<div class="nav-search" id="nav-search">
-				<form class="form-search" method="get" action="{{ url('donkey/admin/post/recycle') }}">
+				<form class="form-search" method="get" action="{{ url('donkey/admin/pdf/recycle') }}">
 					<span class="input-icon">
-						<input type="text" placeholder="输入日记名称搜索" class="nav-search-input" id="nav-search-input" name="title"/>
+						<input type="text" placeholder="输入文档名称搜索" class="nav-search-input" id="nav-search-input" name="title"/>
 						<i class="ace-icon fa fa-search nav-search-icon"></i>
 					</span>
 					
@@ -71,21 +71,24 @@
 				<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
 					<thead>
 						<tr>
-							<th class="center">日期</th>
+							<th class="center">序号</th>
 							<th class="center">题目</th>
 							<th class="center">板块</th>
 							<th class="center">发布者</th>
+							<th class="center">上传时间</th>
 							<th class="center">操作</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						@foreach($posts as $item)
+						<?php $num = 1 ?>
+						@foreach($pdfs as $item)
 						<tr>
-							<td>{{ substr($item->created_at,0,10)  }}</td>
+							<td>{{ $num ++  }}</td>
 							<td>{{ $item->title or ''}}</td>
 							<td>{{ $item->area->title or ''}}</td>
 							<td>{{ $item->user->name or ''}}</td>
+							<td>{{  $item->created_at }}</td>
 							<td>
 								<div class="btn-group">
 									
@@ -93,11 +96,11 @@
 										<i class="ace-icon fa fa-eye bigger-120"></i>
 									</a>-->
 					
-									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/post/restore') .'/'. $item->id }}" title="恢复">
+									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/pdf/restore') .'/'. $item->id }}" title="恢复">
 										<i class="ace-icon fa fa-reply bigger-120"></i>
 									</a>
 
-									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/post/delete') .'/'. $item->id }}" title="彻底删除">
+									<a class="btn btn-xs btn-danger" href="{{ url('donkey/admin/pdf/delete') .'/'. $item->id }}" title="彻底删除">
 										<i class="ace-icon fa fa-trash-o bigger-120"></i>
 									</a>
 
@@ -107,7 +110,7 @@
 						@endforeach
 					</tbody>
 				</table>
-				{!! $posts->appends(['title'=>$title])->render() !!}
+				{!! $pdfs->appends(['title'=>$title])->render() !!}
 				
 			</div>
 			

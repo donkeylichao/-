@@ -15,7 +15,7 @@
 	</li>
 
 	<li @if(strpos($uri,'user') || strpos($uri,'manager')) class="active open hsub" @endif>
-		<a href="{{ url('donkey/admin/user') }}" class="dropdown-toggle">
+		<a href="#" class="dropdown-toggle">
 			<i class="menu-icon fa fa-users"></i>
 			<span class="menu-text"> 用户管理 </span>
 
@@ -50,7 +50,7 @@
 	</li>
 
 	<li @if(strpos($uri,'role') || strpos($uri,'permission')) class="active open hsub" @endif>
-		<a href="{{ url('donkey/admin/role') }}" class="dropdown-toggle">
+		<a href="#" class="dropdown-toggle">
 			<i class="menu-icon fa fa-eye"></i>
 			<span class="menu-text"> 权限管理 </span>
 
@@ -99,7 +99,7 @@
 	</li>
 	
 	<li @if(strpos($uri,'video')) class="active open hsub" @endif>
-		<a href="{{ url('donkey/admin/video/index')}}" class="dropdown-toggle">
+		<a href="#" class="dropdown-toggle">
 			<i class="menu-icon fa fa-video-camera"></i>
 			<span class="menu-text"> 视频管理 </span>
 			
@@ -128,7 +128,7 @@
 	</li>
 	
 	<li @if(strpos($uri,'music')) class="active open hsub" @endif>
-		<a href="{{ url('donkey/admin/music')}}" class="dropdown-toggle">
+		<a href="#" class="dropdown-toggle">
 			<i class="menu-icon fa fa-music"></i>
 			<span class="menu-text"> 音频管理 </span>
 			
@@ -157,7 +157,7 @@
 	</li>
 	
 	<li @if(strpos($uri,'album')) class="active open hsub" @endif>
-		<a href="{{ url('donkey/admin/album')}}" class="dropdown-toggle">
+		<a href="#" class="dropdown-toggle">
 			<i class="menu-icon fa fa-image"></i>
 			<span class="menu-text"> 相册管理 </span>
 				
@@ -186,7 +186,7 @@
 	</li>
 	
 	<li @if(strpos($uri,'post')) class="active open hsub" @endif>
-		<a href="{{ url('donkey/admin/post')}}" class="dropdown-toggle">
+		<a href="#" class="dropdown-toggle">
 			<i class="menu-icon fa fa-pencil-square-o"></i>
 			<span class="menu-text"> 日记管理 </span>
 			
@@ -224,7 +224,7 @@
 	</li>
 	
 	<li @if(strpos($uri,'pdf')) class="active open hsub" @endif>
-		<a href="{{ url('donkey/admin/pdf')}}" class="dropdown-toggle">
+		<a href="#" class="dropdown-toggle">
 			<i class="menu-icon fa fa-file"></i>
 			<span class="menu-text"> 文档管理 </span>
 			
@@ -241,6 +241,15 @@
 				<b class="arrow"></b>
 			</li>
 
+			<li @if(strpos($uri,'pdf/type_index')) class="active" @endif>
+				<a href="{{ url('donkey/admin/pdf/type_index')}}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					分类列表
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+			
 			<li @if(strpos($uri,'pdf/recycle')) class="active" @endif>
 				<a href="{{ url('donkey/admin/pdf/recycle')}}">
 					<i class="menu-icon fa fa-caret-right"></i>
