@@ -75,7 +75,7 @@
 							<th class="center">标题</th>
 							<th class="center">作者</th>
 							<th class="center">内容</th>
-							<th class="center">上传时间</th>
+							<th class="center hidden-xs">上传时间</th>
 							<th class="center">上传者</th>
 							<th class="center">操作</th>
 						</tr>
@@ -90,7 +90,7 @@
 							<td>{{ $item->title or ''}}</td>
 							<td>{{ $item->author or ''}}</td>
 							<td>{{ $item->content or ''}}</td>
-							<td>{{ $item->created_at or ''}}</td>
+							<td class="hidden-xs">{{ $item->created_at or ''}}</td>
 							<td>{{ $item->user->name or ''}}</td>
 							<td>
 								<div class="btn-group">

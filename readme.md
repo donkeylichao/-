@@ -12,3 +12,10 @@ jodconverter-2.2.2 jar工具包下载//用来转换word文件成pdf，通过使�
 openOffice
 redis
 queue:listen 队列监听
+
+##必须的文件
+public/uploads/videos
+public/uploads/musics
+public/uploads/rooms
+public/uploads/emojis
+public/uploads/words

@@ -77,7 +77,7 @@
 							<th class="center">名称</th>
 							<th class="center">符号</th>
 							<th class="center">展示</th>
-							<th class="center">保存路径</th>
+							<th class="center hidden-xs">保存路径</th>
 							<th class="center">上传时间</th>
 							<th class="center">操作</th>
 						</tr>
@@ -91,7 +91,7 @@
 							<td>{{ $item->name or '' }}</td>
 							<td>{{ $item->mark or ''}}</td>
 							<td><img src="{{ $item->path or ''}}" alt="{{$item->name}}"/></td>
-							<td>{{ $item->path or ''}}</td>
+							<td class="hidden-xs">{{ $item->path or ''}}</td>
 							<td>{{ $item->created_at or ''}}</td>
 							<td>
 								<div class="btn-group">

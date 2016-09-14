@@ -78,10 +78,10 @@
 							<th class="center">序号</th>
 							<th class="center">用户名</th>
 							<th class="center">邮箱</th>
-							<th class="center">手机</th>
-							<th class="center">最后登陆</th>
-							<th class="center">上次登陆ip</th>
-							<th class="center">真实姓名</th>
+							<th class="center hidden-xs">手机</th>
+							<th class="center hidden-xs">最后登陆</th>
+							<th class="center hidden-xs">上次登陆ip</th>
+							<th class="center hidden-xs">真实姓名</th>
 							<th class="center">权限角色</th>
 							<th class="center">操作</th>
 						</tr>
@@ -94,10 +94,10 @@
 							<td>{{ $num++ }}</td>
 							<td>{{ $item->name or ''}}</td>
 							<td>{{ $item->email or ''}}</td>
-							<td>{{ $item->phone or ''}}</td>
-							<td>{{ $item->last_login_time ? date('Y-m-d H:i:s',$item->last_login_time) : ''}}</td>
-							<td>{{ $item->last_login_ip or ''}}</td>
-							<td>{{ $item->real_name or ''}}</td>	
+							<td class="hidden-xs">{{ $item->phone or ''}}</td>
+							<td class="hidden-xs">{{ $item->last_login_time ? date('Y-m-d H:i:s',$item->last_login_time) : ''}}</td>
+							<td class="hidden-xs">{{ $item->last_login_ip or ''}}</td>
+							<td class="hidden-xs">{{ $item->real_name or ''}}</td>
 							<td>@foreach($item->roles as $role)
 									{{ $role->name.' ' }}
 								@endforeach
