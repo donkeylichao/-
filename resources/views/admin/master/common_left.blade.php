@@ -262,7 +262,7 @@
 	</li>
 	
 	<li @if(strpos($uri,'comment')) class="active" @endif>
-		<a href="{{ url('donkey/admin/comment')}}" class="dropdown-toggle">
+		<a href="{{ url('donkey/admin/comment')}}">
 			<i class="menu-icon fa fa-comment"></i>
 			<span class="menu-text"> 评论管理 </span>
 			

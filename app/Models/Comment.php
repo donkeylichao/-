@@ -96,4 +96,10 @@ class Comment extends Model {
 	{
 		return $this->hasOne("App\Models\Favour");
 	}
+
+    //评论所属资源
+    public function resource()
+    {
+        return $this->belongsTo("App\Models\Resource");
+    }
 }

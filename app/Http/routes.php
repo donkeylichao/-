@@ -278,8 +278,17 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	
 	//评论管理
 	Route::group(['prefix'=>'comment'] , function(){
+        //评论列表
 		Route::get('/' , ['as'=>'admin.comment' , 'uses'=>'CommentController@index']);
-	});
+	    //查看评论
+        Route::get('show/{id}' , ['as'=>'admin.comment.show' , 'uses'=>'CommentController@show']);
+        //删除评论
+        Route::get('destroy/{id}' , ['as'=>'admin.comment.destroy' , 'uses'=>'CommentController@destroy']);
+        //修改评论
+        Route::get('edit/{id}' , ['as'=>'admin.comment.edit' , 'uses'=>'CommentController@edit']);
+        //保存修改
+        Route::post('update' , 'CommentController@update');
+    });
 	
 	//消息管理
 	Route::group(['prefix'=>'notification'] , function(){
