@@ -7,7 +7,7 @@ use DB;
 use Config;
 
 class Comment extends Model {
-
+	
 	private function getEmojiArray() 
 	{ 
 		//Cache::get('emojis',function(){
@@ -48,9 +48,9 @@ class Comment extends Model {
 			$emojis_array = Cache::get("emojis_array");
 			return "<img src=".$emojis_array[$matches[0]] ."/>";
 		} , $value);
-		
+		$this->attributes["content"] = $value; 
 		//替换中文敏感词汇
-		$chinese = Cache::get("chinese",function(){
+		/*$chinese = Cache::get("chinese",function(){
 			$chinese = Config::get("badword.chinese");
 			Cache::put("chinese",$chinese,Config::get("common.cache_time")[0]);
 			return $chinese;
@@ -75,8 +75,8 @@ class Comment extends Model {
 			$replace_english[] = str_repeat("*",strlen($v1));
 		}
 		$replace2 = array_combine($english,$replace_english);
-		$value = strtr($value,$replace2);
-		$this->attributes["content"] = $value; 
+		$value = strtr($value,$replace2);*/
+		//$this->attributes["content"] = $value; 
 		//return $value;	
 	}
 	//子评论

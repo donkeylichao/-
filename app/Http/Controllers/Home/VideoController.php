@@ -10,6 +10,7 @@ use App\Models\FavourCount;
 use Cache,Request,Input;
 use Config,Auth,DB;
 use App\Models\Emoji;
+use App\Commands\BadWord;
 
 class VideoController extends Controller {
 
@@ -110,6 +111,7 @@ class VideoController extends Controller {
 		
 		//获取评论者id
 		//$user_id = Auth::user()->id;
+		//TODO
 		$user_id = 1;
 		//获取提交内容
 		$content = rtrim($request->Input("contents"));
@@ -117,16 +119,29 @@ class VideoController extends Controller {
 		$resource_id = $request->Input("resource_id");
 		
 		//dd($content);
-		$comment = new Comment;
+		/*$comment = new Comment;
 		$comment->resource_id = $resource_id;
 		$comment->pid = $pid;
 		$comment->user_id = $user_id;
-		$comment->content = $content;
+		$comment->content = $content;*/
+		$data = [];
+		$data['resource_id'] = $resource_id;
+		$data['pid'] = $pid;
+		$data['user_id'] = $user_id;
+		$data['content'] = $content;
+		$data['created_at'] = date("Y-m-d H:i:s",time());
+		$data['updated_at'] = date("Y-m-d H:i:s",time());
 		
-		if(!$comment->save()) {
+		/*if(!$comment->save()) {
+			return back()->withInput()->with("notify_error","添加评论失败!");
+		}*/
+		$id = DB::table('comments')->insertGetId($data);
+		$job = new BadWord($id);
+		$this->dispatch($job);
+		if(!$id){
 			return back()->withInput()->with("notify_error","添加评论失败!");
 		}
-		$category_id = $request->input("category_id");
+		//$category_id = $request->input("category_id");
 		//dd($category_id);
 		//return redirect("/donkey/video/" . $category_id ."/show/" . $resource_id);
 		return back()->with("notify_success","评论成功!");
