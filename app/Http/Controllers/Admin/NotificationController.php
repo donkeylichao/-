@@ -68,11 +68,11 @@ class NotificationController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$n = Notification::where("id",$id)->update(['is_read'=>1]);
+		/*$n = Notification::where("id",$id)->update(['is_read'=>1]);
 		if(!$n){
 			return back()->with("notify_error","编辑已查看失败！");
 		}
-		return back()->with("notify_success","编辑已查看成功!");
+		return back()->with("notify_success","编辑已查看成功!");*/
 	}
 
 	/**

@@ -74,7 +74,7 @@
 							<td>
 								<div class="btn-group">
 								
-									<a class="btn btn-xs btn-info" href="{{ url('donkey/admin/notification/update') .'/'. $item->id }}">
+									<a class="btn btn-xs btn-info" href="{{ url(Config::get('common.notify_routes')[$item->type]).'/'.$item->resource_id }}">
 										<i class="ace-icon fa fa-eye bigger-120"></i>
 									</a>
 
