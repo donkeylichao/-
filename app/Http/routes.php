@@ -292,7 +292,12 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	
 	//消息管理
 	Route::group(['prefix'=>'notification'] , function(){
-		Route:;get('/' , ['as'=>'admin.notification' , 'uses'=>'NotifycationController@index']);
+		//消息类表
+		Route::get('/' , ['as'=>'admin.notification' , 'uses'=>'NotificationController@index']);
+		//标记已查看
+		Route::get('update/{id}' , ['as'=>'admin.notification.update' , 'uses'=>'NotificationController@update']);
+		//删除消息
+		Route::get('destroy/{id}' , ['as'=>'admin.notification.destroy' , 'uses'=>'NotificationController@destroy']);
 	});
 	
 	//个人中心

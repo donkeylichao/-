@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Admin\BaseController;
-
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class NotificationController extends BaseController {
@@ -14,7 +14,8 @@ class NotificationController extends BaseController {
 	 */
 	public function index()
 	{
-		//
+		$notifications = Notification::where("is_read",0)->paginate(10);
+		return view("admin.notification.index")->with("notifications",$notifications);
 	}
 
 	/**
@@ -67,7 +68,11 @@ class NotificationController extends BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$n = Notification::where("id",$id)->update(['is_read'=>1]);
+		if(!$n){
+			return back()->with("notify_error","编辑已查看失败！");
+		}
+		return back()->with("notify_success","编辑已查看成功!");
 	}
 
 	/**
@@ -78,7 +83,10 @@ class NotificationController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		if(!Notification::destroy($id)) {
+			return back()->with("notify_error","删除失败!");
+		}
+		return back()->with("notify_success","删除成功!");
 	}
 
 }

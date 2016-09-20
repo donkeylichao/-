@@ -35,11 +35,11 @@
 		<!-- #section:basics/navbar.dropdown -->
 		<div class="navbar-buttons navbar-header pull-right" role="navigation">
 			<ul class="nav ace-nav">
-
+				@if(Auth::user()->id == 1)
 				<li class="purple">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 						<i class="ace-icon fa fa-bell icon-animated-bell"></i>
-						<span class="badge badge-important">8</span>
+						<span class="badge badge-important">{{ App\Models\Notification::where("is_read",0)->count()}}</span>
 					</a>
 
 					<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
@@ -47,27 +47,30 @@
 							<i class="ace-icon fa fa-exclamation-triangle"></i>
 							通知
 						</li>
-
+						<?php
+							$n = App\Models\Notification::where("is_read",0)->first();
+						?>
+						@if($n) 
 						<li>
-							<a href="#">
+							<a href="{{$n->resource_id ? url(Config::get('common.notify_routes')[$n->type] . $n->resource->id) : url(Config::get('common.notify_routes')[$n->type].$n->album->id)}}">
 								<div class="clearfix">
 									<span class="pull-left">
 										<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
-										这里是通知的内容
+										{{ $n->user->name . $n->body  }}
 									</span>
 								</div>
 							</a>
 						</li>
-
+						@endif
 						<li class="dropdown-footer">
-							<a href="#">
+							<a href="{{ url('donkey/admin/notifications') }}">
 								 查看所有的通告
 								<i class="ace-icon fa fa-arrow-right"></i>
 							</a>
 						</li>
 					</ul>
 				</li>
-
+				@endif
 				<li class="green">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 						<i class="ace-icon fa fa-comments icon-animated-vertical"></i>
@@ -133,7 +136,7 @@
 						</li>
 
 						<li>
-							<a href="profile.html">
+							<a href="{{ url('donkey/admin/personal') }}">
 								<i class="ace-icon fa fa-user"></i>
 								个人中心
 							</a>

@@ -12,4 +12,14 @@ class Notification extends Model {
 	{
 		return $this->belongsTo('App\Models\User');
 	}
+	
+	public function resource()
+	{
+		return $this->belongsTo("App\Models\Resource");
+	}
+	
+	public function album()
+	{
+		return $this->belongsTo("App\Models\Album");
+	}
 }

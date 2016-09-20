@@ -280,7 +280,7 @@
 	</li>
 	
 	<li @if(strpos($uri,'notification')) class="active" @endif>
-		<a href="{{ url('donkey/admin/notification')}}" class="dropdown-toggle">
+		<a href="{{ url('donkey/admin/notification')}}" >
 			<i class="menu-icon fa fa-bullhorn"></i>
 			<span class="menu-text"> 消息管理 </span>
 			
@@ -288,14 +288,14 @@
 		</a>
 	</li>
 	
-	<li @if(strpos($uri,'personal')) class="active" @endif>
-		<a href="{{ url('donkey/admin/personal')}}" class="dropdown-toggle">
+	<!--<li @if(strpos($uri,'personal')) class="active" @endif>
+		<a href="{{ url('donkey/admin/personal')}}" >
 			<i class="menu-icon fa fa-user"></i>
 			<span class="menu-text"> 个人中心 </span>
 			
 			<b class="arrow"></b>
 		</a>
-	</li>
+	</li>-->
 	
 
 </ul><!-- /.nav-list -->
