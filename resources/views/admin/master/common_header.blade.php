@@ -39,7 +39,10 @@
 				<li class="purple">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 						<i class="ace-icon fa fa-bell icon-animated-bell"></i>
-						<span class="badge badge-important">{{ App\Models\Notification::where("is_read",0)->count()}}</span>
+						<?php $count1 = App\Models\Notification::where("is_read",0)->count(); ?>
+						@if($count1 > 0)
+						<span class="badge badge-important">{{ $count1 }}</span>
+						@endif
 					</a>
 
 					<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
@@ -63,7 +66,7 @@
 						</li>
 						@endif
 						<li class="dropdown-footer">
-							<a href="{{ url('donkey/admin/notifications') }}">
+							<a href="{{ url('donkey/admin/notification') }}">
 								 查看所有的通告
 								<i class="ace-icon fa fa-arrow-right"></i>
 							</a>
@@ -72,42 +75,53 @@
 				</li>
 				@endif
 				<li class="green">
+					<?php
+						$time = time() - 60*60*3;
+						$date = date("Y-m-d H:i:s",$time);
+						$num = App\Models\Comment::where('created_at','>',$date)->count();
+						$first = App\Models\Comment::where('created_at','>',$date)->orderBy('created_at','desc')->paginate(3);
+					?>
+					
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 						<i class="ace-icon fa fa-comments icon-animated-vertical"></i>
-						<span class="badge badge-success">5</span>
+						@if($num > 0)
+						<span class="badge badge-success">{{ $num }}</span>
+						@endif
 					</a>
-
+				
 					<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
 						<li class="dropdown-header">
 							<i class="ace-icon fa fa-comment"></i>
-							5条评论
+							{{$num}}条评论
 						</li>
 
 						<li class="dropdown-content">
 							<ul class="dropdown-menu dropdown-navbar">
-
+								@if($first)
+								@foreach($first as $first1)
 								<li>
-									<a href="#">
-										<img src="/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+									<a href="{{url('donkey/admin/comment/show').'/'.$first1->id}}">
+										<img src="{{$first1->user->headimg ? $first1->user->headimg : '/assets/avatars/avatar3.png'}}" class="msg-photo" alt="{{ $first1->user->name }}" />
 										<span class="msg-body">
 											<span class="msg-title">
-												<span class="blue">Susan:</span>
-												Vestibulum id ligula porta felis euismod ...
+												<span class="blue">{{ $first1->user->name }}:</span>
+												{!! $first1->content !!}
 											</span>
 
 											<span class="msg-time">
 												<i class="ace-icon fa fa-clock-o"></i>
-												<span>评论时间</span>
+												<span>{{ $first1->created_at }}</span>
 											</span>
 										</span>
 									</a>
 								</li>
-								
+								@endforeach
+								@endif
 							</ul>
 						</li>
 
 						<li class="dropdown-footer">
-							<a href="inbox.html">
+							<a href="{{ url('donkey/admin/comment')}}">
 								查看所有评论
 								<i class="ace-icon fa fa-arrow-right"></i>
 							</a>
