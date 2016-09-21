@@ -3,6 +3,8 @@
 use App\Http\Requests;
 use App\Http\Controllers\Admin\BaseController;
 use App\Models\Comment;
+use App\Models\Favour;
+use App\Models\FavourCount;
 use Illuminate\Http\Request;
 
 class CommentController extends BaseController {
@@ -92,11 +94,30 @@ class CommentController extends BaseController {
 	 * @return Response
 	 */
 	public function destroy($id)
-	{
-		if(!Comment::destroy($id)) {
+	{	
+		$childs = Comment::find($id)->childs;
+		if(count($childs) > 0) {
+			foreach($childs as $item){
+				//删除踩赞数量
+				Favour::where("comment_id",$item->id)->delete();
+				//删除踩赞记录
+				FavourCount::where("comment_id",$item->id)->delete();	
+				//删除子评论
+				$item->delete();
+			}
+		}
+		
+		//删除踩赞数量
+		Favour::where("comment_id",$id)->delete();
+		
+		//删除踩赞记录
+		FavourCount::where("comment_id",$id)->delete();
+		
+		$comment = Comment::find($id);
+		if(!$comment->delete()) {
             return back()->with('notify_error','删除失败!');
         }
-        return back()->with('notify_success','删除成功!');
+        return redirect('donkey/admin/comment')->with('notify_success','删除成功!');
 	}
 
 }

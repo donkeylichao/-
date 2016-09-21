@@ -8,6 +8,9 @@ use Config;
 
 class Comment extends Model {
 	
+	//protected $fillable=['resource_id','user_id','pid','content','created_at','updated_at'];
+	protected $guarded = ['id'];
+	
 	private function getEmojiArray() 
 	{ 
 		//Cache::get('emojis',function(){
@@ -18,7 +21,7 @@ class Comment extends Model {
 			//dd($marks);
 			$emojis_array = array_combine($marks,$paths);
 			Cache::put("emojis_array",$emojis_array,Config::get("common.cache_time")[0]);
-			//return $emojis_array;
+			return $emojis_array;
 		//});
 	}
 	
@@ -96,7 +99,13 @@ class Comment extends Model {
 	{
 		return $this->hasOne("App\Models\Favour");
 	}
-
+	
+	//踩或赞的ip
+	public function favourCount()
+	{
+		return $this->hasMany("App\Models\FavourCount");
+	}
+	
     //评论所属资源
     public function resource()
     {

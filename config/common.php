@@ -57,6 +57,6 @@ return [
 	
 	//redis缓存时间（分钟）
 	'cache_time' => [
-		60
+		5
 	],
 ];

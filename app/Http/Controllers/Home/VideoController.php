@@ -131,11 +131,13 @@ class VideoController extends Controller {
 		$data['content'] = $content;
 		$data['created_at'] = date("Y-m-d H:i:s",time());
 		$data['updated_at'] = date("Y-m-d H:i:s",time());
-		
+
 		/*if(!$comment->save()) {
 			return back()->withInput()->with("notify_error","添加评论失败!");
 		}*/
-		$id = DB::table('comments')->insertGetId($data);
+		//$id = DB::table('comments')->insertGetId($data);
+		$comment = Comment::create($data);
+		$id = $comment->id;
 		$job = new BadWord($id);
 		$this->dispatch($job);
 		if(!$id){

@@ -54,6 +54,9 @@
 			@include('admin.master.notify')
 			
 			<div>
+				<a class="btn btn-xs btn-success" href="{{ url('donkey/admin/comment/destroy') .'/'. $comments->id}}" style="float:right; margin-bottom:5px;" >
+					删除评论和子评论
+				</a>
                 <table id="sample-table-1" class="table table-striped table-bordered table-hover center">
                     <tr>
                         <th colspan="4" class="center">详细信息</th>
@@ -74,6 +77,7 @@
                 </table>
                 @if($comments->childs->count() > 0)
                 <p>子评论</p>
+			
 				<table id="sample-table-1" class="table table-striped table-bordered table-hover center">
 					<thead>
 

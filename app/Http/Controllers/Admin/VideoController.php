@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Http\Controllers\Admin\BaseController;
 use App\Models\Resource;
 use Illuminate\Http\Request;
+use App\Models\Favour;
+use App\Models\FavourCount;
 use Auth;
 use DB;
 use Input;
@@ -29,7 +31,7 @@ class VideoController extends BaseController {
             $videos = $videos->where('title', 'like', '%' . $name . '%');
         }
         //生成唯一键
-        $key = md5($videos->toSql());
+        /*$key = md5($videos->toSql());
 
         if(!Cache::get($key)) {
             //查出来
@@ -38,8 +40,8 @@ class VideoController extends BaseController {
             Cache::put($key,$videos,5);
         } else {
             $videos = Cache::get($key);
-        }
-        //dd($videos);
+        }*/
+        $videos = $videos->paginate(10);
         //Cache::put('123','123456',3);
         //$a = Cache::get('123');
         //echo $a;
@@ -361,7 +363,27 @@ class VideoController extends BaseController {
 		}
 		
 		//TODO 删除所有的评论
+		if(count($resource->comments) > 0) {
+			foreach($resource->comments as $item){
+				if(count($item->childs) > 0) {
+					foreach($item->childs as $value){
+						//删除踩赞数量
+						Favour::where("comment_id",$value->id)->delete();
+						//删除踩赞记录
+						FavourCount::where("comment_id",$value->id)->delete();	
+						//删除子评论
+						$value->delete();
+					}
+				}
+				//删除踩赞数量
+				Favour::where("comment_id",$item->id)->delete();
 		
+				//删除踩赞记录
+				FavourCount::where("comment_id",$item->id)->delete();
+				//删除评论
+				$item->delete();
+			}
+		}
 		
 		//从数据库删除
 		$resource->forceDelete();
