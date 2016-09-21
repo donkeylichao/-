@@ -14,7 +14,7 @@ class PersonalController extends BaseController {
 	 */
 	public function index()
 	{
-		//
+		return view('admin.personal.index');
 	}
 
 	/**
