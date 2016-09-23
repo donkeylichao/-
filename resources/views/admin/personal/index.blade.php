@@ -105,7 +105,7 @@
 						<div>
 							<!-- #section:pages/profile.picture -->
 							<span class="profile-picture">
-								<img id="avatar" class="editable img-responsive" alt="Alex's Avatar" src="/assets/avatars/profile-pic.jpg" />
+								<img id="headimg" class="editable img-responsive" alt="{{ $user->name }}" src="{{ $user->headimg ? $user->headimg : '/assets/avatars/profile-pic.jpg'}}" />
 							</span>
 
 							<!-- /section:pages/profile.picture -->
@@ -114,7 +114,7 @@
 							<div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
 								<div class="inline position-relative">
 									<a href="#" class="user-title-label" data-toggle="dropdown">
-										<span class="white">Alex M. Doe</span>
+										<span class="white">{{ ucfirst($user->name )}}</span>
 									</a>
 
 								</div>
@@ -198,7 +198,7 @@
 								<div class="profile-info-name"> 用户名 </div>
 
 								<div class="profile-info-value">
-									<span class="editable" id="name">alexdoe</span>
+									<span class="editable" id="name">{{ $user->name or ''}}</span>
 								</div>
 							</div>
 
@@ -206,7 +206,7 @@
 								<div class="profile-info-name"> email </div>
 
 								<div class="profile-info-value">
-									<span class="editable" id="email">3812123124@qq.com</span>
+									<span class="editable" id="email">{{ $user->email or ''}}</span>
 								</div>
 							</div>
 
@@ -214,7 +214,7 @@
 								<div class="profile-info-name"> phone </div>
 
 								<div class="profile-info-value">
-									<span class="editable" id="phone">38</span>
+									<span class="editable" id="phone">{{ $user->phone or ''}}</span>
 								</div>
 							</div>
 
@@ -222,7 +222,7 @@
 								<div class="profile-info-name"> 真实姓名 </div>
 
 								<div class="profile-info-value">
-									<span class="editable" id="real_name">2010/06/20</span>
+									<span class="editable" id="real_name">{{ $user->real_name or ''}}</span>
 								</div>
 							</div>
 
@@ -230,7 +230,7 @@
 								<div class="profile-info-name"> Last Online </div>
 
 								<div class="profile-info-value">
-									<span class="editable" id="last_login_time">3 hours ago</span>
+									<span class="editable" id="last_login_time">{{ date("Y-m-d H:i:s",$user->last_login_time) }}</span>
 								</div>
 							</div>
 
@@ -238,7 +238,7 @@
 								<div class="profile-info-name"> Last Ip </div>
 
 								<div class="profile-info-value">
-									<span class="editable" id="last_login_ip">Editable as WYSIWYG</span>
+									<span class="editable" id="last_login_ip">{{ $user->last_login_ip }}</span>
 								</div>
 							</div>
 						</div>
@@ -299,29 +299,50 @@
 				$.fn.editableform.loading = "<div class='editableform-loading'><i class='ace-icon fa fa-spinner fa-spin fa-2x light-blue'></i></div>";
 			    $.fn.editableform.buttons = '<button type="submit" class="btn btn-info editable-submit"><i class="ace-icon fa fa-check"></i></button>'+
 			                                '<button type="button" class="btn editable-cancel"><i class="ace-icon fa fa-times"></i></button>';    
-				
+				$.fn.editable.defaults.ajaxOptions = {type: "GET"}
 				//editables 
 				
 				//text editable
 			    $('#name')
 				.editable({
 					type: 'text',
-					name: 'name'
+					name: 'name',
+					pk: {{ $user->id }},
+					url: "/donkey/admin/personal/update/",
+					success: function(response,newValue){
+						console.log(response.msg);
+						//if(response.status == 'success') console.log(response.msg);
+					},
 			    });
 			
 				$('#email').editable({
 					type: 'text',
-					name: 'email'
+					name: 'email',
+					pk : {{ $user->id }},
+					url : "/donkey/admin/personal/update/",
+					success : function(response,newValue) {
+						console.log(response.msg)
+					},
 				});
 			
 			    $('#phone').editable({
 			        type: 'text',
-					name : 'phone'
+					name : 'phone',
+					pk : {{ $user->id }},
+					url : "/donkey/admin/personal/update/",
+					success : function(response,newValue) {
+						console.log(response.msg)
+					},
 				});
 				
 				$('#real_name').editable({
 			        type: 'text',
-					name : 'real_name'
+					name : 'real_name',
+					pk : {{ $user->id }},
+					url : "/donkey/admin/personal/update/",
+					success : function(response,newValue) {
+						console.log(response.msg)
+					},
 				});
 				
 				
@@ -337,10 +358,15 @@
 					}
 			
 					var last_gritter
-					$('#avatar').editable({
+					$('#headimg').editable({
+						ajaxOptions: {
+							type: 'get',
+							dataType: 'json',
+						},
 						type: 'image',
-						name: 'avatar',
+						name: 'headimg',
 						value: null,
+						pk : {{ $user->id }},
 						image: {
 							//specify ace file input plugin's options here
 							btn_choose: 'Change Avatar',
@@ -348,7 +374,7 @@
 							maxSize: 110000,//~100Kb
 			
 							//and a few extra ones here
-							name: 'avatar',//put the field name here as well, will be used inside the custom plugin
+							name: 'headimg',//put the field name here as well, will be used inside the custom plugin
 							on_error : function(error_type) {//on_error function will be called when the selected file has a problem
 								if(last_gritter) $.gritter.remove(last_gritter);
 								if(error_type == 1) {//file format error
@@ -371,14 +397,14 @@
 								$.gritter.removeAll();
 							}
 						},
-					    url: function(params) {
+					    /*url: function(params) {
 							// ***UPDATE AVATAR HERE*** //
 							//for a working upload example you can replace the contents of this function with 
 							//examples/profile-avatar-update.js
 			
 							var deferred = new $.Deferred
 			
-							var value = $('#avatar').next().find('input[type=hidden]:eq(0)').val();
+							var value = $('#headimg').next().find('input[type=hidden]:eq(0)').val();
 							if(!value || value.length == 0) {
 								deferred.resolve();
 								return deferred.promise();
@@ -389,8 +415,8 @@
 							setTimeout(function(){
 								if("FileReader" in window) {
 									//for browsers that have a thumbnail of selected image
-									var thumb = $('#avatar').next().find('img').data('thumb');
-									if(thumb) $('#avatar').get(0).src = thumb;
+									var thumb = $('#headimg').next().find('img').data('thumb');
+									if(thumb) $('#headimg').get(0).src = thumb;
 								}
 								
 								deferred.resolve({'status':'OK'});
@@ -407,9 +433,10 @@
 							return deferred.promise();
 							
 							// ***END OF UPDATE AVATAR HERE*** //
-						},
-						
+						},*/
+						url : '/donkey/admin/personal/headimg/',
 						success: function(response, newValue) {
+							
 						}
 					})
 				}catch(e) {}

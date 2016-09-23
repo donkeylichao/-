@@ -302,7 +302,12 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 	
 	//个人中心
 	Route::group(['prefix'=>'personal'] , function(){
+		//首页
 		Route::get('/' , ['as'=>'admin.personal' , 'uses'=>'PersonalController@index']);
+		//修改页
+		Route::get('update' , 'PersonalController@update');
+		//修改头像
+		Route::get('headimg' , 'PersonalController@headimg');
 	});
 	
 	//表情管理
@@ -320,7 +325,10 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		//删除表情
 		Route::get('destroy/{id}' , ['as'=>'amdin.emoji.destroy' , 'uses'=>'EmojiController@destroy']);
 	});
+	
 });
+
+
 /**********************************************************
 	app后台资源下载相关路由
 ********************************************************/
@@ -332,6 +340,14 @@ Route::group(['prefix' => 'donkey/download' , 'namespace'=>'Download' ] , functi
 });
 
 
+/********************************************************
+	服务接口
+*********************************************************/
+	//测试用的
+Route::group(['prefix'=>'donkey/api' , 'namespace'=>'Api'] , function(){
+	Route::get('/' , 'ExcelController@index');
+});
+//以上为测试用的
 
 
 

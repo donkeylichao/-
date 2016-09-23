@@ -2,8 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Admin\BaseController;
-
+use App\Models\User;
 use Illuminate\Http\Request;
+use Input,Auth;
+
 
 class PersonalController extends BaseController {
 
@@ -14,7 +16,14 @@ class PersonalController extends BaseController {
 	 */
 	public function index()
 	{
-		return view('admin.personal.index');
+		if(!Auth::check()){
+			return redirect('/donkey/admin/auth/login');
+		}
+		$compact = [];
+		$user = Auth::user();
+		$compact[] = 'user';
+		
+		return view('admin.personal.index')->with(compact($compact));
 	}
 
 	/**
@@ -65,11 +74,42 @@ class PersonalController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request)
 	{
-		//
+		//dump($request->all());
+		$user = User::find($request->input('pk'));
+		$data = [];
+		$data['status'] = 'error';
+		$data['msg'] = '修改失败!';
+		$name = $request->input('name');
+		$value = rtrim($request->input('value'));
+		switch($name) {
+			case 'email':
+				$user->email = $value;
+				break;
+			case 'name':
+				$user->name = $value;
+				break;
+			case 'real_name':
+				$user->real_name = $value;
+				break;
+			case 'phone':
+				$user->phone = $value;
+				break;
+		}
+		if($user->save()) {
+			$data['status'] = 'success';
+			$data['msg'] = '修改成功!';
+		}
+	
+		return response()->json($data);
 	}
-
+	
+	
+	public function headimg(Request $request)
+	{
+		dump(Input::hasFile('headimg'));
+	}
 	/**
 	 * Remove the specified resource from storage.
 	 *
