@@ -272,7 +272,7 @@
 		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>
-		  <script src="../assets/js/excanvas.min.js"></script>
+		  <script src="/assets/js/excanvas.min.js"></script>
 		<![endif]-->
 		<script src="/assets/js/jquery-ui.custom.min.js"></script>
 		<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -308,7 +308,7 @@
 					type: 'text',
 					name: 'name',
 					pk: {{ $user->id }},
-					url: "/donkey/admin/personal/update/",
+					url: "/donkey/admin/personal/update",
 					success: function(response,newValue){
 						console.log(response.msg);
 						//if(response.status == 'success') console.log(response.msg);
@@ -319,7 +319,7 @@
 					type: 'text',
 					name: 'email',
 					pk : {{ $user->id }},
-					url : "/donkey/admin/personal/update/",
+					url : "/donkey/admin/personal/update",
 					success : function(response,newValue) {
 						console.log(response.msg)
 					},
@@ -329,7 +329,7 @@
 			        type: 'text',
 					name : 'phone',
 					pk : {{ $user->id }},
-					url : "/donkey/admin/personal/update/",
+					url : "/donkey/admin/personal/update",
 					success : function(response,newValue) {
 						console.log(response.msg)
 					},
@@ -338,8 +338,12 @@
 				$('#real_name').editable({
 			        type: 'text',
 					name : 'real_name',
-					pk : {{ $user->id }},
-					url : "/donkey/admin/personal/update/",
+                    ajaxOptions: {
+                        type: 'GET',
+                        dataType: 'json',
+                    },
+                    pk : "{{ $user->id }}",
+                    url : "/donkey/admin/personal/update",
 					success : function(response,newValue) {
 						console.log(response.msg)
 					},
@@ -365,7 +369,7 @@
 						},
 						type: 'image',
 						name: 'headimg',
-						value: null,
+						value: $('.ace-file-name').attr('data_title'),
 						pk : {{ $user->id }},
 						image: {
 							//specify ace file input plugin's options here
@@ -376,7 +380,8 @@
 							//and a few extra ones here
 							name: 'headimg',//put the field name here as well, will be used inside the custom plugin
 							on_error : function(error_type) {//on_error function will be called when the selected file has a problem
-								if(last_gritter) $.gritter.remove(last_gritter);
+
+                                if(last_gritter) $.gritter.remove(last_gritter);
 								if(error_type == 1) {//file format error
 									last_gritter = $.gritter.add({
 										title: 'File is not an image!',
@@ -434,7 +439,7 @@
 							
 							// ***END OF UPDATE AVATAR HERE*** //
 						},*/
-						url : '/donkey/admin/personal/headimg/',
+						url : '/donkey/admin/personal/headimg',
 						success: function(response, newValue) {
 							
 						}
@@ -444,7 +449,7 @@
 				
 			
 				//another option is using modals
-				$('#avatar2').on('click', function(){
+				/*$('#avatar2').on('click', function(){
 					var modal = 
 					'<div class="modal fade">\
 					  <div class="modal-dialog">\
@@ -454,7 +459,7 @@
 							<h4 class="blue">Change Avatar</h4>\
 						</div>\
 						\
-						<form class="no-margin">\
+						<form class="no-margin" enctype="multipart/form-data">\
 						 <div class="modal-body">\
 							<div class="space-4"></div>\
 							<div style="width:75%;margin-left:12%;"><input type="file" name="file-input" /></div>\
@@ -523,7 +528,7 @@
 						return false;
 					});
 							
-				});
+				});*/
 			
 				
 			
