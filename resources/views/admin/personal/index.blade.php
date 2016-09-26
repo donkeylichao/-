@@ -12,6 +12,11 @@
 		<link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
 
+		<style type="text/css">
+			#headimg:hover{
+				cursor:pointer;
+			}
+		</style>
 		<!-- page specific plugin styles -->
 		<link rel="stylesheet" href="/assets/css/jquery-ui.custom.min.css" />
 		<link rel="stylesheet" href="/assets/css/jquery.gritter.css" />
@@ -105,9 +110,9 @@
 						<div>
 							<!-- #section:pages/profile.picture -->
 							<span class="profile-picture">
-								<img id="headimg" class="editable img-responsive" alt="{{ $user->name }}" src="{{ $user->headimg ? $user->headimg : '/assets/avatars/profile-pic.jpg'}}" />
+								<img id="headimg" width="180px" class="editable img-responsive" alt="{{ $user->name }}" src="{{ $user->headimg ? $user->headimg : '/assets/avatars/profile-pic.jpg'}}" />
 							</span>
-
+							<input type="hidden" name="oldhead" value=""/>
 							<!-- /section:pages/profile.picture -->
 							<div class="space-4"></div>
 
@@ -293,7 +298,7 @@
 		
 		<script type="text/javascript">
 			jQuery(function($) {
-			
+				$('#head_file').click();
 				//editables on first profile page
 				$.fn.editable.defaults.mode = 'inline';
 				$.fn.editableform.loading = "<div class='editableform-loading'><i class='ace-icon fa fa-spinner fa-spin fa-2x light-blue'></i></div>";
@@ -349,9 +354,66 @@
 					},
 				});
 				
+				/*$('#headfile').on('click',function(){
+					$(this).click();
+				})*/
+				$('#headimg').click(function(){
+					
+					var content = '<span class="editable-container editable-inline">\
+						<div>\
+							<div class="editableform-loading" style="display: none;"><i class="ace-icon fa fa-spinner fa-spin fa-2x light-blue"></i>\
+						</div>\
+							<form class="form-inline editableform" action="#" method="post" enctype="multipart/form-data">\
+								<div class="control-group form-group">\
+									<div>\
+										<div class="editable-input editable-image">\
+										<span style="display:none;">\
+											<input type="file" name="files" id="files" value="">\
+										</span>\
+										<span>\
+											<label class="ace-file-input ace-file-multiple" style="width: 150px;">\
+												<span class="ace-file-container" data-title="Change Avatar">\
+													<span class="ace-file-name" data-title="No File ...">\
+													<i class=" ace-icon fa fa-picture-o"></i>\
+													</span>\
+												</span>\
+											</label>\
+										</span>\
+										</div>\
+									</div>\
+									<div class="editable-error-block help-block" style="display: none;"></div>\
+								</div>\
+							</form>\
+						</div>\
+					</span>';
+					$(this).css('display','none');
+					$(this).parent().append(content);
+					$('.ace-file-container').click(function(){
+						$('#files').click();
+						$("#files").change(function(){
+							//console.log('adsf');
+							//获取上一张图片的地址
+							var oldhead = $("input[name='oldhead']").val();
+							var newhead = $("input[name='files']").val();
+							$.ajax({
+								url : '/donkey/admin/personal/headimg',
+								type : 'POST',
+								data : {'id':"{{ $user->id }}",
+										'files': newhead,
+										'old' : oldhead,
+										'_token': "{{ csrf_token() }}",
+								},
+								success : function(msg){
+									console.log('success');
+								}
+							})
+						});
+					});
+				});
+				
 				
 				// *** editable avatar *** //
-				try {//ie8 throws some harmless exceptions, so let's catch'em
+				/*try {//ie8 throws some harmless exceptions, so let's catch'em
 			
 					//first let's add a fake appendChild method for Image element for browsers that have a problem with this
 					//because editable plugin calls appendChild, and it causes errors on IE at unpredicted points
@@ -364,12 +426,16 @@
 					var last_gritter
 					$('#headimg').editable({
 						ajaxOptions: {
-							type: 'get',
+							type: 'post',
 							dataType: 'json',
+							data:{'pk':"{{ $user->id }}",'name':'headimg','_token':"{{ csrf_token() }}",'file':$('.ace-file-name').attr('data-title')},
+							success : function(e){
+								console.log('asdf');
+							},
 						},
 						type: 'image',
 						name: 'headimg',
-						value: $('.ace-file-name').attr('data_title'),
+						value: null,
 						pk : {{ $user->id }},
 						image: {
 							//specify ace file input plugin's options here
@@ -396,13 +462,18 @@
 									});
 								}
 								else {//other error
+									var filevalue = $(".ace-file-name").attr('data-title');
+									$("headimg-hidden").val(filevalue);
 								}
 							},
 							on_success : function() {
-								$.gritter.removeAll();
+								//console.log(suc);
+								//$.gritter.removeAll();
+								var filevalue = $(".ace-file-name").attr('data-title');
+								$("headimg-hidden").val(filevalue);
 							}
 						},
-					    /*url: function(params) {
+					   /* url: function(params) {
 							// ***UPDATE AVATAR HERE*** //
 							//for a working upload example you can replace the contents of this function with 
 							//examples/profile-avatar-update.js
@@ -421,6 +492,9 @@
 								if("FileReader" in window) {
 									//for browsers that have a thumbnail of selected image
 									var thumb = $('#headimg').next().find('img').data('thumb');
+									//var thumb = $('#headimg').next().find('img').get(0).style.backgroundImage;
+									//var thumb = $('#headimg').next().find('img').css('background');
+									//console.log(thumb);
 									if(thumb) $('#headimg').get(0).src = thumb;
 								}
 								
@@ -434,17 +508,17 @@
 								});
 								
 							 } , parseInt(Math.random() * 800 + 800))
-			
 							return deferred.promise();
 							
 							// ***END OF UPDATE AVATAR HERE*** //
 						},*/
-						url : '/donkey/admin/personal/headimg',
+						/*url : '/donkey/admin/personal/headimg',
 						success: function(response, newValue) {
-							
+							//console.log(response);
+							//console.log(newValue);
 						}
 					})
-				}catch(e) {}
+				}catch(e) {}*/
 				
 				
 			

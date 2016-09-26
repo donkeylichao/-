@@ -108,7 +108,7 @@ class PersonalController extends BaseController {
 	
 	public function headimg(Request $request)
 	{
-		dump(Input::hasFile('headimg'));
+		dd($request->file('files'));
 	}
 	/**
 	 * Remove the specified resource from storage.

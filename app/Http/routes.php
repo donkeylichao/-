@@ -307,7 +307,7 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		//修改页
 		Route::get('update' , 'PersonalController@update');
 		//修改头像
-		Route::get('headimg' , 'PersonalController@headimg');
+		Route::post('headimg' , 'PersonalController@headimg');
 	});
 	
 	//表情管理
