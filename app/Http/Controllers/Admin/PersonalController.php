@@ -108,7 +108,8 @@ class PersonalController extends BaseController {
 	
 	public function headimg(Request $request)
 	{
-		dd($request->file('files'));
+		//dd($request->file('userfile'));
+        echo 'true';
 	}
 	/**
 	 * Remove the specified resource from storage.

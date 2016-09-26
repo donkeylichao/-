@@ -390,16 +390,49 @@
 					$(this).parent().append(content);
 					$('.ace-file-container').click(function(){
 						$('#files').click();
-						$("#files").change(function(){
+						$('#files').change(function(){
+                            var oMyForm = new FormData();
+
+                            oMyForm.append("id", "{{ $user->id }}");
+                            oMyForm.append("_token", "{{ csrf_token() }}"); // 数字123456被立即转换成字符串"123456"
+
+                            //用户所选择的文件
+                            //console.log($("input[name='files']").get(0).files[0]);
+                            oMyForm.append("userfile", $("input[name='files']").get(0).files[0]);
+
+                            var oReq = new XMLHttpRequest();
+                            oReq.onreadystatechange = zswFun;
+                            oReq.open("POST", "{{ url('donkey/admin/personal/headimg')}}");
+                            oReq.send(oMyForm);
+
+                            function zswFun(){
+                                if(oReq.readyState == 4 && oReq.status == 200){
+                                    var b = oReq.responseText;
+                                    if(b == "true"){
+                                        alert("登录成功！");
+                                    }else{
+                                        alert("登录失败！");
+                                    }
+                                }
+                            }
+
+                        });
+						/*$("#files").change(function(){
 							//console.log('adsf');
 							//获取上一张图片的地址
 							var oldhead = $("input[name='oldhead']").val();
-							var newhead = $("input[name='files']").val();
+							var newhead = $("input[name='files']").get(0).files[0];
+                            //var myForm = new FormData();
+                            //myForm.append('filename',newhead);
+                           // var newheadimg = newhead.files[0];
+
+                            //console.log(newhead);
 							$.ajax({
+                                type : 'POST',
 								url : '/donkey/admin/personal/headimg',
-								type : 'POST',
+                                dataType: 'json',
 								data : {'id':"{{ $user->id }}",
-										'files': newhead,
+										'headimg': newhead,
 										'old' : oldhead,
 										'_token': "{{ csrf_token() }}",
 								},
@@ -407,11 +440,11 @@
 									console.log('success');
 								}
 							})
-						});
+						});*/
 					});
 				});
-				
-				
+
+
 				// *** editable avatar *** //
 				/*try {//ie8 throws some harmless exceptions, so let's catch'em
 			
