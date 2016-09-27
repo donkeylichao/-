@@ -55,7 +55,7 @@
 						?>
 						@if($n) 
 						<li>
-							<a href="{{$n->resource_id ? url(Config::get('common.notify_routes')[$n->type] . $n->resource->id) : url(Config::get('common.notify_routes')[$n->type].$n->album->id)}}">
+							<a href="{{ $n->resource_id ? url(Config::get('common.notify_routes')[$n->type] . $n->resource_id) : url(Config::get('common.notify_routes')[$n->type].$n->album_id)}}">
 								<div class="clearfix">
 									<span class="pull-left">
 										<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>

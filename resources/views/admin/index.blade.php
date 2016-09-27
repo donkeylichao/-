@@ -63,7 +63,7 @@
 		
 		<!-- /section:basics/content.breadcrumbs -->
 		<div class="page-content">
-			
+			<p>当你的才华还撑不起你的野心时,就应该静下心来学习。</p>
 			@include('admin.master.common_footer')
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>

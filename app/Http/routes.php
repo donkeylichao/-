@@ -22,9 +22,9 @@ Route::group(['prefix'=>'donkey' , 'namespace'=>'Home'] , function(){
 	//视频列表
 	Route::controller('video/{category_id?}' , 'VideoController');
 	//日记列表
-	//Route::controller('post' , 'PostController');
-	//评论
-	//Route::controller('comment' , 'CommentController');
+	Route::controller('post/{category?}' , 'PostController');
+	//文件
+	Route::controller('pdf/{category?}' , 'PdfController');
 });
 
 
@@ -348,6 +348,12 @@ Route::group(['prefix'=>'donkey/api' , 'namespace'=>'Api'] , function(){
 	Route::get('/' , 'ExcelController@index');
 });
 //以上为测试用的
+
+//服务
+Route::group(['prefix'=>'donkey/server' , 'namespace'=>'Service'] , function(){
+	//发送邮件服务
+	Route::get('mail' , 'MailController@index');
+});
 
 
 

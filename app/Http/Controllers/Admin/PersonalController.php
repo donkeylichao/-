@@ -3,6 +3,10 @@
 use App\Http\Requests;
 use App\Http\Controllers\Admin\BaseController;
 use App\Models\User;
+use App\Models\Resource;
+use App\Models\Pdf;
+use App\Models\Post;
+use App\Models\House;
 use Illuminate\Http\Request;
 use Input,Auth;
 
@@ -22,6 +26,26 @@ class PersonalController extends BaseController {
 		$compact = [];
 		$user = Auth::user();
 		$compact[] = 'user';
+		
+		//房子数量
+		$rooms = House::where('user_id',$user->id)->count();
+		$compact[] = 'rooms';
+		
+		//视频数量
+		$videos = Resource::withTrashed()->where('type_id',1)->where('user_id',$user->id)->count();
+		$compact[] = 'videos';
+		
+		//音频数量
+		$musics = Resource::withTrashed()->where('type_id',2)->where('user_id',$user->id)->count();
+		$compact[] = 'musics';
+		
+		//文件数量
+		$pdfs = Pdf::withTrashed()->where('user_id',$user->id)->count();
+		$compact[] = 'pdfs';
+		
+		//日记数量
+		$posts = Post::withTrashed()->where('user_id',$user->id)->count();
+		$compact[] = 'posts';
 		
 		return view('admin.personal.index')->with(compact($compact));
 	}

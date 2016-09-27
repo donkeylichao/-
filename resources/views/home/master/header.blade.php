@@ -41,7 +41,7 @@
 								</ul>
 							</li>-->
 							<li  @if(strpos(Request::getUri(),'post')) class="active" @endif><a href="{{ url('donkey/post')}}">日记</a></li>
-							<li><a href="#">不知道</a></li>
+							<li @if(strpos(Request::getUri(),'pdf')) class="active" @endif><a href="{{ url('donkey/pdf') }}">文件</a></li>
 						</ul>
 					</div><!-- /.navbar-collapse -->
 			  </div><!-- /.container-fluid -->

@@ -25,7 +25,7 @@
 						<button class="btn btn-primary btn-xs" data-toggle="offcanvas" type="button">菜单</button>
 					</p>
 					<div class="jumbotron" style="margin-bottom:10px;">
-						<p>hello world</p>
+						<p>{{ Config::get('common.motto')[1] }}</p>
 					</div>
 					<div class="row">
 						<ul id="houselist-mod" class="houselist-mod col-sm-12">

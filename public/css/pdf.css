@@ -1,0 +1,14 @@
+/*pdf列表样式*/
+#pdf-list{
+	height:295px;
+}
+.list-unstyled li{
+	border-bottom:1px dotted #ccc;
+}
+.list-unstyled  li a{
+	cursor:pointer;
+	color:#000;
+}
+.list-unstyled  li a:hover{
+	color:#4398ed;
+}

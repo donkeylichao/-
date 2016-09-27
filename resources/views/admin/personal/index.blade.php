@@ -152,47 +152,57 @@
 
 					<div class="col-xs-12 col-sm-9">
 						<div class="center">
+							<a href="{{ url('donkey/admin/room/index/1')}}" style="text-decoration:none">
 							<span class="btn btn-app btn-sm btn-light no-hover">
-								<span class="line-height-1 bigger-170 blue"> 1,411 </span>
+								<span class="line-height-1 bigger-170 blue"> {{ $rooms }} </span>
 
 								<br />
 								<span class="line-height-1 smaller-90"> 房子 </span>
 							</span>
-
+							</a>
+							
+							<a href="{{ url('donkey/admin/video/index')}}" style="text-decoration:none">
 							<span class="btn btn-app btn-sm btn-yellow no-hover">
-								<span class="line-height-1 bigger-170"> 32 </span>
+								<span class="line-height-1 bigger-170"> {{ $videos }} </span>
 
 								<br />
 								<span class="line-height-1 smaller-90"> 视频 </span>
 							</span>
+							</a>
 
+							<a href="{{ url('donkey/admin/music/index')}}" style="text-decoration:none">
 							<span class="btn btn-app btn-sm btn-pink no-hover">
-								<span class="line-height-1 bigger-170"> 4 </span>
+								<span class="line-height-1 bigger-170"> {{ $musics }} </span>
 
 								<br />
 								<span class="line-height-1 smaller-90"> 音频 </span>
 							</span>
+							</a>
 
 							<span class="btn btn-app btn-sm btn-grey no-hover">
-								<span class="line-height-1 bigger-170"> 23 </span>
+								<span class="line-height-1 bigger-170"> 0 </span>
 
 								<br />
 								<span class="line-height-1 smaller-90">  相册 </span>
 							</span>
-
+			
+							<a href="{{ url('donkey/admin/post/index')}}" style="text-decoration:none">
 							<span class="btn btn-app btn-sm btn-success no-hover">
-								<span class="line-height-1 bigger-170"> 7 </span>
+								<span class="line-height-1 bigger-170"> {{ $posts }} </span>
 
 								<br />
 								<span class="line-height-1 smaller-90"> 日记 </span>
 							</span>
+							</a>
 
+							<a href="{{ url('donkey/admin/pdf/index')}}" style="text-decoration:none">
 							<span class="btn btn-app btn-sm btn-primary no-hover">
-								<span class="line-height-1 bigger-170"> 55 </span>
+								<span class="line-height-1 bigger-170"> {{ $pdfs }} </span>
 
 								<br />
 								<span class="line-height-1 smaller-90"> 文件 </span>
 							</span>
+							</a>
 						</div>
 
 						<div class="space-12"></div>
