@@ -109,7 +109,45 @@ class PersonalController extends BaseController {
 	public function headimg(Request $request)
 	{
 		//dd($request->file('userfile'));
-        echo 'true';
+		$data = [];
+		$data['status'] = 0;
+		$data['msg'] = '上传失败!';
+		$url = $request->input('url');
+		if($request->hasFile('userfile') && $request->file('userfile')->isValid()) {
+			//上传图片
+			$file = $request->file('userfile');
+			$mime = $file->getMimeType();
+			switch($mime) {
+				case 'image/jpeg':
+					$ext = '.jpg';
+					break;
+				case 'image/png':
+					$ext = '.png';
+					break;
+				default:
+					$data['msg'] = '图片类型不对';
+					echo json_encode($data,JSON_UNESCAPED_UNICODE );
+					return;
+			}
+			$newname = time().$this->name().$ext;
+			$save_path = public_path('uploads/headimgs');
+			$sql_path = '/uploads/headimgs/'.$newname;
+			$file->move($save_path,$newname);
+			
+			$headimg = User::find($request->input('id'));
+			$url = $headimg->headimg;
+			$headimg->headimg = $sql_path;
+			
+			if($headimg->save()){
+				$data['status'] = 1;
+				$data['msg'] = '上传成功!';		
+				if($url != '' && file_exists(public_path($url))) {
+					unlink(public_path($url));
+				}
+			}
+			$data['url'] = $sql_path;
+		}
+		echo json_encode($data,JSON_UNESCAPED_UNICODE );
 	}
 	/**
 	 * Remove the specified resource from storage.
@@ -120,6 +158,15 @@ class PersonalController extends BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+	
+	private function name($num = 6) {
+		$str = 'ABCEDFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+		$name = '';
+		for($i=0;$i<$num;$i++) {
+			$name .= $str[rand(0,61)];
+		}
+		return $name;
 	}
 
 }

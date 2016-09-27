@@ -112,7 +112,7 @@
 							<span class="profile-picture">
 								<img id="headimg" width="180px" class="editable img-responsive" alt="{{ $user->name }}" src="{{ $user->headimg ? $user->headimg : '/assets/avatars/profile-pic.jpg'}}" />
 							</span>
-							<input type="hidden" name="oldhead" value=""/>
+							<input type="hidden" name="oldhead" value="{{ $user->headimg }}"/>
 							<!-- /section:pages/profile.picture -->
 							<div class="space-4"></div>
 
@@ -392,10 +392,10 @@
 						$('#files').click();
 						$('#files').change(function(){
                             var oMyForm = new FormData();
-
+							//console.log('hehe');
                             oMyForm.append("id", "{{ $user->id }}");
                             oMyForm.append("_token", "{{ csrf_token() }}"); // 数字123456被立即转换成字符串"123456"
-
+							oMyForm.append("url", $("input[name='oldhead']").val());
                             //用户所选择的文件
                             //console.log($("input[name='files']").get(0).files[0]);
                             oMyForm.append("userfile", $("input[name='files']").get(0).files[0]);
@@ -404,18 +404,21 @@
                             oReq.onreadystatechange = zswFun;
                             oReq.open("POST", "{{ url('donkey/admin/personal/headimg')}}");
                             oReq.send(oMyForm);
-
+							
                             function zswFun(){
                                 if(oReq.readyState == 4 && oReq.status == 200){
-                                    var b = oReq.responseText;
-                                    if(b == "true"){
-                                        alert("登录成功！");
+                                    var b = JSON.parse(oReq.responseText);
+                                    if(b.status == 1){
+										console.log(b.msg);
+										$('.editable-container').remove();
+										$("#headimg").attr('src',b.url);
+										$("#headimg").css('display','block');
                                     }else{
-                                        alert("登录失败！");
+                                        console.log(b.msg);
                                     }
+									//$('#files').remove();
                                 }
                             }
-
                         });
 						/*$("#files").change(function(){
 							//console.log('adsf');
