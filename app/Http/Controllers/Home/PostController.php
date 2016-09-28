@@ -13,17 +13,24 @@ class PostController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getIndex($category = 1)
+	public function getIndex($category = 0)
 	{
 		$compact = [];
 		$categories = Post::where('pid',0)->get();
 		$compact[] = 'categories';
 		
-		$posts = Post::where('pid',$category)->orderBy('created_at','desc')->paginate(14);
+		if($category != 0){
+			$posts = Post::where('pid',$category)->orderBy('created_at','desc')->paginate(14);
+		} else {
+			$posts = Post::where('pid','<>',0)->orderBy('created_at','desc')->paginate(14);
+		}
 		$compact[] = 'posts';
 		
-		$category = Post::find($category);
-		$compact[] = 'category';
+		$categoryO = Post::find($category);
+		$compact[] = 'categoryO';
+		
+		$category_id = $category;
+		$compact[] = 'category_id';
 		
 		return view('home.post.index')->with(compact($compact));
 	}
@@ -36,11 +43,11 @@ class PostController extends Controller {
 	public function getShow($category,$id)
 	{
 		$compact = []; 
-		$post = Post::find($id);
+		$post = Post::with('parent')->find($id);
 		$compact[] = 'post';
 		
-		$category = Post::find($category);
-		$compact[] = 'category';
+		/*$category = Post::find($category);
+		$compact[] = 'category';*/
 		
 		return view('home.post.show')->with(compact($compact));
 	}

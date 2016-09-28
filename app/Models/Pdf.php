@@ -23,4 +23,9 @@ class Pdf extends Model {
 	{
 		return $this->hasMany("App\Models\Pdf","pid","id");
 	}
+	
+	public function parent()
+	{
+		return $this->belongsTo("App\Models\Pdf","pid","id");
+	}
 }

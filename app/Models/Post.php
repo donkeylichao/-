@@ -23,4 +23,9 @@ class Post extends Model {
 	{
 		return $this->hasMany("App\Models\Post","pid","id");
 	}
+	 
+	public function parent()
+	{
+		return $this->belongsTo("App\Models\Post","pid","id");
+	}
 }

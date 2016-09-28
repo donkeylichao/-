@@ -13,16 +13,22 @@ class PdfController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getIndex($category = 1)
+	public function getIndex($category = 0)
 	{
 		$compact = [];
 		$categories = Pdf::where('pid',0)->get();
 		$compact[] = 'categories';
 			
-		$pdfs = Pdf::where('pid',$category)->orderBy('created_at','desc')->paginate(14);
+		if($category != 0) {
+			$pdfs = Pdf::where('pid',$category)->orderBy('created_at','desc')->paginate(14);
+		} else {
+			$pdfs = Pdf::where('pid','<>',0)->orderBy('created_at','desc')->paginate(14);
+		}
 		$compact[] = 'pdfs';
 		
-		$category = Pdf::find($category);
+		$categoryO = Pdf::find($category);
+		$compact[] = 'categoryO';
+		
 		$compact[] = 'category';
 		
 		return view('home.pdf.index')->with(compact($compact));

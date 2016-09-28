@@ -9,7 +9,7 @@
 		<div class="container">
 			<div class="page-header">
 				<h3>文件列表 <small>> 
-				{{ $category->title }}
+				{{ $categoryO->title or '全部'}}
 				</small></h3>
 			</div>
 		</div>
@@ -27,7 +27,7 @@
 						<ul class="list-unstyled col-12">
 							@foreach($pdfs as $item)
 							<li class="col-md-6 col-sm-12 col-xs-12">
-								<a href="{{ url('donkey/pdf/'.$category->id.'/show').'/'.$item->id }}" target="blank">
+								<a href="{{ url('donkey/pdf/'.$category.'/show').'/'.$item->id }}" target="blank">
 									<p class="pull-left">{{ $item->title }}</p> 
 									<span class="pull-right">{{ substr($item->created_at,0,11) }}</span>
 								</a>
