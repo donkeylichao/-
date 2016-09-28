@@ -244,6 +244,8 @@ Route::group(['prefix'=>'donkey/admin' , 'namespace'=>'Admin' , 'middleware'=>'A
 		Route::get('delete/{id}' , ['as'=>'admin.post.delete' , 'uses'=>'PostController@delete']);
 		//回复回收站的内容
 		Route::get('restore/{id}' , ['as'=>'admin.post.restore' , 'uses'=>'PostController@restore']);
+		//上传图片
+		Route::post('img_upload' , 'PostController@img_upload');
 	});
 	
 	//pdf文件管理

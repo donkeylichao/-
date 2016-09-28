@@ -51,9 +51,6 @@
 
 @include('admin.master.common_header')
 
-<script src="/fileupload/js/vendor/jquery.ui.widget.js"></script>
-<script src="/fileupload/js/jquery.iframe-transport.js"></script>
-<script src="/fileupload/js/jquery.fileupload.js"></script>
 <div class="main-container" id="main-container">
 	<script type="text/javascript">
 		try{ace.settings.check('main-container' , 'fixed')}catch(e){}
@@ -193,7 +190,7 @@
 		<!-- page specific plugin scripts -->
 		<script src="/froala_editor/js/froala_editor.min.js"></script>
 		<!--[if lt IE 9]>
-			<script src="../js/froala_editor_ie8.min.js"></script>
+			<script src="/js/froala_editor_ie8.min.js"></script>
 		<![endif]-->
 		<script src="/froala_editor/js/plugins/tables.min.js"></script>
 		<script src="/froala_editor/js/plugins/lists.min.js"></script>
@@ -206,7 +203,13 @@
 
 		<script>
 			$(function(){
-				$('#edit').editable({inlineMode: false, alwaysBlank: true})
+				$('#edit').editable({
+					inlineMode: false,
+					alwaysBlank: true,
+					imageUploadURL:"{{url('donkey/admin/post/img_upload')}}",
+					fileUploadParam:'haha',
+					imageUploadParams:{"_token":"{{ csrf_token() }}"},
+				})
 							
 				var content = $("#post_content").val();
 

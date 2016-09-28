@@ -17,8 +17,8 @@ class Word2Pdf extends Command implements SelfHandling, ShouldBeQueued {
 	protected $startOpenofficeExc = 'soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard';
 	//protected $openoffice = "C:/Program Files (x86)/OpenOffice 4/program";
 	//protected $jodconverter = public_path('/jodconverter-2.2.2/lib/jodconverter-cli-2.2.2.jar');
-	protected $jodconverter = "E:/xampp/htdocs/donkeyli/public/jodconverter-2.2.2/lib/jodconverter-cli-2.2.2.jar";
-	//protected $jodconverter = "D:/xampp/htdocs/donkeyli/public/jodconverter-2.2.2/lib/jodconverter-cli-2.2.2.jar";
+	//protected $jodconverter = "E:/xampp/htdocs/donkeyli/public/jodconverter-2.2.2/lib/jodconverter-cli-2.2.2.jar";
+	protected $jodconverter = "D:/xampp/htdocs/donkeyli/public/jodconverter-2.2.2/lib/jodconverter-cli-2.2.2.jar";
 	//protected $javaPath = '';
 	//protected $pdf2swf = '';
 	/**

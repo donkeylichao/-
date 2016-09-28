@@ -245,4 +245,25 @@ class PostController extends BaseController {
 		$post->forceDelete();
 		return back()->with("notify_success","删除成功!");
 	}
-}
+	
+	/**
+	 *	上传图片
+	 *
+	 */
+	public function img_upload(Request $request)
+	{
+		if($request->hasFile('file') && $request->file('file')->isValid()){
+			$data = [];
+			$file = $request->file('file');
+			
+			$upload_path = public_path('/uploads/posts');
+			$ext = $file->getClientOriginalExtension();
+			$new_name = time().'.'.$ext;
+			
+			$path = '/uploads/posts/'.$new_name;
+			$file->move($upload_path,$new_name);
+			$data['link'] = $path;
+			echo json_encode($data);
+		}
+	}
+} 
