@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="f28efbb9-4823-4f94-b7c6-ee1d8f7063a3" name="Default" comment="">
       <change type="DELETED" beforePath="E:\xampp\htdocs\donkeyli\public\uploads\videos\2016-08-18\14714838690FdJey.m4v" afterPath="" />
       <change type="DELETED" beforePath="E:\xampp\htdocs\donkeyli\public\uploads\videos\2016-08-18\1471483875rYF6ZX.jpeg" afterPath="" />
@@ -8,6 +9,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MOVED" beforePath="E:\xampp\htdocs\donkeyli\README.md" afterPath="$PROJECT_DIR$/readme.md" />
     </list>
+=======
+    <list default="true" id="f28efbb9-4823-4f94-b7c6-ee1d8f7063a3" name="Default" comment="" />
+>>>>>>> c3faa11d59c25ab3e2705b14acfcbbc467894eb2
     <ignored path="donkeyli.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
