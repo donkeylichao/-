@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f28efbb9-4823-4f94-b7c6-ee1d8f7063a3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PersonalController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PersonalController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/personal/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/personal/index.blade.php" />
+      <change type="DELETED" beforePath="E:\xampp\htdocs\donkeyli\public\uploads\videos\2016-08-18\14714838690FdJey.m4v" afterPath="" />
+      <change type="DELETED" beforePath="E:\xampp\htdocs\donkeyli\public\uploads\videos\2016-08-18\1471483875rYF6ZX.jpeg" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/home/video/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/home/video/show.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="E:\xampp\htdocs\donkeyli\README.md" afterPath="$PROJECT_DIR$/readme.md" />
     </list>
     <ignored path="donkeyli.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,8 +39,8 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.84" vertical-offset="4629" max-vertical-offset="5616">
-              <caret line="309" column="18" selection-start-line="309" selection-start-column="18" selection-end-line="309" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4661" max-vertical-offset="5744">
+              <caret line="311" column="18" selection-start-line="311" selection-start-column="18" selection-end-line="311" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -47,44 +49,54 @@
       <file leaf-file-name="PersonalController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/PersonalController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.96" vertical-offset="1488" max-vertical-offset="2032">
-              <caret line="111" column="19" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2496" max-vertical-offset="3184">
+              <caret line="173" column="19" selection-start-line="173" selection-start-column="19" selection-end-line="173" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/personal/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7825243" vertical-offset="6157" max-vertical-offset="11664">
-              <caret line="410" column="49" selection-start-line="410" selection-start-column="49" selection-end-line="410" selection-end-column="49" />
+            <state vertical-scroll-proportion="-16.12" vertical-offset="6381" max-vertical-offset="11872">
+              <caret line="424" column="49" selection-start-line="424" selection-start-column="49" selection-end-line="424" selection-end-column="49" />
               <folding>
-                <marker date="1474905101005" expanded="true" signature="11731:12795" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="11744:12781" placeholder="..." />
-                <marker date="1474905101005" expanded="false" signature="11795:11809" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="11810:11887" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="11990:12767" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="12038:12751" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="12054:12650" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="12109:12633" placeholder="..." />
-                <marker date="1474905101005" expanded="false" signature="12135:12148" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="12149:12233" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="12251:12615" placeholder="..." />
-                <marker date="1474905101005" expanded="false" signature="12320:12333" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="12334:12596" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="12408:12575" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="12476:12554" placeholder="..." />
-                <marker date="1474905101005" expanded="false" signature="12714:12728" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="19177:20030" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="19212:20017" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="19249:20003" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="19283:19423" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="19493:19988" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="19526:19671" placeholder="..." />
-                <marker date="1474905101005" expanded="false" signature="19584:19610" placeholder="..." />
-                <marker date="1474905101005" expanded="true" signature="19721:19973" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="12288:13352" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="12301:13338" placeholder="..." />
+                <marker date="1474987225080" expanded="false" signature="12352:12366" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="12367:12444" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="12547:13324" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="12595:13308" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="12611:13207" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="12666:13190" placeholder="..." />
+                <marker date="1474987225080" expanded="false" signature="12692:12705" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="12706:12790" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="12808:13172" placeholder="..." />
+                <marker date="1474987225080" expanded="false" signature="12877:12890" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="12891:13153" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="12965:13132" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="13033:13111" placeholder="..." />
+                <marker date="1474987225080" expanded="false" signature="13271:13285" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="19993:20846" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="20028:20833" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="20065:20819" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="20099:20239" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="20309:20804" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="20342:20487" placeholder="..." />
+                <marker date="1474987225080" expanded="false" signature="20400:20426" placeholder="..." />
+                <marker date="1474987225080" expanded="true" signature="20537:20789" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/home/video/show.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.57864076" vertical-offset="742" max-vertical-offset="6384">
+              <caret line="65" column="58" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -117,7 +129,6 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Home/VideoController.php" />
         <option value="$PROJECT_DIR$/app/Models/FavourCount.php" />
         <option value="$PROJECT_DIR$/public/css/video-detail.css" />
-        <option value="$PROJECT_DIR$/resources/views/home/video/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/pdf/type_index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/emoji/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/music/index.blade.php" />
@@ -135,6 +146,7 @@
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/PersonalController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/personal/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/home/video/show.blade.php" />
       </list>
     </option>
   </component>
@@ -243,6 +255,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Default" />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -297,29 +312,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="donkeyli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="donkeyli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
+              <option name="myItemId" value="home" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -345,11 +338,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="personal" />
+              <option name="myItemId" value="home" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -381,77 +370,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="donkeyli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="donkeyli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="donkeyli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="donkeyli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="donkeyli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="donkeyli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
         <option name="show-excluded-files" value="false" />
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Default" />
       </pane>
     </panes>
   </component>
@@ -484,9 +404,6 @@
       <BehatRunner />
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
@@ -494,6 +411,9 @@
       <arguments />
       <pass-parent-envs>true</pass-parent-envs>
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="0" />
@@ -542,19 +462,19 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32272726" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="518" y="59" width="330" height="610" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3280303" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="518" y="59" width="330" height="610" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -775,13 +695,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/home/video/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.76504856" vertical-offset="3414" max-vertical-offset="6384">
-          <caret line="238" column="65" selection-start-line="238" selection-start-column="65" selection-end-line="238" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/emoji/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43106797" vertical-offset="1266" max-vertical-offset="2560">
@@ -925,50 +838,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.84" vertical-offset="4629" max-vertical-offset="5616">
-          <caret line="309" column="18" selection-start-line="309" selection-start-column="18" selection-end-line="309" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4661" max-vertical-offset="5744">
+          <caret line="311" column="18" selection-start-line="311" selection-start-column="18" selection-end-line="311" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/PersonalController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.96" vertical-offset="1488" max-vertical-offset="2032">
-          <caret line="111" column="19" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2496" max-vertical-offset="3184">
+          <caret line="173" column="19" selection-start-line="173" selection-start-column="19" selection-end-line="173" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/personal/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7825243" vertical-offset="6157" max-vertical-offset="11664">
-          <caret line="410" column="49" selection-start-line="410" selection-start-column="49" selection-end-line="410" selection-end-column="49" />
+        <state vertical-scroll-proportion="-16.12" vertical-offset="6381" max-vertical-offset="11872">
+          <caret line="424" column="49" selection-start-line="424" selection-start-column="49" selection-end-line="424" selection-end-column="49" />
           <folding>
-            <marker date="1474905101005" expanded="true" signature="11731:12795" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="11744:12781" placeholder="..." />
-            <marker date="1474905101005" expanded="false" signature="11795:11809" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="11810:11887" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="11990:12767" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="12038:12751" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="12054:12650" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="12109:12633" placeholder="..." />
-            <marker date="1474905101005" expanded="false" signature="12135:12148" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="12149:12233" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="12251:12615" placeholder="..." />
-            <marker date="1474905101005" expanded="false" signature="12320:12333" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="12334:12596" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="12408:12575" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="12476:12554" placeholder="..." />
-            <marker date="1474905101005" expanded="false" signature="12714:12728" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="19177:20030" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="19212:20017" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="19249:20003" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="19283:19423" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="19493:19988" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="19526:19671" placeholder="..." />
-            <marker date="1474905101005" expanded="false" signature="19584:19610" placeholder="..." />
-            <marker date="1474905101005" expanded="true" signature="19721:19973" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="12288:13352" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="12301:13338" placeholder="..." />
+            <marker date="1474987225080" expanded="false" signature="12352:12366" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="12367:12444" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="12547:13324" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="12595:13308" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="12611:13207" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="12666:13190" placeholder="..." />
+            <marker date="1474987225080" expanded="false" signature="12692:12705" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="12706:12790" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="12808:13172" placeholder="..." />
+            <marker date="1474987225080" expanded="false" signature="12877:12890" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="12891:13153" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="12965:13132" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="13033:13111" placeholder="..." />
+            <marker date="1474987225080" expanded="false" signature="13271:13285" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="19993:20846" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="20028:20833" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="20065:20819" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="20099:20239" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="20309:20804" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="20342:20487" placeholder="..." />
+            <marker date="1474987225080" expanded="false" signature="20400:20426" placeholder="..." />
+            <marker date="1474987225080" expanded="true" signature="20537:20789" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/home/video/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.57864076" vertical-offset="742" max-vertical-offset="6384">
+          <caret line="65" column="58" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>

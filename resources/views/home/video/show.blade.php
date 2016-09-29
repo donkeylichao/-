@@ -62,8 +62,8 @@
 						<button id="tucao" type="button" data="0" class="btn btn-primary btn-sm pull-right" style="margin:15px 15px 0px 0px;">我要吐槽</button>
 					</span>	
 					<div class="Main" style="display:none;">
-						<img src="{{ Auth::user()->headimg ? Auth::user()->headimg : '/images/s5.jpg' }}" class="img-circle"/>
-						<span class="name">用户:<strong>{{ Auth::check() ? Auth::user()->name : "未登录"}}</strong></span>
+						<img src="{{ (Auth::check() && Auth::user()->is_admin == 0) ? Auth::user()->headimg : '/images/s5.jpg' }}" class="img-circle"/>
+						<span class="name">用户:<strong>{{ (Auth::check() && Auth::user()->is_admin == 0) ? Auth::user()->name : "未登录"}}</strong></span>
 						<div class="Input_Box">
 							<textarea class="Input_text"></textarea>						
 							<div class="faceDiv"></div>     
