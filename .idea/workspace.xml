@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f28efbb9-4823-4f94-b7c6-ee1d8f7063a3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PersonalController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PersonalController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/personal/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/personal/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="f28efbb9-4823-4f94-b7c6-ee1d8f7063a3" name="Default" comment="" />
     <ignored path="donkeyli.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
