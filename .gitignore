@@ -1,9 +1,4 @@
 .env
-/public/uploads/musics
-/public/uploads/videos
-/public/uploads/photos
-/public/uploads/rooms
 /resources/html/img
-/public/uploads/words
 .idea
 
